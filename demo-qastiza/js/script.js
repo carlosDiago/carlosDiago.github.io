@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. WhatsApp Ordering Logic
     // Replace this with the actual phone number of the business.
-    const whatsappNumber = "+34600000000";
+    const whatsappNumber = "+34622415979";
 
     const waButtons = document.querySelectorAll('.ws-order-btn, .btn-outline, .floating-whatsapp');
 

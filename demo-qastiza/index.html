@@ -24,7 +24,14 @@
         <nav class="nav">
             <a href="#filosofia">El Obrador</a>
             <a href="#menu">Nuestras Tartas</a>
-            <a href="#contacto" class="btn btn-outline" data-product="Consulta general">Contacto</a>
+            <button class="nav-cart-btn" aria-label="Abrir carrito">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20"
+                    height="20"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                    <path fill="currentColor"
+                        d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                </svg>
+                <span class="cart-count">0</span>
+            </button>
         </nav>
     </header>
 
@@ -72,10 +79,18 @@
                         <h3>La Clásica Qastiza</h3>
                         <p>Nuestra receta estrella. Cremosa, suave y con un sabor intenso a queso curado equilibrado a
                             la perfección.</p>
+                        <div class="product-sizes">
+                            <label for="size-cls">Tamaño:</label>
+                            <select id="size-cls" class="size-select">
+                                <option value="S" data-price="16">Pequeña (4 rac.) - 16€</option>
+                                <option value="M" data-price="25" selected>Mediana (8 rac.) - 25€</option>
+                                <option value="L" data-price="38">Grande (12 rac.) - 38€</option>
+                            </select>
+                        </div>
                         <div class="product-footer">
                             <span class="price">25€</span>
-                            <button class="btn btn-primary ws-order-btn" data-product="Tarta Clásica Qastiza">Pedir por
-                                WhatsApp</button>
+                            <button class="btn btn-primary add-to-cart-btn" data-id="1" data-name="La Clásica Qastiza"
+                                data-price="25" data-baseid="cls">Añadir al Carrito</button>
                         </div>
                     </div>
                 </div>
@@ -88,10 +103,18 @@
                     <div class="product-info">
                         <h3>Pistacho Iraní</h3>
                         <p>Para los amantes de los frutos secos. Elaborada con pura pasta de pistacho iraní premium.</p>
+                        <div class="product-sizes">
+                            <label for="size-pis">Tamaño:</label>
+                            <select id="size-pis" class="size-select">
+                                <option value="S" data-price="20">Pequeña (4 rac.) - 20€</option>
+                                <option value="M" data-price="30" selected>Mediana (8 rac.) - 30€</option>
+                                <option value="L" data-price="45">Grande (12 rac.) - 45€</option>
+                            </select>
+                        </div>
                         <div class="product-footer">
                             <span class="price">30€</span>
-                            <button class="btn btn-primary ws-order-btn" data-product="Tarta de Pistacho Iraní">Pedir
-                                por WhatsApp</button>
+                            <button class="btn btn-primary add-to-cart-btn" data-id="2" data-name="Pistacho Iraní"
+                                data-price="30" data-baseid="pis">Añadir al Carrito</button>
                         </div>
                     </div>
                 </div>
@@ -105,10 +128,18 @@
                         <h3>Queso Azul y Miel</h3>
                         <p>Una experiencia gourmet con el carácter atrevido del queso azul y un toque dulce de miel
                             natural.</p>
+                        <div class="product-sizes">
+                            <label for="size-blu">Tamaño:</label>
+                            <select id="size-blu" class="size-select">
+                                <option value="S" data-price="18">Pequeña (4 rac.) - 18€</option>
+                                <option value="M" data-price="28" selected>Mediana (8 rac.) - 28€</option>
+                                <option value="L" data-price="42">Grande (12 rac.) - 42€</option>
+                            </select>
+                        </div>
                         <div class="product-footer">
                             <span class="price">28€</span>
-                            <button class="btn btn-primary ws-order-btn" data-product="Tarta Queso Azul y Miel">Pedir
-                                por WhatsApp</button>
+                            <button class="btn btn-primary add-to-cart-btn" data-id="3" data-name="Queso Azul y Miel"
+                                data-price="28" data-baseid="blu">Añadir al Carrito</button>
                         </div>
                     </div>
                 </div>
@@ -137,6 +168,71 @@
             <a href="#">Aviso Legal</a>
         </div>
     </footer>
+
+    <!-- Cart Overlay & Sidebar -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Tu Pedido</h2>
+            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Items will be injected here via JS -->
+            <p class="empty-cart-msg">Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-summary-line" id="cartSubtotalLine" style="display: none;">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">0€</span>
+            </div>
+            <div class="cart-summary-line" id="cartDeliveryLine" style="display: none;">
+                <span>Envío:</span>
+                <span id="cartDeliveryCost">0€</span>
+            </div>
+            <div class="cart-summary-line" id="cartDiscountLine" style="display: none;">
+                <span>Descuento:</span>
+                <span id="cartDiscountValue">-0€</span>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0€</span>
+            </div>
+
+            <div class="discount-section hidden" id="discountSection">
+                <input type="text" id="discountCodeInput" placeholder="Código de descuento">
+                <button type="button" class="btn btn-outline btn-sm" id="applyDiscountBtn">Aplicar</button>
+            </div>
+            <small id="discountMessage" class="warning-text hidden" style="margin-bottom:1rem; display:block;"></small>
+
+            <form id="checkoutForm" class="checkout-form hidden">
+                <h3>Datos del pedido</h3>
+
+                <div class="delivery-options">
+                    <label class="radio-label">
+                        <input type="radio" name="deliveryType" value="pickup" checked>
+                        <span>Recogida en Obrador</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="deliveryType" value="delivery">
+                        <span>Envío a domicilio (+3€)</span>
+                    </label>
+                    <small id="deliveryWarning" class="warning-text hidden">El envío requiere al menos una tarta Mediana
+                        (M) o Grande (L).</small>
+                </div>
+
+                <input type="text" id="custName" placeholder="Tu Nombre completo" required>
+                <div id="addressField" class="hidden">
+                    <input type="text" id="custAddress" placeholder="Dirección de entrega (Solo Torres de la Alameda)">
+                </div>
+                <input type="text" id="custDetails" placeholder="Fecha y hora preferida (Ej: Viernes tarde)" required>
+                <button type="submit" class="btn btn-primary checkout-whatsapp-btn" id="confirmOrderBtn">
+                    Confirmar Pedido
+                </button>
+            </form>
+
+            <button class="btn btn-primary w-100" id="showCheckoutBtn">Tramitar Pedido</button>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

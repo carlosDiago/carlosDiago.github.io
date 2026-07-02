@@ -15,12 +15,7 @@
     <meta name="twitter:description" content="Premium interactive CV for onboard railway signalling and technical warranty management.">
     <title>Carlos Diago Guijarro | Railway Systems Engineer</title>
     <link rel="canonical" href="https://carlosdiago.github.io/">
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIINfQPD7f+LrC+eT3Q4bKfJtxL/qIk1xOQ="
-      crossorigin=""
-    >
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -39,7 +34,7 @@
       <div class="nav-links" id="primary-menu">
         <a href="#profile">Profile</a>
         <a href="#expertise">Expertise</a>
-        <a href="#project-map">Map</a>
+        <a href="#map">Map</a>
         <a href="#experience">Experience</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
@@ -58,17 +53,9 @@
             JRU/onboard log analysis and digital workflow automation.
           </p>
           <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="assets/cv/Carlos_Diago_CV.pdf" download>Download CV</a>
-            <a class="button button-secondary" href="#project-map">View Project Map</a>
-            <a class="button button-ghost" href="#contact">Contact</a>
+            <a class="button button-primary" href="#map">View Project Map</a>
+            <a class="button button-secondary" href="#contact">Contact</a>
           </div>
-          <address class="contact-line">
-            Madrid, Spain &middot;
-            <a href="tel:+34622415979">+34 622 415 979</a> &middot;
-            <a href="mailto:carlos.diago.guijarro@gmail.com">carlos.diago.guijarro@gmail.com</a> &middot;
-            <a href="https://www.linkedin.com/in/jcdiago" target="_blank" rel="noreferrer">linkedin.com/in/jcdiago</a> &middot;
-            English B2 - APTIS certified
-          </address>
         </div>
 
         <div class="hero-visual" aria-label="Onboard signalling focus overview" data-animate>
@@ -205,7 +192,7 @@
         </div>
       </section>
 
-      <section class="map-section section-shell" id="project-map" aria-labelledby="map-title">
+      <section class="map-section section-shell" id="map" aria-labelledby="map-title">
         <div class="section-heading" data-animate>
           <p class="eyebrow">International assignments</p>
           <h2 id="map-title">On-site Railway Project Assignments</h2>
@@ -216,7 +203,7 @@
 
         <div class="map-layout">
           <div class="map-wrap" data-animate>
-            <div id="map" role="application" aria-label="Interactive world map with project assignments"></div>
+            <div id="assignment-map" role="application" aria-label="Interactive world map with project assignments"></div>
             <p class="map-note">OpenStreetMap tiles, Leaflet.js and non-confidential project summaries.</p>
           </div>
           <aside class="assignment-panel" aria-label="Project assignment list" data-animate>
@@ -350,9 +337,44 @@
           </div>
         </div>
       </section>
+
+      <section class="contact section-band" id="contact" aria-labelledby="contact-title">
+        <div class="section-shell">
+          <div class="section-heading" data-animate>
+            <p class="eyebrow">Contact</p>
+            <h2 id="contact-title">Professional contact details</h2>
+            <p>
+              Available for railway systems engineering, onboard signalling, technical warranty and digital workflow discussions.
+            </p>
+          </div>
+
+          <address class="contact-grid" aria-label="Contact details">
+            <div class="contact-card" data-animate>
+              <span>Location</span>
+              <strong>Madrid, Spain</strong>
+            </div>
+            <a class="contact-card" href="tel:+34622415979" data-animate>
+              <span>Phone</span>
+              <strong>+34 622 415 979</strong>
+            </a>
+            <a class="contact-card" href="mailto:carlos.diago.guijarro@gmail.com" data-animate>
+              <span>Email</span>
+              <strong>carlos.diago.guijarro@gmail.com</strong>
+            </a>
+            <a class="contact-card" href="https://www.linkedin.com/in/jcdiago" target="_blank" rel="noreferrer" data-animate>
+              <span>LinkedIn</span>
+              <strong>linkedin.com/in/jcdiago</strong>
+            </a>
+            <div class="contact-card contact-card-wide" data-animate>
+              <span>Languages</span>
+              <strong>English B2 - APTIS certified</strong>
+            </div>
+          </address>
+        </div>
+      </section>
     </main>
 
-    <footer class="site-footer" id="contact">
+    <footer class="site-footer">
       <div class="section-shell footer-grid">
         <div>
           <h2>Carlos Diago Guijarro</h2>
@@ -365,11 +387,7 @@
       </div>
     </footer>
 
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

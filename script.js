@@ -6,7 +6,6 @@
       location: "Spain",
       project: "Renfe, Metro Madrid, FGV Valencia, FGC Catalu\u00f1a",
       year: "2008 - Present",
-      technology: "ERTMS/ETCS, ASFA Digital/ASFA 4, ATP/ATO, CBTC",
       role: "National railway and metro assignments involving onboard signalling, maintenance engineering, warranty support and technical coordination.",
       coordinates: [40.4168, -3.7038]
     },
@@ -14,7 +13,6 @@
       location: "Caracas, Venezuela",
       project: "CAMETRO Line 1",
       year: "2011 - 2012",
-      technology: "Onboard systems",
       role: "On-site commissioning activities for CAMETRO Line 1 onboard systems.",
       coordinates: [10.4806, -66.9036]
     },
@@ -22,7 +20,6 @@
       location: "Istanbul, Turkey",
       project: "Marmaray",
       year: "2014",
-      technology: "Railway onboard systems",
       role: "On-site commissioning support for Marmaray railway project.",
       coordinates: [41.0082, 28.9784]
     },
@@ -30,7 +27,6 @@
       location: "Riyadh, Saudi Arabia",
       project: "HSR Push-Pull",
       year: "2015",
-      technology: "Railway onboard systems",
       role: "On-site project execution support for HSR Push-Pull railway project.",
       coordinates: [24.7136, 46.6753]
     },
@@ -38,7 +34,6 @@
       location: "Singapore",
       project: "Downtown Line 1",
       year: "2013",
-      technology: "Testing & commissioning",
       role: "On-site testing and commissioning activities for Downtown Line 1.",
       coordinates: [1.3521, 103.8198]
     },
@@ -46,7 +41,6 @@
       location: "Singapore",
       project: "Downtown Line 3",
       year: "2017",
-      technology: "Testing & commissioning",
       role: "On-site testing and commissioning activities for Downtown Line 3.",
       coordinates: [1.3147, 103.8927]
     },
@@ -54,7 +48,6 @@
       location: "Changsha, China",
       project: "Metro Line 2",
       year: "2019",
-      technology: "CBTC onboard equipment",
       role: "On-site maintenance engineering support and technical training for CBTC onboard equipment maintainers.",
       coordinates: [28.2282, 112.9388]
     }
@@ -115,9 +108,9 @@
       '<div class="map-popup">',
       "<h3>" + escapeHtml(assignment.location) + "</h3>",
       "<dl>",
+      "<dt>Location</dt><dd>" + escapeHtml(assignment.location) + "</dd>",
       "<dt>Project</dt><dd>" + escapeHtml(assignment.project) + "</dd>",
       "<dt>Year</dt><dd>" + escapeHtml(assignment.year) + "</dd>",
-      "<dt>Technology</dt><dd>" + escapeHtml(assignment.technology) + "</dd>",
       "</dl>",
       "<p>" + escapeHtml(assignment.role) + "</p>",
       "</div>"
@@ -155,8 +148,10 @@
         setActiveAssignment(index);
 
         if (markers[index] && map) {
-          map.flyTo(assignment.coordinates, Math.max(map.getZoom(), 5), { duration: 0.65 });
-          markers[index].openPopup();
+          map.flyTo(assignment.coordinates, 5, { duration: 0.65 });
+          setTimeout(function () {
+            markers[index].openPopup();
+          }, 240);
         }
       });
 
@@ -173,7 +168,7 @@
   }
 
   function initMap() {
-    var mapElement = document.getElementById("map");
+    var mapElement = document.getElementById("assignment-map");
 
     if (!mapElement) {
       return;
@@ -187,14 +182,14 @@
       return;
     }
 
-    var map = window.L.map("map", {
+    var map = window.L.map("assignment-map", {
       scrollWheelZoom: false,
       worldCopyJump: true
     }).setView([27.5, 24], 2);
 
     window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 18,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     }).addTo(map);
 
     assignments.forEach(function (assignment, index) {
@@ -209,6 +204,10 @@
         setActiveAssignment(index);
       });
 
+      marker.on("popupopen", function () {
+        setActiveAssignment(index);
+      });
+
       markers.push(marker);
     });
 
@@ -220,6 +219,10 @@
       padding: [36, 36],
       maxZoom: 4
     });
+
+    setTimeout(function () {
+      map.invalidateSize();
+    }, 100);
 
     renderAssignmentList(markers, map);
     setActiveAssignment(0);
@@ -255,8 +258,15 @@
     });
   }
 
-  window.addEventListener("load", function () {
+  function initPage() {
     initMap();
     initRevealAnimations();
-  });
+    setActiveNav();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initPage);
+  } else {
+    initPage();
+  }
 }());

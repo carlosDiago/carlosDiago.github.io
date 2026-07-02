@@ -9,7 +9,7 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 - `index.html` - semantic page structure and CV content.
 - `styles.css` - responsive visual system, layout and Leaflet popup styling.
 - `script.js` - mobile navigation, section highlighting, reveal effects and interactive map markers.
-- `assets/cv/Carlos_Diago_CV.pdf` - public CV placeholder. Replace with the final public PDF when ready.
+- `assets/cv/Carlos_Diago_CV.pdf` - harmless placeholder retained in the assets folder; it is not linked from the visible UI.
 - `assets/img/` - optional folder for future image assets.
 
 ## Local Use

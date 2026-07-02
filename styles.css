@@ -45,6 +45,11 @@ svg {
   max-width: 100%;
 }
 
+.leaflet-container img {
+  max-width: none;
+  max-height: none;
+}
+
 a {
   color: inherit;
 }
@@ -80,6 +85,15 @@ button:focus-visible {
 
 .section-band {
   background: var(--surface);
+}
+
+#profile,
+#expertise,
+#map,
+#experience,
+#education,
+#contact {
+  scroll-margin-top: calc(var(--nav-height) + 28px);
 }
 
 .site-nav {
@@ -262,22 +276,12 @@ button:focus-visible {
   color: var(--surface);
 }
 
-.contact-line {
-  max-width: 880px;
-  margin-top: 26px;
-  color: #d9e8ee;
-  font-style: normal;
-  font-size: 0.95rem;
-}
-
-.contact-line a,
 .site-footer a {
   color: inherit;
   text-decoration-color: rgba(19, 184, 173, 0.55);
   text-underline-offset: 4px;
 }
 
-.contact-line a:hover,
 .site-footer a:hover {
   color: var(--teal-500);
 }
@@ -432,6 +436,7 @@ button:focus-visible {
 .timeline-content,
 .education-card,
 .cert-card,
+.contact-card,
 .assignment-panel {
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -448,6 +453,7 @@ button:focus-visible {
 .figure-card:hover,
 .expertise-card:hover,
 .cert-card:hover,
+.contact-card:hover,
 .assignment-button:hover {
   transform: translateY(-3px);
   border-color: rgba(19, 184, 173, 0.48);
@@ -529,10 +535,15 @@ button:focus-visible {
   box-shadow: var(--shadow);
 }
 
-#map {
+.map-wrap[data-animate],
+.map-wrap[data-animate].is-visible {
+  transform: none;
+}
+
+#assignment-map {
   width: 100%;
-  height: min(68vh, 620px);
-  min-height: 440px;
+  height: 520px;
+  min-height: 520px;
   background: #d9e7ed;
 }
 
@@ -784,6 +795,48 @@ button:focus-visible {
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
+.contact {
+  padding: 82px 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  font-style: normal;
+}
+
+.contact-card {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: inherit;
+  padding: 22px;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.contact-card span {
+  color: var(--teal-600);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-card strong {
+  display: block;
+  margin-top: 18px;
+  color: var(--navy-950);
+  font-size: 1rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.contact-card-wide {
+  grid-column: span 2;
+}
+
 .site-footer {
   background: var(--navy-950);
   color: var(--surface);
@@ -875,12 +928,17 @@ button:focus-visible {
   }
 
   .map-layout,
+  .contact-grid,
   .education-layout {
     grid-template-columns: 1fr;
   }
 
   .assignment-panel {
     max-height: none;
+  }
+
+  .contact-card-wide {
+    grid-column: auto;
   }
 }
 
@@ -939,7 +997,8 @@ button:focus-visible {
   .expertise,
   .map-section,
   .experience,
-  .education {
+  .education,
+  .contact {
     padding: 58px 0;
   }
 
@@ -953,8 +1012,8 @@ button:focus-visible {
     min-height: 132px;
   }
 
-  #map {
-    height: 430px;
+  #assignment-map {
+    height: 360px;
     min-height: 360px;
   }
 

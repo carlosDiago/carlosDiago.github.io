@@ -25,8 +25,9 @@ This is a GitHub Pages user site. To deploy:
 1. Keep `index.html`, `styles.css`, `script.js` and `assets/` at the repository root.
 2. Commit the files to the `main` branch.
 3. In GitHub, open repository settings.
-4. Under Pages, publish from `main` branch and `/root`.
-5. The site will be served at `https://carlosdiago.github.io/`.
+4. Under Pages, set the source to GitHub Actions.
+5. The workflow in `.github/workflows/pages.yml` deploys the static root directory on every push to `main`.
+6. The site will be served at `https://carlosdiago.github.io/`.
 
 ## Content Guidelines
 

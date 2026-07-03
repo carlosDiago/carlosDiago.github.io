@@ -3,66 +3,72 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Interactive CV and portfolio for Carlos Diago Guijarro, Railway Systems Engineer focused on onboard signalling, technical warranty management and railway digitalisation.">
-    <meta name="author" content="Carlos Diago Guijarro">
+    <meta name="description" content="Interactive railway systems portfolio for Juan Carlos Diago Guijarro, Railway Systems Engineer focused on onboard signalling, technical warranty management and railway digitalisation.">
+    <meta name="author" content="Juan Carlos Diago Guijarro">
     <meta name="theme-color" content="#061827">
-    <meta property="og:title" content="Carlos Diago Guijarro | Railway Systems Engineer">
+    <meta property="og:title" content="Juan Carlos Diago Guijarro | Railway Systems Engineer">
     <meta property="og:description" content="Onboard signalling, testing and commissioning, maintenance engineering, technical warranty management and digital workflow automation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://carlosdiago.github.io/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Carlos Diago Guijarro | Railway Systems Engineer">
-    <meta name="twitter:description" content="Premium interactive CV for onboard railway signalling and technical warranty management.">
-    <title>Carlos Diago Guijarro | Railway Systems Engineer</title>
+    <meta name="twitter:title" content="Juan Carlos Diago Guijarro | Railway Systems Engineer">
+    <meta name="twitter:description" content="Interactive railway systems portfolio for onboard signalling and technical warranty management.">
+    <title>Juan Carlos Diago Guijarro | Railway Systems Engineer</title>
     <link rel="canonical" href="https://carlosdiago.github.io/">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="ui.skipLink">Skip to content</a>
 
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="brand" href="#profile" aria-label="Carlos Diago Guijarro home">
-        <span class="brand-mark" aria-hidden="true">CD</span>
-        <span>Carlos Diago</span>
+    <nav class="site-nav" aria-label="Primary navigation" data-i18n-aria-label="ui.primaryNavigation">
+      <a class="brand" href="#profile" aria-label="Juan Carlos Diago Guijarro home" data-i18n-aria-label="brand.homeLabel">
+        <span class="brand-mark" aria-hidden="true">JCD</span>
+        <span data-i18n="identity.compactName">Carlos Diago Guijarro</span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Open navigation" data-nav-toggle>
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <div class="nav-links" id="primary-menu">
-        <a href="#profile">Profile</a>
-        <a href="#expertise">Expertise</a>
-        <a href="#map">Map</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
+      <div class="nav-menu" id="primary-menu">
+        <div class="nav-links">
+          <a href="#profile" data-i18n="nav.profile">Profile</a>
+          <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+          <a href="#journey" data-i18n="nav.journey">Journey</a>
+          <a href="#map" data-i18n="nav.map">Map</a>
+          <a href="#blog" data-i18n="nav.blog">Blog</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="language-switcher" role="group" aria-label="Language selector" data-i18n-aria-label="language.selectorLabel">
+          <button class="language-button" type="button" data-lang="es" aria-pressed="false">ES</button>
+          <button class="language-button is-active" type="button" data-lang="en" aria-pressed="true">EN</button>
+        </div>
       </div>
     </nav>
 
     <header class="hero" id="profile">
       <div class="hero-grid section-shell">
         <div class="hero-copy" data-animate>
-          <p class="eyebrow">Interactive CV &amp; railway systems portfolio</p>
-          <h1>Carlos Diago Guijarro</h1>
-          <p class="hero-title">Railway Systems Engineer &middot; Onboard Signalling &middot; Technical Warranty Manager</p>
-          <p class="hero-subtitle">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Interactive Railway Systems Portfolio</p>
+          <h1 data-i18n="identity.fullName">Juan Carlos Diago Guijarro</h1>
+          <p class="hero-title" data-i18n="hero.title">Railway Systems Engineer &middot; Onboard Signalling &middot; Technical Warranty Manager</p>
+          <p class="hero-subtitle" data-i18n="hero.subtitle">
             Computer Engineer with 17+ years at Siemens Mobility, focused on onboard railway systems, signalling,
-            testing &amp; commissioning, maintenance engineering, technical warranty management, incident analysis,
+            testing and commissioning, maintenance engineering, technical warranty management, incident analysis,
             JRU/onboard log analysis and digital workflow automation.
           </p>
-          <div class="hero-actions" aria-label="Primary actions">
-            <a class="button button-primary" href="#map">View Project Map</a>
-            <a class="button button-secondary" href="#contact">Contact</a>
+          <div class="hero-actions" aria-label="Primary actions" data-i18n-aria-label="hero.actionsLabel">
+            <a class="button button-primary" href="#map" data-i18n="hero.mapButton">View Project Map</a>
+            <a class="button button-secondary" href="#contact" data-i18n="hero.contactButton">Contact</a>
           </div>
         </div>
 
-        <div class="hero-visual" aria-label="Onboard signalling focus overview" data-animate>
+        <div class="hero-visual" aria-label="Onboard signalling focus overview" data-i18n-aria-label="hero.visualLabel" data-animate>
           <div class="systems-panel">
             <div class="panel-topline">
-              <span>ONBOARD SIGNALLING</span>
-              <span>RAMS &amp; WARRANTY</span>
+              <span data-i18n="hero.visualToplineLeft">ONBOARD SIGNALLING</span>
+              <span data-i18n="hero.visualToplineRight">RAMS &amp; WARRANTY</span>
             </div>
             <div class="rail-line" aria-hidden="true">
               <span class="signal signal-green"></span>
@@ -73,25 +79,25 @@
             <div class="systems-grid">
               <div>
                 <span>ERTMS / ETCS</span>
-                <strong>JRU review</strong>
+                <strong data-i18n="hero.visualCard1">JRU review</strong>
               </div>
               <div>
                 <span>ASFA Digital</span>
-                <strong>Failure criteria</strong>
+                <strong data-i18n="hero.visualCard2">Failure criteria</strong>
               </div>
               <div>
                 <span>ATP / ATO</span>
-                <strong>T&amp;C field support</strong>
+                <strong data-i18n="hero.visualCard3">Testing field support</strong>
               </div>
               <div>
                 <span>CBTC</span>
-                <strong>Maintenance training</strong>
+                <strong data-i18n="hero.visualCard4">Maintenance training</strong>
               </div>
             </div>
             <div class="panel-status">
-              <span class="status-pill">Incident analysis</span>
-              <span class="status-pill">Repair workflow</span>
-              <span class="status-pill">Customer meetings</span>
+              <span class="status-pill" data-i18n="hero.statusIncident">Incident analysis</span>
+              <span class="status-pill" data-i18n="hero.statusRepair">Repair workflow</span>
+              <span class="status-pill" data-i18n="hero.statusMeetings">Customer meetings</span>
             </div>
           </div>
         </div>
@@ -101,25 +107,25 @@
     <main id="main">
       <section class="figures section-shell" aria-labelledby="figures-title">
         <div class="section-heading compact" data-animate>
-          <p class="eyebrow">Key figures</p>
-          <h2 id="figures-title">Railway experience at a glance</h2>
+          <p class="eyebrow" data-i18n="figures.eyebrow">Key figures</p>
+          <h2 id="figures-title" data-i18n="figures.title">Railway experience at a glance</h2>
         </div>
         <div class="figure-grid">
           <article class="figure-card" data-animate>
-            <strong>17+ years</strong>
-            <span>Siemens Mobility railway systems experience</span>
+            <strong data-i18n="figures.cards.0.value">17+ years</strong>
+            <span data-i18n="figures.cards.0.label">Siemens Mobility railway systems experience</span>
           </article>
           <article class="figure-card" data-animate>
-            <strong>8+ years</strong>
-            <span>Project Execution / Testing &amp; Commissioning</span>
+            <strong data-i18n="figures.cards.1.value">8+ years</strong>
+            <span data-i18n="figures.cards.1.label">Project Execution / Testing and Commissioning</span>
           </article>
           <article class="figure-card" data-animate>
-            <strong>5+ years</strong>
-            <span>Maintenance Engineer / Service Engineer</span>
+            <strong data-i18n="figures.cards.2.value">5+ years</strong>
+            <span data-i18n="figures.cards.2.label">Maintenance Engineer / Service Engineer</span>
           </article>
           <article class="figure-card" data-animate>
-            <strong>Current role</strong>
-            <span>Technical Warranty Manager for Renfe onboard signalling contracts</span>
+            <strong data-i18n="figures.cards.3.value">Current role</strong>
+            <span data-i18n="figures.cards.3.label">Technical Warranty Manager for onboard signalling contracts</span>
           </article>
         </div>
       </section>
@@ -127,9 +133,9 @@
       <section class="expertise section-band" id="expertise" aria-labelledby="expertise-title">
         <div class="section-shell">
           <div class="section-heading" data-animate>
-            <p class="eyebrow">Core expertise</p>
-            <h2 id="expertise-title">Onboard systems, technical governance and digitalisation</h2>
-            <p>
+            <p class="eyebrow" data-i18n="expertise.eyebrow">Core expertise</p>
+            <h2 id="expertise-title" data-i18n="expertise.title">Onboard systems, technical governance and digitalisation</h2>
+            <p data-i18n="expertise.subtitle">
               A field-based railway systems profile combining commissioning, maintenance engineering,
               warranty assessment, customer-facing technical analysis and data-driven workflow control.
             </p>
@@ -137,7 +143,7 @@
 
           <div class="expertise-grid">
             <article class="expertise-card" data-animate>
-              <h3>Onboard Signalling Technologies</h3>
+              <h3 data-i18n="expertise.cards.0.title">Onboard Signalling Technologies</h3>
               <ul class="tag-list">
                 <li>ERTMS / ETCS</li>
                 <li>ASFA Digital / ASFA 4</li>
@@ -149,33 +155,33 @@
             </article>
 
             <article class="expertise-card" data-animate>
-              <h3>Technical Capabilities</h3>
+              <h3 data-i18n="expertise.cards.1.title">Technical Capabilities</h3>
               <ul class="tag-list">
-                <li>JRU / onboard log analysis</li>
-                <li>Incident analysis</li>
-                <li>Root cause / failure categorisation</li>
-                <li>Maintenance engineering</li>
-                <li>Testing &amp; commissioning</li>
-                <li>Warranty management</li>
-                <li>Repair and spare parts workflow</li>
-                <li>Customer technical meetings</li>
+                <li data-i18n="expertise.cards.1.items.0">JRU / onboard log analysis</li>
+                <li data-i18n="expertise.cards.1.items.1">Incident analysis</li>
+                <li data-i18n="expertise.cards.1.items.2">Root cause / failure categorisation</li>
+                <li data-i18n="expertise.cards.1.items.3">Maintenance engineering</li>
+                <li data-i18n="expertise.cards.1.items.4">Testing and commissioning</li>
+                <li data-i18n="expertise.cards.1.items.5">Warranty management</li>
+                <li data-i18n="expertise.cards.1.items.6">Repair and spare parts workflow</li>
+                <li data-i18n="expertise.cards.1.items.7">Customer technical meetings</li>
               </ul>
             </article>
 
             <article class="expertise-card" data-animate>
-              <h3>Frameworks &amp; Standards</h3>
+              <h3 data-i18n="expertise.cards.2.title">Frameworks and Standards</h3>
               <ul class="tag-list">
                 <li>RAMS</li>
                 <li>EN 50126</li>
                 <li>EN 50129</li>
-                <li>ADIF ASFA technical specification</li>
-                <li>Warranty contractual assessment</li>
-                <li>Reliability / MTBF assessment</li>
+                <li data-i18n="expertise.cards.2.items.0">ADIF ASFA technical specification</li>
+                <li data-i18n="expertise.cards.2.items.1">Warranty contractual assessment</li>
+                <li data-i18n="expertise.cards.2.items.2">Reliability / MTBF assessment</li>
               </ul>
             </article>
 
             <article class="expertise-card" data-animate>
-              <h3>Tools &amp; Digitalisation</h3>
+              <h3 data-i18n="expertise.cards.3.title">Tools and Digitalisation</h3>
               <ul class="tag-list">
                 <li>IBM Maximo</li>
                 <li>SAP</li>
@@ -192,182 +198,136 @@
         </div>
       </section>
 
+      <section class="journey section-band" id="journey" aria-labelledby="journey-title">
+        <div class="section-shell">
+          <div class="section-heading" data-animate>
+            <p class="eyebrow" data-i18n="journey.eyebrow">Professional experience</p>
+            <h2 id="journey-title" data-i18n="journey.title">Professional Journey</h2>
+            <p data-i18n="journey.subtitle">
+              A railway systems career built across project execution, commissioning, maintenance engineering, digital services and technical warranty management.
+            </p>
+          </div>
+
+          <div class="journey-layout">
+            <div class="journey-rail" id="journey-rail" aria-label="Professional journey railway stations" data-i18n-aria-label="journey.railLabel"></div>
+            <div class="journey-cards" id="journey-cards"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="map-section section-shell" id="map" aria-labelledby="map-title">
         <div class="section-heading" data-animate>
-          <p class="eyebrow">International assignments</p>
-          <h2 id="map-title">On-site Railway Project Assignments</h2>
-          <p>
+          <p class="eyebrow" data-i18n="map.eyebrow">International assignments</p>
+          <h2 id="map-title" data-i18n="map.title">On-site Railway Project Assignments</h2>
+          <p data-i18n="map.subtitle">
             Field project assignments across national railway, metro and international onboard signalling programmes.
           </p>
         </div>
 
         <div class="map-layout">
           <div class="map-wrap" data-animate>
-            <div id="assignment-map" role="application" aria-label="Interactive world map with project assignments"></div>
-            <p class="map-note">OpenStreetMap tiles, Leaflet.js and non-confidential project summaries.</p>
+            <div id="assignment-map" role="application" aria-label="Interactive world map with project assignments" data-i18n-aria-label="map.mapLabel"></div>
+            <p class="map-note" data-i18n="map.note">OpenStreetMap tiles, Leaflet.js and non-confidential project summaries.</p>
           </div>
-          <aside class="assignment-panel" aria-label="Project assignment list" data-animate>
-            <h3>Assignments</h3>
+          <aside class="assignment-panel" aria-label="Project assignment list" data-i18n-aria-label="map.panelLabel" data-animate>
+            <h3 data-i18n="map.assignmentsTitle">Assignments</h3>
             <div class="assignment-list" id="assignment-list"></div>
           </aside>
         </div>
       </section>
 
-      <section class="experience section-band" id="experience" aria-labelledby="experience-title">
-        <div class="section-shell">
-          <div class="section-heading" data-animate>
-            <p class="eyebrow">Professional experience</p>
-            <h2 id="experience-title">Progressive railway systems responsibility</h2>
-          </div>
-
-          <div class="timeline">
-            <article class="timeline-card" data-animate>
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <time datetime="2023">2023 - Present</time>
-                <h3>Technical Warranty Manager - Onboard Signalling</h3>
-                <p class="company">Siemens Mobility &middot; Madrid, Spain</p>
-                <p>
-                  Responsible for technical warranty management of Renfe onboard signalling contracts, including
-                  ERTMS/ETCS and ASFA Digital/ASFA 4 equipment.
-                </p>
-                <ul>
-                  <li>Lead technical analysis of warranty incidents, including JRU/onboard log review, failure categorisation and warranty applicability.</li>
-                  <li>Coordinate maintainers, customer stakeholders, repair centres, spare parts and logistics linked to warranty processes.</li>
-                  <li>Lead warranty incident meetings with customers and maintainers, explaining failure origin, categorisation criteria and contractual impact.</li>
-                  <li>Define and apply RAMS/contractual criteria based on customer contracts, ADIF ASFA technical specification and EN 50126 / EN 50129 principles.</li>
-                  <li>Design digital incident-reporting and repair-request architecture using Teams Lists, SharePoint and Power Automate.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-card" data-animate>
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <time datetime="2022">2022 - 2023</time>
-                <h3>Project Manager &amp; Business Intelligence Expert - Digital Services</h3>
-                <p class="company">Siemens Mobility &middot; Madrid, Spain</p>
-                <p>
-                  Digital Services department set-up, IRIS/OPMES/OMMES fleet monitoring visualisation and
-                  project-control governance.
-                </p>
-                <ul>
-                  <li>Collaborated in the creation and deployment of Digital Services activities within Siemens Mobility, supporting department set-up, operating model and reporting definition.</li>
-                  <li>Participated in the original definition of IRIS, the fleet-monitoring visualisation tool integrated into OPMES/OMMES, focused on train fleet, project/line and onboard equipment status control.</li>
-                  <li>Defined Qlik Sense dashboards and views to display the key information required for fleet condition monitoring, onboard equipment status, project/line follow-up and management KPIs.</li>
-                  <li>As Project Manager, supported project-control set-up for Digital Services, including customer invoicing approach, invoicing plan, team hour allocation, planned cost follow-up and risk tracking.</li>
-                  <li>Combined railway technical knowledge with data modelling, Qlik Sense, Power BI and NPrinting to transform onboard equipment data into operational and management reporting.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-card" data-animate>
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <time datetime="2017">2017 - 2022</time>
-                <h3>Customer Service Engineer - ATP/ATO Maintenance Contract</h3>
-                <p class="company">Siemens Mobility &middot; Madrid, Spain</p>
-                <p>Ferromovil 3000 and Ferromovil 9000 ATP/ATO maintenance contract.</p>
-                <ul>
-                  <li>Resolved incidents in onboard ATP/ATO Dimetronic equipment, supporting preventive and corrective maintenance activities.</li>
-                  <li>Managed and coordinated subcontracted personnel in maintenance execution.</li>
-                  <li>Controlled client certifications, billing documentation, contract progress and technical-financial status.</li>
-                  <li>Administered and improved IBM Maximo as the GMAO tool for integral maintenance management.</li>
-                  <li>Developed BI dashboards and automated reports with Qlik Sense, NPrinting and Power BI to monitor technical and financial indicators.</li>
-                  <li>Collaborated in the redesign of repair and spare parts management processes for Siemens Mobility Spain.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-card" data-animate>
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <time datetime="2015">2015 - 2017</time>
-                <h3>Senior Testing &amp; Commissioning Technician - Project Execution</h3>
-                <p class="company">Siemens Mobility &middot; Madrid, Spain / International</p>
-                <p>Senior field commissioning role for onboard signalling systems: ASFA, ERTMS/ETCS, ATP/ATO and CBTC.</p>
-                <ul>
-                  <li>Performed senior testing and commissioning activities for onboard signalling equipment in national and international railway projects.</li>
-                  <li>Led field troubleshooting, functional validation, configuration checks and technical deviation resolution during project delivery.</li>
-                  <li>Coordinated with project engineering, customer representatives, maintenance teams and suppliers to ensure safe commissioning and service readiness.</li>
-                  <li>Provided technical support during dynamic tests, operational validation, handover and early-life project support.</li>
-                </ul>
-              </div>
-            </article>
-
-            <article class="timeline-card" data-animate>
-              <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-content">
-                <time datetime="2008">2008 - 2015</time>
-                <h3>Testing &amp; Commissioning Technician - Project Execution</h3>
-                <p class="company">Siemens Mobility &middot; Madrid, Spain / International</p>
-                <p>Onboard signalling systems commissioning in ASFA, ERTMS/ETCS, ATP/ATO and CBTC technologies.</p>
-                <ul>
-                  <li>Executed static and dynamic tests, equipment configuration checks, integration activities and field validation for onboard railway signalling systems.</li>
-                  <li>Supported commissioning, troubleshooting and operational validation of ASFA, ERTMS/ETCS, ATP/ATO and CBTC equipment.</li>
-                  <li>Worked in project environments involving installation, train preparation, functional testing, technical reporting and delivery support.</li>
-                  <li>Built a strong field background in railway safety-critical systems, later applied to maintenance engineering, warranty management and customer-facing technical support.</li>
-                </ul>
-              </div>
-            </article>
-          </div>
+      <section class="personal section-shell" id="personal" aria-labelledby="personal-title">
+        <div class="section-heading compact" data-animate>
+          <p class="eyebrow" data-i18n="personal.eyebrow">Personal Drive</p>
+          <h2 id="personal-title" data-i18n="personal.title">Personal Drive</h2>
+          <p data-i18n="personal.copy">
+            Endurance running and marathon preparation have reinforced the same principles I apply professionally: discipline, consistency, structured progress and resilience under demanding conditions.
+          </p>
+        </div>
+        <div class="personal-grid">
+          <article class="personal-card" data-animate>
+            <span data-i18n="personal.cards.0.label">Marathon experience</span>
+          </article>
+          <article class="personal-card" data-animate>
+            <span data-i18n="personal.cards.1.label">Long-term endurance goals</span>
+          </article>
+          <article class="personal-card" data-animate>
+            <span data-i18n="personal.cards.2.label">Discipline and consistency</span>
+          </article>
         </div>
       </section>
 
       <section class="education section-shell" id="education" aria-labelledby="education-title">
         <div class="section-heading" data-animate>
-          <p class="eyebrow">Education &amp; certifications</p>
-          <h2 id="education-title">Engineering foundation and continuous training</h2>
+          <p class="eyebrow" data-i18n="education.eyebrow">Education and certifications</p>
+          <h2 id="education-title" data-i18n="education.title">Engineering foundation and continuous training</h2>
         </div>
 
         <div class="education-layout">
           <article class="education-card" data-animate>
-            <span class="card-label">Education</span>
-            <h3>Universidad Polit&eacute;cnica de Madrid</h3>
-            <p>Degree in Computer Engineering / Grado en Ingenier&iacute;a de Computadores</p>
+            <span class="card-label" data-i18n="education.degreeLabel">Education</span>
+            <h3 data-i18n="education.university">Universidad Polit&eacute;cnica de Madrid</h3>
+            <p data-i18n="education.degree">Degree in Computer Engineering / Grado en Ingenier&iacute;a de Computadores</p>
             <time datetime="2008">2008 - 2017</time>
           </article>
 
-          <div class="certification-grid" aria-label="Certifications">
-            <article class="cert-card" data-animate>English B2 - APTIS certified</article>
-            <article class="cert-card" data-animate>IBM Maximo Administrator Training - 12h</article>
-            <article class="cert-card" data-animate>PRL Generic 30h</article>
-            <article class="cert-card" data-animate>Qlik Sense / NPrinting training</article>
-            <article class="cert-card" data-animate>PM@ Siemens Project Management Career</article>
+          <div class="certification-grid" aria-label="Certifications" data-i18n-aria-label="education.certificationsLabel">
+            <article class="cert-card" data-animate data-i18n="education.certifications.0">English B2 - APTIS certified</article>
+            <article class="cert-card" data-animate data-i18n="education.certifications.1">IBM Maximo Administrator Training - 12h</article>
+            <article class="cert-card" data-animate data-i18n="education.certifications.2">PRL Generic 30h</article>
+            <article class="cert-card" data-animate data-i18n="education.certifications.3">Qlik Sense / NPrinting training</article>
+            <article class="cert-card" data-animate data-i18n="education.certifications.4">PM@ Siemens Project Management Career</article>
           </div>
+        </div>
+      </section>
+
+      <section class="blog section-band" id="blog" aria-labelledby="blog-title">
+        <div class="section-shell">
+          <div class="section-heading compact" data-animate>
+            <p class="eyebrow" data-i18n="blog.eyebrow">Technical Notes and Blog</p>
+            <h2 id="blog-title" data-i18n="blog.title">Technical Notes &amp; Blog</h2>
+          </div>
+          <article class="blog-card" data-animate>
+            <p data-i18n="blog.placeholder">Future posts about railway systems, digitalisation, maintenance engineering and technical lessons learned.</p>
+            <button class="button button-placeholder" type="button" disabled data-i18n="blog.button">Blog coming soon</button>
+          </article>
         </div>
       </section>
 
       <section class="contact section-band" id="contact" aria-labelledby="contact-title">
         <div class="section-shell">
           <div class="section-heading" data-animate>
-            <p class="eyebrow">Contact</p>
-            <h2 id="contact-title">Professional contact details</h2>
-            <p>
+            <p class="eyebrow" data-i18n="contact.eyebrow">Contact</p>
+            <h2 id="contact-title" data-i18n="contact.title">Professional contact details</h2>
+            <p data-i18n="contact.subtitle">
               Available for railway systems engineering, onboard signalling, technical warranty and digital workflow discussions.
             </p>
           </div>
 
-          <address class="contact-grid" aria-label="Contact details">
+          <address class="contact-grid" aria-label="Contact details" data-i18n-aria-label="contact.gridLabel">
             <div class="contact-card" data-animate>
-              <span>Location</span>
-              <strong>Madrid, Spain</strong>
+              <span data-i18n="contact.labels.location">Location</span>
+              <strong data-i18n="contact.values.location">Madrid, Spain</strong>
             </div>
             <a class="contact-card" href="tel:+34622415979" data-animate>
-              <span>Phone</span>
+              <span data-i18n="contact.labels.phone">Phone</span>
               <strong>+34 622 415 979</strong>
             </a>
             <a class="contact-card" href="mailto:carlos.diago.guijarro@gmail.com" data-animate>
-              <span>Email</span>
+              <span data-i18n="contact.labels.email">Email</span>
               <strong>carlos.diago.guijarro@gmail.com</strong>
             </a>
             <a class="contact-card" href="https://www.linkedin.com/in/jcdiago" target="_blank" rel="noreferrer" data-animate>
-              <span>LinkedIn</span>
+              <span data-i18n="contact.labels.linkedin">LinkedIn</span>
               <strong>linkedin.com/in/jcdiago</strong>
             </a>
-            <div class="contact-card contact-card-wide" data-animate>
-              <span>Languages</span>
-              <strong>English B2 - APTIS certified</strong>
+            <a class="contact-card" href="https://carlosdiago.github.io/" target="_blank" rel="noreferrer" data-animate>
+              <span data-i18n="contact.labels.portfolio">Portfolio</span>
+              <strong>carlosdiago.github.io</strong>
+            </a>
+            <div class="contact-card" data-animate>
+              <span data-i18n="contact.labels.languages">Languages</span>
+              <strong data-i18n="contact.values.languages">English B2 - APTIS certified</strong>
             </div>
           </address>
         </div>
@@ -377,8 +337,8 @@
     <footer class="site-footer">
       <div class="section-shell footer-grid">
         <div>
-          <h2>Carlos Diago Guijarro</h2>
-          <p>Railway Systems Engineer &middot; Onboard Signalling &middot; Technical Warranty Manager</p>
+          <h2 data-i18n="identity.fullName">Juan Carlos Diago Guijarro</h2>
+          <p data-i18n="footer.tagline">Railway Systems Engineer &middot; Onboard Signalling &middot; Technical Warranty Manager</p>
         </div>
         <address>
           <a href="mailto:carlos.diago.guijarro@gmail.com">carlos.diago.guijarro@gmail.com</a>

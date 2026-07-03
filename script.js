@@ -469,11 +469,22 @@
         eyebrow: "Core expertise",
         title: "Onboard systems, technical warranty and digitalisation",
         subtitle: "A field-based railway systems profile combining testing and commissioning, maintenance engineering, technical warranty management, customer-facing technical analysis and data-driven workflow control.",
-        dashboardLabel: "Core expertise dashboard",
+        dashboardLabel: "Railway expertise control dashboard",
+        kpis: [
+          { value: "17+ years", label: "Railway systems experience" },
+          { value: "5", label: "Signalling technologies" },
+          { value: "8", label: "Technical capabilities" },
+          { value: "9", label: "Tools & digital platforms" }
+        ],
+        experienceLabels: {
+          core: "Core expertise",
+          applied: "Applied experience",
+          solid: "Solid experience"
+        },
         cards: [
           { title: "Onboard Signalling Technologies" },
           {
-            title: "Technical Capabilities",
+            title: "Key Technical Capabilities",
             items: [
               "JRU / onboard log analysis",
               "Incident analysis",
@@ -494,7 +505,8 @@
             ]
           },
           { title: "Tools & Digitalisation" }
-        ]
+        ],
+        focusBar: "Focus: safety \u00b7 reliability \u00b7 compliance \u00b7 operational efficiency \u00b7 data-driven decisions"
       },
       map: {
         eyebrow: "International assignments",
@@ -642,13 +654,24 @@
       },
       expertise: {
         eyebrow: "Especializaci\u00f3n",
-        title: "Sistemas embarcados, garant\u00eda t\u00e9cnica y digitalizaci\u00f3n",
+        title: "Sistemas embarcados, gesti\u00f3n t\u00e9cnica de garant\u00edas y digitalizaci\u00f3n",
         subtitle: "Perfil t\u00e9cnico ferroviario desarrollado en campo, combinando puesta en servicio, ingenier\u00eda de mantenimiento, gesti\u00f3n de garant\u00edas, an\u00e1lisis t\u00e9cnico con cliente y digitalizaci\u00f3n de flujos basada en datos.",
-        dashboardLabel: "Dashboard de especializaci\u00f3n t\u00e9cnica",
+        dashboardLabel: "Dashboard de control de especializaci\u00f3n ferroviaria",
+        kpis: [
+          { value: "17+ a\u00f1os", label: "Experiencia en sistemas ferroviarios" },
+          { value: "5", label: "Tecnolog\u00edas de se\u00f1alizaci\u00f3n" },
+          { value: "8", label: "Capacidades t\u00e9cnicas" },
+          { value: "9", label: "Herramientas y plataformas digitales" }
+        ],
+        experienceLabels: {
+          core: "Experiencia principal",
+          applied: "Experiencia aplicada",
+          solid: "Experiencia consolidada"
+        },
         cards: [
           { title: "Tecnolog\u00edas de Se\u00f1alizaci\u00f3n Embarcada" },
           {
-            title: "Capacidades t\u00e9cnicas",
+            title: "Capacidades t\u00e9cnicas clave",
             items: [
               "An\u00e1lisis de registros JRU / logs embarcados",
               "An\u00e1lisis de incidencias",
@@ -669,7 +692,8 @@
             ]
           },
           { title: "Herramientas y digitalizaci\u00f3n" }
-        ]
+        ],
+        focusBar: "Enfoque: seguridad \u00b7 fiabilidad \u00b7 cumplimiento \u00b7 eficiencia operativa \u00b7 decisiones basadas en datos"
       },
       map: {
         eyebrow: "Proyectos internacionales",

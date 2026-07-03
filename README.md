@@ -9,7 +9,7 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 - Controlled bilingual interface: English by default, Spanish available through the ES / EN switcher.
 - Consistent identity usage for Juan Carlos Diago Guijarro, with Carlos Diago Guijarro only in compact navigation contexts.
 - Railway-themed professional journey with station nodes, current-role highlight and focusable experience cards.
-- Leaflet assignment map with non-confidential project summaries, technology/context and role details.
+- Leaflet assignment map with compact, scrollable assignment cards, marker popups, non-confidential project summaries, technology/context and role details.
 - Technical Notes & Blog placeholder prepared for a future Blogger integration.
 - Personal Drive section covering endurance running and marathon preparation without external integrations.
 - Responsive layout for desktop and mobile, including horizontal railway line on desktop and vertical railway line on mobile.
@@ -24,7 +24,7 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 
 ## Local Use
 
-Open `index.html` directly in a browser. No local server is required.
+Open `index.html` directly in a browser. No local server or build step is required.
 
 The map requires an internet connection because Leaflet and OpenStreetMap tiles are loaded from external CDNs.
 

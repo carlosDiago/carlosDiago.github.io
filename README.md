@@ -11,7 +11,7 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 - Railway-themed professional journey with station nodes, current-role highlight and focusable experience cards.
 - Dashboard-style technical expertise section for onboard signalling, capabilities, standards and digital tools.
 - Leaflet assignment map with compact assignment list, zoomable Spain/Singapore location groups, marker popups, non-confidential project summaries, technology/context and role details.
-- Personal Drive section covering endurance running and marathon preparation without external integrations.
+- Personal Drive section covering endurance running, marathon preparation and selected public Strava activity links.
 - Responsive layout for desktop and mobile, including horizontal railway line on desktop and vertical railway line on mobile.
 
 ## Files
@@ -30,7 +30,7 @@ The map requires an internet connection because Leaflet and OpenStreetMap tiles 
 
 ## Placeholders
 
-- Running / endurance: no Strava or external sports service is connected. The UI has hidden link placeholders ready for future activity URLs.
+- Running / endurance: selected activities are linked manually through public Strava activity URLs. There is no Strava API integration.
 
 ## GitHub Pages Deployment
 

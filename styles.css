@@ -989,6 +989,85 @@ button:focus-visible {
   line-height: 1.45;
 }
 
+.selected-activities {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 18px;
+}
+
+.selected-activities-copy,
+.activity-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.selected-activities-copy {
+  padding: 22px;
+}
+
+.selected-activities-copy h3 {
+  margin: 0;
+  color: var(--navy-950);
+  font-size: 1.18rem;
+}
+
+.selected-activities-copy p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.activity-card {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-height: 132px;
+  padding: 20px;
+}
+
+.activity-card span {
+  color: var(--navy-950);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.activity-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.activity-link {
+  justify-self: start;
+  margin-top: 6px;
+  border-bottom: 2px solid rgba(19, 184, 173, 0.42);
+  color: var(--teal-600);
+  font-size: 0.88rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.activity-link::after {
+  content: " >";
+}
+
+.activity-link:hover {
+  border-bottom-color: var(--teal-500);
+  color: var(--navy-950);
+}
+
 .education-layout {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
@@ -1172,6 +1251,7 @@ button:focus-visible {
   }
 
   .map-layout,
+  .selected-activities,
   .contact-grid,
   .education-layout {
     grid-template-columns: 1fr;
@@ -1240,6 +1320,7 @@ button:focus-visible {
   .dashboard-list,
   .dashboard-tool-grid,
   .personal-grid,
+  .activity-grid,
   .certification-grid {
     grid-template-columns: 1fr;
   }

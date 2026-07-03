@@ -261,12 +261,6 @@
     "changsha"
   ];
 
-  var personalDriveActivities = [
-    { stravaUrl: "" },
-    { stravaUrl: "" },
-    { stravaUrl: "" }
-  ];
-
   var journeyStations = [
     {
       current: false,
@@ -534,7 +528,7 @@
       personal: {
         eyebrow: "Personal Drive",
         title: "Personal Drive",
-        copy: "Endurance running and marathon preparation have reinforced the same principles I apply professionally: discipline, consistency, structured progress and resilience under demanding conditions.",
+        copy: "Endurance running and marathon preparation have reinforced the same principles I apply professionally: discipline, consistency, structured progress and resilience under demanding conditions. I am currently rebuilding endurance fitness after becoming a father, balancing family, work and future long-distance challenges.",
         cards: [
           {
             label: "Marathon experience",
@@ -549,7 +543,21 @@
             text: "Training habits based on planning, repetition and resilience, aligned with the same approach used in technical project work."
           }
         ],
-        viewActivity: "View activity"
+        activities: {
+          title: "Selected activities",
+          intro: "Selected endurance activities that reflect discipline, structured preparation and consistency over time.",
+          linkLabel: "View on Strava",
+          items: [
+            {
+              title: "Madrid Marathon",
+              distance: "Marathon distance"
+            },
+            {
+              title: "Barcelona Marathon",
+              distance: "Marathon distance"
+            }
+          ]
+        }
       },
       education: {
         eyebrow: "Education and certifications",
@@ -695,7 +703,7 @@
       personal: {
         eyebrow: "Disciplina personal",
         title: "Disciplina personal",
-        copy: "La carrera de resistencia y la preparaci\u00f3n de maratones refuerzan los mismos principios que aplico profesionalmente: disciplina, constancia, progreso estructurado y resiliencia en condiciones exigentes.",
+        copy: "La carrera de resistencia y la preparaci\u00f3n de maratones refuerzan los mismos principios que aplico profesionalmente: disciplina, constancia, progreso estructurado y resiliencia en condiciones exigentes. Actualmente estoy recuperando forma deportiva tras la paternidad, compaginando familia, trabajo y futuros retos de mayor distancia.",
         cards: [
           {
             label: "Experiencia en marat\u00f3n",
@@ -710,7 +718,21 @@
             text: "H\u00e1bitos basados en planificaci\u00f3n, repetici\u00f3n y resiliencia, alineados con mi forma de trabajar en proyectos t\u00e9cnicos."
           }
         ],
-        viewActivity: "Ver actividad"
+        activities: {
+          title: "Actividades destacadas",
+          intro: "Actividades de resistencia seleccionadas que reflejan disciplina, preparaci\u00f3n estructurada y constancia en el tiempo.",
+          linkLabel: "Ver en Strava",
+          items: [
+            {
+              title: "Marat\u00f3n de Madrid",
+              distance: "Distancia marat\u00f3n"
+            },
+            {
+              title: "Marat\u00f3n de Barcelona",
+              distance: "Distancia marat\u00f3n"
+            }
+          ]
+        }
       },
       education: {
         eyebrow: "Formaci\u00f3n y certificaciones",
@@ -901,22 +923,6 @@
     });
   }
 
-  function renderPersonalLinks() {
-    document.querySelectorAll("[data-strava-index]").forEach(function (link) {
-      var index = Number(link.getAttribute("data-strava-index"));
-      var activity = personalDriveActivities[index];
-      var url = activity && activity.stravaUrl;
-
-      if (url) {
-        link.href = url;
-        link.hidden = false;
-      } else {
-        link.hidden = true;
-        link.removeAttribute("href");
-      }
-    });
-  }
-
   function updateNavToggleLabel() {
     if (!navToggle) {
       return;
@@ -954,7 +960,6 @@
     updateLanguageButtons();
     renderAssignmentList();
     renderMapMarkers();
-    renderPersonalLinks();
     renderJourney();
     setActiveNav();
   }

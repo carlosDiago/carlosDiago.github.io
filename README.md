@@ -9,16 +9,16 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 - Controlled bilingual interface: English by default, Spanish available through the ES / EN switcher.
 - Consistent identity usage for Juan Carlos Diago Guijarro, with Carlos Diago Guijarro only in compact navigation contexts.
 - Railway-themed professional journey with station nodes, current-role highlight and focusable experience cards.
-- Leaflet assignment map with compact, scrollable assignment cards, marker popups, non-confidential project summaries, technology/context and role details.
-- Technical Notes & Blog placeholder prepared for a future Blogger integration.
+- Dashboard-style technical expertise section for onboard signalling, capabilities, standards and digital tools.
+- Leaflet assignment map with compact assignment list, zoomable Spain/Singapore location groups, marker popups, non-confidential project summaries, technology/context and role details.
 - Personal Drive section covering endurance running and marathon preparation without external integrations.
 - Responsive layout for desktop and mobile, including horizontal railway line on desktop and vertical railway line on mobile.
 
 ## Files
 
 - `index.html` - semantic page structure and English fallback content.
-- `styles.css` - responsive visual system, railway-line journey, layout and Leaflet popup styling.
-- `script.js` - bilingual dictionary, mobile navigation, section highlighting, reveal effects, interactive map markers and journey station focus.
+- `styles.css` - responsive visual system, railway-line journey, dashboard cards, layout and Leaflet popup styling.
+- `script.js` - bilingual dictionary, mobile navigation, section highlighting, reveal effects, hierarchical interactive map markers and journey station focus.
 - `assets/cv/Carlos_Diago_CV.pdf` - harmless placeholder retained in the assets folder; it is not linked from the visible UI.
 - `assets/img/` - optional folder for future image assets.
 
@@ -30,8 +30,7 @@ The map requires an internet connection because Leaflet and OpenStreetMap tiles 
 
 ## Placeholders
 
-- Blog: the section is intentionally not connected to Blogger until a valid public Blogger URL is configured.
-- Running / endurance: no Strava or external sports service is connected.
+- Running / endurance: no Strava or external sports service is connected. The UI has hidden link placeholders ready for future activity URLs.
 
 ## GitHub Pages Deployment
 

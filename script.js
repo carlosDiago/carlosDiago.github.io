@@ -4,135 +4,261 @@
   var supportedLanguages = ["en", "es"];
   var currentLanguage = "en";
   var assignmentMap = null;
-  var assignmentMarkers = [];
-  var activeAssignmentIndex = 0;
+  var mapMarkers = {};
+  var revealedGroups = {};
+  var activeAssignmentKey = "spain";
   var activeJourneyIndex = 4;
+  var resetMapButton = document.querySelector("[data-map-reset]");
 
   var navToggle = document.querySelector("[data-nav-toggle]");
   var navMenu = document.querySelector(".nav-menu");
   var navItems = document.querySelectorAll(".nav-links a");
   var languageButtons = document.querySelectorAll("[data-lang]");
 
-  var assignments = [
+  var assignmentGroups = [
     {
+      key: "spain",
+      type: "group",
       coordinates: [40.4168, -3.7038],
+      zoom: 6,
+      children: ["madrid", "valencia", "cataluna"],
+      label: "ES",
       en: {
         location: "Spain",
-        project: "Renfe, Metro Madrid, FGV Valencia, FGC Catalu\u00f1a",
-        year: "2008 - Present",
-        technology: "Onboard signalling, ATP/ATO, ASFA Digital, ERTMS/ETCS, maintenance engineering and warranty support.",
-        role: "National railway and metro assignments involving onboard signalling, maintenance engineering, warranty support and technical coordination."
+        project: "Spain Railway Assignments",
+        year: "2008 - Present"
       },
       es: {
         location: "Espa\u00f1a",
-        project: "Renfe, Metro Madrid, FGV Valencia, FGC Catalu\u00f1a",
-        year: "2008 - Actualidad",
-        technology: "Se\u00f1alizaci\u00f3n embarcada, ATP/ATO, ASFA Digital, ERTMS/ETCS, ingenier\u00eda de mantenimiento y soporte de garant\u00edas.",
-        role: "Proyectos nacionales ferroviarios y de metro con se\u00f1alizaci\u00f3n embarcada, ingenier\u00eda de mantenimiento, soporte de garant\u00edas y coordinaci\u00f3n t\u00e9cnica."
+        project: "Proyectos ferroviarios en Espa\u00f1a",
+        year: "2008 - Actualidad"
       }
     },
     {
+      key: "singapore",
+      type: "group",
+      coordinates: [1.3335, 103.8565],
+      zoom: 11,
+      children: ["singapore-dtl1", "singapore-dtl3"],
+      label: "SG",
+      en: {
+        location: "Singapore",
+        project: "Singapore Downtown Line Assignments",
+        year: "2013 - 2017"
+      },
+      es: {
+        location: "Singapur",
+        project: "Proyectos Downtown Line en Singapur",
+        year: "2013 - 2017"
+      }
+    }
+  ];
+
+  var finalAssignments = [
+    {
+      key: "madrid",
+      parentKey: "spain",
+      coordinates: [40.4168, -3.7038],
+      label: "MD",
+      en: {
+        location: "Madrid, Spain",
+        project: "Renfe / Metro Madrid",
+        year: "2008 - Present",
+        technology: "ASFA Digital, ERTMS/ETCS, ATP/ATO, onboard signalling, maintenance engineering and warranty support.",
+        role: "National railway and metro assignments involving onboard signalling, maintenance engineering, warranty support, customer coordination and technical analysis.",
+        detail: "Field, maintenance and warranty work focused on non-confidential onboard signalling support and technical analysis."
+      },
+      es: {
+        location: "Madrid, Espa\u00f1a",
+        project: "Renfe / Metro Madrid",
+        year: "2008 - Actualidad",
+        technology: "ASFA Digital, ERTMS/ETCS, ATP/ATO, se\u00f1alizaci\u00f3n embarcada, ingenier\u00eda de mantenimiento y soporte de garant\u00edas.",
+        role: "Asignaciones nacionales ferroviarias y de metro con se\u00f1alizaci\u00f3n embarcada, ingenier\u00eda de mantenimiento, soporte de garant\u00edas, coordinaci\u00f3n con cliente y an\u00e1lisis t\u00e9cnico.",
+        detail: "Trabajo de campo, mantenimiento y garant\u00edas centrado en soporte no confidencial de se\u00f1alizaci\u00f3n embarcada y an\u00e1lisis t\u00e9cnico."
+      }
+    },
+    {
+      key: "valencia",
+      parentKey: "spain",
+      coordinates: [39.4699, -0.3763],
+      label: "VL",
+      en: {
+        location: "Valencia, Spain",
+        project: "FGV Valencia",
+        year: "2013 - 2016",
+        technology: "Onboard railway signalling systems.",
+        role: "Field support and project assignment related to onboard railway systems.",
+        detail: "Non-confidential field support for onboard railway systems in a regional railway context."
+      },
+      es: {
+        location: "Valencia, Espa\u00f1a",
+        project: "FGV Valencia",
+        year: "2013 - 2016",
+        technology: "Sistemas ferroviarios de se\u00f1alizaci\u00f3n embarcada.",
+        role: "Soporte de campo y asignaci\u00f3n de proyecto relacionada con sistemas ferroviarios embarcados.",
+        detail: "Soporte de campo no confidencial para sistemas ferroviarios embarcados en un contexto ferroviario regional."
+      }
+    },
+    {
+      key: "cataluna",
+      parentKey: "spain",
+      coordinates: [41.5912, 1.5209],
+      label: "CT",
+      en: {
+        location: "Catalu\u00f1a, Spain",
+        project: "FGC Catalu\u00f1a",
+        year: "2022",
+        technology: "Railway systems training support.",
+        role: "Training / technical support assignment.",
+        detail: "Technical support and training activities related to railway systems."
+      },
+      es: {
+        location: "Catalu\u00f1a, Espa\u00f1a",
+        project: "FGC Catalu\u00f1a",
+        year: "2022",
+        technology: "Soporte de formaci\u00f3n en sistemas ferroviarios.",
+        role: "Asignaci\u00f3n de formaci\u00f3n / soporte t\u00e9cnico.",
+        detail: "Actividades de soporte t\u00e9cnico y formaci\u00f3n relacionadas con sistemas ferroviarios."
+      }
+    },
+    {
+      key: "caracas",
       coordinates: [10.4806, -66.9036],
+      label: "CC",
       en: {
         location: "Caracas, Venezuela",
         project: "CAMETRO Line 1",
         year: "2011 - 2012",
-        technology: "Metro onboard systems",
-        role: "On-site commissioning activities for CAMETRO Line 1 onboard systems."
+        technology: "Metro onboard systems.",
+        role: "On-site commissioning activities for CAMETRO Line 1 onboard systems.",
+        detail: "Commissioning support performed on site for metro onboard systems."
       },
       es: {
         location: "Caracas, Venezuela",
         project: "CAMETRO L\u00ednea 1",
         year: "2011 - 2012",
-        technology: "Sistemas embarcados de metro",
-        role: "Actividades in situ de puesta en servicio para los sistemas embarcados de CAMETRO L\u00ednea 1."
+        technology: "Sistemas embarcados de metro.",
+        role: "Actividades in situ de puesta en servicio para los sistemas embarcados de CAMETRO L\u00ednea 1.",
+        detail: "Soporte de puesta en servicio realizado en campo para sistemas embarcados de metro."
       }
     },
     {
+      key: "istanbul",
       coordinates: [41.0082, 28.9784],
+      label: "IS",
       en: {
         location: "Istanbul, Turkey",
         project: "Marmaray",
         year: "2014",
-        technology: "Railway onboard systems",
-        role: "On-site commissioning support for Marmaray railway project."
+        technology: "Railway onboard systems.",
+        role: "On-site commissioning support for Marmaray railway project.",
+        detail: "Commissioning support for railway onboard systems during project execution."
       },
       es: {
         location: "Estambul, Turqu\u00eda",
         project: "Marmaray",
         year: "2014",
-        technology: "Sistemas ferroviarios embarcados",
-        role: "Soporte in situ de puesta en servicio para el proyecto ferroviario Marmaray."
+        technology: "Sistemas ferroviarios embarcados.",
+        role: "Soporte in situ de puesta en servicio para el proyecto ferroviario Marmaray.",
+        detail: "Soporte de puesta en servicio para sistemas ferroviarios embarcados durante la ejecuci\u00f3n del proyecto."
       }
     },
     {
+      key: "riyadh",
       coordinates: [24.7136, 46.6753],
+      label: "RY",
       en: {
         location: "Riyadh, Saudi Arabia",
         project: "HSR Push-Pull",
         year: "2015",
-        technology: "High-speed railway onboard systems",
-        role: "On-site project execution support for HSR Push-Pull railway project."
+        technology: "High-speed railway onboard systems.",
+        role: "On-site project execution support for HSR Push-Pull railway project.",
+        detail: "On-site execution support for high-speed onboard systems."
       },
       es: {
         location: "Riad, Arabia Saud\u00ed",
         project: "HSR Push-Pull",
         year: "2015",
-        technology: "Sistemas embarcados de alta velocidad",
-        role: "Soporte in situ a la ejecuci\u00f3n del proyecto ferroviario HSR Push-Pull."
+        technology: "Sistemas embarcados de alta velocidad.",
+        role: "Soporte in situ a la ejecuci\u00f3n del proyecto ferroviario HSR Push-Pull.",
+        detail: "Soporte de ejecuci\u00f3n en campo para sistemas embarcados de alta velocidad."
       }
     },
     {
+      key: "singapore-dtl1",
+      parentKey: "singapore",
       coordinates: [1.3521, 103.8198],
+      label: "D1",
       en: {
         location: "Singapore",
         project: "Downtown Line 1",
         year: "2013",
-        technology: "CBTC / onboard signalling",
-        role: "On-site testing and commissioning activities for Downtown Line 1."
+        technology: "CBTC / onboard signalling.",
+        role: "On-site testing and commissioning activities for Downtown Line 1.",
+        detail: "Testing and commissioning work for CBTC onboard signalling."
       },
       es: {
         location: "Singapur",
         project: "Downtown Line 1",
         year: "2013",
-        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada",
-        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 1."
+        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada.",
+        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 1.",
+        detail: "Trabajo de pruebas y puesta en servicio para se\u00f1alizaci\u00f3n embarcada CBTC."
       }
     },
     {
+      key: "singapore-dtl3",
+      parentKey: "singapore",
       coordinates: [1.3147, 103.8927],
+      label: "D3",
       en: {
         location: "Singapore",
         project: "Downtown Line 3",
         year: "2017",
-        technology: "CBTC / onboard signalling",
-        role: "On-site testing and commissioning activities for Downtown Line 3."
+        technology: "CBTC / onboard signalling.",
+        role: "On-site testing and commissioning activities for Downtown Line 3.",
+        detail: "Testing and commissioning work for CBTC onboard signalling."
       },
       es: {
         location: "Singapur",
         project: "Downtown Line 3",
         year: "2017",
-        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada",
-        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 3."
+        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada.",
+        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 3.",
+        detail: "Trabajo de pruebas y puesta en servicio para se\u00f1alizaci\u00f3n embarcada CBTC."
       }
     },
     {
+      key: "changsha",
       coordinates: [28.2282, 112.9388],
+      label: "CS",
       en: {
         location: "Changsha, China",
         project: "Metro Line 2",
         year: "2019",
-        technology: "CBTC onboard equipment",
-        role: "On-site maintenance engineering support and technical training for CBTC onboard equipment maintainers."
+        technology: "CBTC onboard equipment.",
+        role: "On-site maintenance engineering support and technical training for CBTC onboard equipment maintainers.",
+        detail: "Maintenance engineering support and technical training for CBTC onboard equipment maintainers."
       },
       es: {
         location: "Changsha, China",
         project: "Metro L\u00ednea 2",
         year: "2019",
-        technology: "Equipos embarcados CBTC",
-        role: "Soporte in situ de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para mantenedores de equipos embarcados CBTC."
+        technology: "Equipos embarcados CBTC.",
+        role: "Soporte in situ de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para mantenedores de equipos embarcados CBTC.",
+        detail: "Soporte de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para mantenedores de equipos embarcados CBTC."
       }
     }
+  ];
+
+  var assignmentListKeys = [
+    "spain",
+    "caracas",
+    "istanbul",
+    "riyadh",
+    "singapore-dtl1",
+    "singapore-dtl3",
+    "changsha"
   ];
 
   var journeyStations = [
@@ -234,10 +360,10 @@
         station: "Project Manager and BI Expert",
         title: "Project Manager and Business Intelligence Expert - Digital Services",
         company: "Siemens Mobility \u00b7 Madrid, Spain",
-        summary: "Digital Services department set-up, IRIS/OPMES/OMMES fleet monitoring visualisation and project-control governance.",
+        summary: "Digital Services department set-up, IRIS/OMNES fleet monitoring visualisation and project-control governance.",
         bullets: [
           "Collaborated in the creation and deployment of Digital Services activities within Siemens Mobility, supporting department set-up, operating model and reporting definition.",
-          "Participated in the original definition of IRIS, the fleet-monitoring visualisation tool integrated into OPMES/OMMES, focused on train fleet, project/line and onboard equipment status control.",
+          "Participated in the original definition of IRIS, the fleet-monitoring visualisation tool integrated into OMNES, focused on train fleet, project/line and onboard equipment status control.",
           "Defined Qlik Sense dashboards and views to display the key information required for fleet condition monitoring, onboard equipment status, project/line follow-up and management KPIs.",
           "As Project Manager, supported project-control set-up for Digital Services, including customer invoicing approach, invoicing plan, team hour allocation, planned cost follow-up and risk tracking.",
           "Combined railway technical knowledge with data modelling, Qlik Sense, Power BI and NPrinting to transform onboard equipment data into operational and management reporting."
@@ -248,10 +374,10 @@
         station: "Project Manager y experto BI",
         title: "Project Manager y experto en Business Intelligence - Digital Services",
         company: "Siemens Mobility \u00b7 Madrid, Espa\u00f1a",
-        summary: "Puesta en marcha del departamento Digital Services, visualizaci\u00f3n de flota IRIS/OPMES/OMMES y gobierno de control de proyecto.",
+        summary: "Puesta en marcha del departamento Digital Services, visualizaci\u00f3n de flota IRIS/OMNES y control de proyecto.",
         bullets: [
           "Colaboraci\u00f3n en la creaci\u00f3n y despliegue de actividades de Digital Services en Siemens Mobility, apoyando la definici\u00f3n del departamento, modelo operativo y reporting.",
-          "Participaci\u00f3n en la definici\u00f3n original de IRIS, herramienta de visualizaci\u00f3n de monitorizaci\u00f3n de flota integrada en OPMES/OMMES, orientada al control de trenes, proyectos/l\u00edneas y equipos embarcados.",
+          "Participaci\u00f3n en la definici\u00f3n original de IRIS, herramienta de visualizaci\u00f3n de monitorizaci\u00f3n de flota integrada en OMNES, orientada al control de trenes, proyectos/l\u00edneas y equipos embarcados.",
           "Definici\u00f3n de cuadros de mando y vistas Qlik Sense para mostrar informaci\u00f3n clave sobre condici\u00f3n de flota, estado de equipos embarcados, seguimiento de proyecto/l\u00ednea e indicadores de gesti\u00f3n.",
           "Como Project Manager, soporte a la puesta en marcha del control de proyecto para Digital Services, incluyendo enfoque de facturaci\u00f3n, plan de facturaci\u00f3n, imputaci\u00f3n de horas, seguimiento de costes previstos y riesgos.",
           "Combinaci\u00f3n de conocimiento t\u00e9cnico ferroviario con modelado de datos, Qlik Sense, Power BI y NPrinting para transformar datos de equipos embarcados en reporting operativo y de gesti\u00f3n."
@@ -316,10 +442,9 @@
       },
       nav: {
         profile: "Profile",
+        journey: "Journey",
         expertise: "Expertise",
         map: "Map",
-        journey: "Journey",
-        blog: "Blog",
         contact: "Contact"
       },
       hero: {
@@ -328,57 +453,60 @@
         subtitle: "Computer Engineer with 17+ years at Siemens Mobility, focused on onboard railway systems, signalling, testing and commissioning, maintenance engineering, technical warranty management, incident analysis, JRU/onboard log analysis and digital workflow automation.",
         actionsLabel: "Primary actions",
         mapButton: "View Project Map",
-        contactButton: "Contact",
-        visualLabel: "Onboard signalling focus overview",
-        visualToplineLeft: "ONBOARD SIGNALLING",
-        visualToplineRight: "RAMS & WARRANTY",
-        visualCard1: "JRU review",
-        visualCard2: "Failure criteria",
-        visualCard3: "Testing field support",
-        visualCard4: "Maintenance training",
-        statusIncident: "Incident analysis",
-        statusRepair: "Repair workflow",
-        statusMeetings: "Customer meetings"
+        contactButton: "Contact"
       },
       figures: {
         eyebrow: "Key figures",
         title: "Railway experience at a glance",
         cards: [
           { value: "17+ years", label: "Siemens Mobility railway systems experience" },
-          { value: "8+ years", label: "Project Execution / Testing and Commissioning" },
+          { value: "8+ years", label: "Project Execution / Testing & Commissioning" },
           { value: "5+ years", label: "Maintenance Engineer / Service Engineer" },
-          { value: "Current role", label: "Technical Warranty Manager for onboard signalling contracts" }
+          { value: "Current role", label: "Technical Warranty Manager for Renfe onboard signalling contracts" }
         ]
       },
       expertise: {
         eyebrow: "Core expertise",
-        title: "Onboard systems, technical governance and digitalisation",
-        subtitle: "A field-based railway systems profile combining commissioning, maintenance engineering, warranty assessment, customer-facing technical analysis and data-driven workflow control.",
+        title: "Onboard systems, technical warranty and digitalisation",
+        subtitle: "A field-based railway systems profile combining testing and commissioning, maintenance engineering, technical warranty management, customer-facing technical analysis and data-driven workflow control.",
+        dashboardLabel: "Railway expertise control dashboard",
+        kpis: [
+          { value: "17+ years", label: "Railway systems experience" },
+          { value: "5", label: "Signalling technologies" },
+          { value: "8", label: "Technical capabilities" },
+          { value: "9", label: "Tools & digital platforms" }
+        ],
+        experienceLabels: {
+          core: "Core expertise",
+          applied: "Applied experience",
+          solid: "Solid experience"
+        },
         cards: [
           { title: "Onboard Signalling Technologies" },
           {
-            title: "Technical Capabilities",
+            title: "Key Technical Capabilities",
             items: [
               "JRU / onboard log analysis",
               "Incident analysis",
               "Root cause / failure categorisation",
               "Maintenance engineering",
-              "Testing and commissioning",
+              "Testing & commissioning",
               "Warranty management",
               "Repair and spare parts workflow",
               "Customer technical meetings"
             ]
           },
           {
-            title: "Frameworks and Standards",
+            title: "Frameworks & Standards",
             items: [
               "ADIF ASFA technical specification",
               "Warranty contractual assessment",
               "Reliability / MTBF assessment"
             ]
           },
-          { title: "Tools and Digitalisation" }
-        ]
+          { title: "Tools & Digitalisation" }
+        ],
+        focusBar: "Focus: safety \u00b7 reliability \u00b7 compliance \u00b7 operational efficiency \u00b7 data-driven decisions"
       },
       map: {
         eyebrow: "International assignments",
@@ -388,14 +516,17 @@
         mapLabel: "Interactive world map with project assignments",
         panelLabel: "Project assignment list",
         assignmentsTitle: "Assignments",
+        resetButton: "Reset map",
         fallback: "Map library unavailable. Project assignments remain listed beside the map.",
         assignmentButtonPrefix: "Open assignment",
+        groupButtonPrefix: "Zoom into assignment area",
         labels: {
           location: "Location",
           project: "Project",
           year: "Year",
           technology: "Technology / context",
-          role: "Role"
+          role: "Role",
+          detail: "Detail"
         }
       },
       journey: {
@@ -409,12 +540,36 @@
       personal: {
         eyebrow: "Personal Drive",
         title: "Personal Drive",
-        copy: "Endurance running and marathon preparation have reinforced the same principles I apply professionally: discipline, consistency, structured progress and resilience under demanding conditions.",
+        copy: "Endurance running and marathon preparation have reinforced the same principles I apply professionally: discipline, consistency, structured progress and resilience under demanding conditions. I am currently rebuilding endurance fitness after becoming a father, balancing family, work and future long-distance challenges.",
         cards: [
-          { label: "Marathon experience" },
-          { label: "Long-term endurance goals" },
-          { label: "Discipline and consistency" }
-        ]
+          {
+            label: "Marathon experience",
+            text: "Completed marathon-distance challenges requiring structured preparation, consistency and long-term focus."
+          },
+          {
+            label: "Long-term endurance goals",
+            text: "Continuous improvement mindset applied through progressive endurance training and measurable objectives."
+          },
+          {
+            label: "Discipline and consistency",
+            text: "Training habits based on planning, repetition and resilience, aligned with the same approach used in technical project work."
+          }
+        ],
+        activities: {
+          title: "Selected activities",
+          intro: "Selected endurance activities that reflect discipline, structured preparation and consistency over time.",
+          linkLabel: "View on Strava",
+          items: [
+            {
+              title: "Madrid Marathon",
+              distance: "Marathon distance"
+            },
+            {
+              title: "Barcelona Marathon",
+              distance: "Marathon distance"
+            }
+          ]
+        }
       },
       education: {
         eyebrow: "Education and certifications",
@@ -425,17 +580,10 @@
         certificationsLabel: "Certifications",
         certifications: [
           "English B2 - APTIS certified",
-          "IBM Maximo Administrator Training - 12h",
-          "PRL Generic 30h",
+          "IBM Maximo Administrator Training",
           "Qlik Sense / NPrinting training",
           "PM@ Siemens Project Management Career"
         ]
-      },
-      blog: {
-        eyebrow: "Technical Notes and Blog",
-        title: "Technical Notes & Blog",
-        placeholder: "Future posts about railway systems, digitalisation, maintenance engineering and technical lessons learned.",
-        button: "Blog coming soon"
       },
       contact: {
         eyebrow: "Contact",
@@ -447,12 +595,10 @@
           phone: "Phone",
           email: "Email",
           linkedin: "LinkedIn",
-          portfolio: "Portfolio",
-          languages: "Languages"
+          portfolio: "Portfolio"
         },
         values: {
-          location: "Madrid, Spain",
-          languages: "English B2 - APTIS certified"
+          location: "Madrid, Spain"
         }
       },
       footer: {
@@ -483,10 +629,9 @@
       },
       nav: {
         profile: "Perfil",
+        journey: "Trayectoria",
         expertise: "Especializaci\u00f3n",
         map: "Mapa",
-        journey: "Trayectoria",
-        blog: "Blog",
         contact: "Contacto"
       },
       hero: {
@@ -495,42 +640,44 @@
         subtitle: "Ingeniero de Computadores con m\u00e1s de 17 a\u00f1os en Siemens Mobility, centrado en sistemas ferroviarios embarcados, se\u00f1alizaci\u00f3n, pruebas y puesta en servicio, ingenier\u00eda de mantenimiento, gesti\u00f3n t\u00e9cnica de garant\u00edas, an\u00e1lisis de incidencias, an\u00e1lisis de registros JRU / logs embarcados y automatizaci\u00f3n de flujos digitales.",
         actionsLabel: "Acciones principales",
         mapButton: "Ver mapa de proyectos",
-        contactButton: "Contacto",
-        visualLabel: "Resumen del foco en se\u00f1alizaci\u00f3n embarcada",
-        visualToplineLeft: "SE\u00d1ALIZACI\u00d3N EMBARCADA",
-        visualToplineRight: "RAMS Y GARANT\u00cdAS",
-        visualCard1: "Revisi\u00f3n JRU",
-        visualCard2: "Criterios de fallo",
-        visualCard3: "Soporte de campo en pruebas",
-        visualCard4: "Formaci\u00f3n de mantenimiento",
-        statusIncident: "An\u00e1lisis de incidencias",
-        statusRepair: "Flujo de reparaci\u00f3n",
-        statusMeetings: "Reuniones t\u00e9cnicas"
+        contactButton: "Contacto"
       },
       figures: {
         eyebrow: "Indicadores clave",
         title: "Experiencia ferroviaria de un vistazo",
         cards: [
           { value: "17+ a\u00f1os", label: "Experiencia en sistemas ferroviarios en Siemens Mobility" },
-          { value: "8+ a\u00f1os", label: "Ejecuci\u00f3n de proyectos / Pruebas y Puesta en Servicio" },
-          { value: "5+ a\u00f1os", label: "Ingenier\u00eda de mantenimiento / servicio a cliente" },
-          { value: "Rol actual", label: "Responsable T\u00e9cnico de Garant\u00edas en contratos de se\u00f1alizaci\u00f3n embarcada" }
+          { value: "8+ a\u00f1os", label: "Ejecuci\u00f3n de proyectos / puesta en servicio" },
+          { value: "5+ a\u00f1os", label: "Ingenier\u00eda de mantenimiento / service engineering" },
+          { value: "Puesto actual", label: "Responsable t\u00e9cnico de garant\u00edas para contratos de se\u00f1alizaci\u00f3n embarcada Renfe" }
         ]
       },
       expertise: {
         eyebrow: "Especializaci\u00f3n",
-        title: "Sistemas embarcados, gobierno t\u00e9cnico y digitalizaci\u00f3n",
-        subtitle: "Perfil de sistemas ferroviarios construido en campo, combinando puesta en servicio, ingenier\u00eda de mantenimiento, evaluaci\u00f3n de garant\u00edas, an\u00e1lisis t\u00e9cnico ante cliente y control de flujos basado en datos.",
+        title: "Sistemas embarcados, gesti\u00f3n t\u00e9cnica de garant\u00edas y digitalizaci\u00f3n",
+        subtitle: "Perfil t\u00e9cnico ferroviario desarrollado en campo, combinando puesta en servicio, ingenier\u00eda de mantenimiento, gesti\u00f3n de garant\u00edas, an\u00e1lisis t\u00e9cnico con cliente y digitalizaci\u00f3n de flujos basada en datos.",
+        dashboardLabel: "Dashboard de control de especializaci\u00f3n ferroviaria",
+        kpis: [
+          { value: "17+ a\u00f1os", label: "Experiencia en sistemas ferroviarios" },
+          { value: "5", label: "Tecnolog\u00edas de se\u00f1alizaci\u00f3n" },
+          { value: "8", label: "Capacidades t\u00e9cnicas" },
+          { value: "9", label: "Herramientas y plataformas digitales" }
+        ],
+        experienceLabels: {
+          core: "Experiencia principal",
+          applied: "Experiencia aplicada",
+          solid: "Experiencia consolidada"
+        },
         cards: [
           { title: "Tecnolog\u00edas de Se\u00f1alizaci\u00f3n Embarcada" },
           {
-            title: "Capacidades t\u00e9cnicas",
+            title: "Capacidades t\u00e9cnicas clave",
             items: [
               "An\u00e1lisis de registros JRU / logs embarcados",
               "An\u00e1lisis de incidencias",
               "An\u00e1lisis de causa ra\u00edz y categorizaci\u00f3n de fallos",
               "Ingenier\u00eda de Mantenimiento",
-              "Pruebas y Puesta en Servicio",
+              "Pruebas y puesta en servicio",
               "Gesti\u00f3n de garant\u00edas",
               "Flujo de reparaci\u00f3n y repuestos",
               "Reuniones t\u00e9cnicas con cliente"
@@ -545,7 +692,8 @@
             ]
           },
           { title: "Herramientas y digitalizaci\u00f3n" }
-        ]
+        ],
+        focusBar: "Enfoque: seguridad \u00b7 fiabilidad \u00b7 cumplimiento \u00b7 eficiencia operativa \u00b7 decisiones basadas en datos"
       },
       map: {
         eyebrow: "Proyectos internacionales",
@@ -555,14 +703,17 @@
         mapLabel: "Mapa mundial interactivo con proyectos ferroviarios",
         panelLabel: "Lista de proyectos ferroviarios",
         assignmentsTitle: "Proyectos",
+        resetButton: "Restablecer mapa",
         fallback: "La librer\u00eda del mapa no est\u00e1 disponible. Los proyectos siguen listados junto al mapa.",
         assignmentButtonPrefix: "Abrir proyecto",
+        groupButtonPrefix: "Ampliar zona de proyectos",
         labels: {
           location: "Ubicaci\u00f3n",
           project: "Proyecto",
           year: "A\u00f1o",
           technology: "Tecnolog\u00eda / contexto",
-          role: "Rol"
+          role: "Rol",
+          detail: "Detalle"
         }
       },
       journey: {
@@ -576,12 +727,36 @@
       personal: {
         eyebrow: "Disciplina personal",
         title: "Disciplina personal",
-        copy: "La preparaci\u00f3n de maratones y la carrera de resistencia refuerzan los mismos principios que aplico profesionalmente: disciplina, constancia, progreso estructurado y resiliencia en condiciones exigentes.",
+        copy: "La carrera de resistencia y la preparaci\u00f3n de maratones refuerzan los mismos principios que aplico profesionalmente: disciplina, constancia, progreso estructurado y resiliencia en condiciones exigentes. Actualmente estoy recuperando forma deportiva tras la paternidad, compaginando familia, trabajo y futuros retos de mayor distancia.",
         cards: [
-          { label: "Experiencia en marat\u00f3n" },
-          { label: "Objetivos de resistencia a largo plazo" },
-          { label: "Disciplina y constancia" }
-        ]
+          {
+            label: "Experiencia en marat\u00f3n",
+            text: "Retos de distancia marat\u00f3n completados mediante preparaci\u00f3n estructurada, constancia y enfoque a largo plazo."
+          },
+          {
+            label: "Objetivos de resistencia",
+            text: "Mentalidad de mejora continua aplicada mediante entrenamiento progresivo y objetivos medibles."
+          },
+          {
+            label: "Disciplina y constancia",
+            text: "H\u00e1bitos basados en planificaci\u00f3n, repetici\u00f3n y resiliencia, alineados con mi forma de trabajar en proyectos t\u00e9cnicos."
+          }
+        ],
+        activities: {
+          title: "Actividades destacadas",
+          intro: "Actividades de resistencia seleccionadas que reflejan disciplina, preparaci\u00f3n estructurada y constancia en el tiempo.",
+          linkLabel: "Ver en Strava",
+          items: [
+            {
+              title: "Marat\u00f3n de Madrid",
+              distance: "Distancia marat\u00f3n"
+            },
+            {
+              title: "Marat\u00f3n de Barcelona",
+              distance: "Distancia marat\u00f3n"
+            }
+          ]
+        }
       },
       education: {
         eyebrow: "Formaci\u00f3n y certificaciones",
@@ -592,17 +767,10 @@
         certificationsLabel: "Certificaciones",
         certifications: [
           "Ingl\u00e9s B2 - certificado APTIS",
-          "Formaci\u00f3n de administrador IBM Maximo - 12h",
-          "PRL gen\u00e9rico 30h",
+          "Formaci\u00f3n de administrador IBM Maximo",
           "Formaci\u00f3n Qlik Sense / NPrinting",
           "PM@ Siemens Project Management Career"
         ]
-      },
-      blog: {
-        eyebrow: "Notas t\u00e9cnicas y blog",
-        title: "Notas t\u00e9cnicas y blog",
-        placeholder: "Futuras entradas sobre sistemas ferroviarios, digitalizaci\u00f3n, ingenier\u00eda de mantenimiento y aprendizajes t\u00e9cnicos.",
-        button: "Blog pr\u00f3ximamente"
       },
       contact: {
         eyebrow: "Contacto",
@@ -614,12 +782,10 @@
           phone: "Tel\u00e9fono",
           email: "Email",
           linkedin: "LinkedIn",
-          portfolio: "Portfolio",
-          languages: "Idiomas"
+          portfolio: "Portfolio"
         },
         values: {
-          location: "Madrid, Espa\u00f1a",
-          languages: "Ingl\u00e9s B2 - certificado APTIS"
+          location: "Madrid, Espa\u00f1a"
         }
       },
       footer: {
@@ -649,18 +815,80 @@
     return value === undefined || value === null ? "" : value;
   }
 
-  function getAssignment(index) {
-    var assignment = assignments[index];
-    var content = assignment[currentLanguage] || assignment.en;
+  function findByKey(collection, key) {
+    for (var index = 0; index < collection.length; index += 1) {
+      if (collection[index].key === key) {
+        return collection[index];
+      }
+    }
+
+    return null;
+  }
+
+  function getGroup(key) {
+    var group = findByKey(assignmentGroups, key);
+    var content = group && (group[currentLanguage] || group.en);
+
+    if (!group || !content) {
+      return null;
+    }
 
     return {
+      type: "group",
+      key: group.key,
+      coordinates: group.coordinates,
+      zoom: group.zoom,
+      children: group.children,
+      label: group.label,
+      location: content.location,
+      project: content.project,
+      year: content.year
+    };
+  }
+
+  function getFinalAssignment(key) {
+    var assignment = findByKey(finalAssignments, key);
+    var content = assignment && (assignment[currentLanguage] || assignment.en);
+
+    if (!assignment || !content) {
+      return null;
+    }
+
+    return {
+      type: "assignment",
+      key: assignment.key,
+      parentKey: assignment.parentKey || "",
       coordinates: assignment.coordinates,
+      label: assignment.label,
       location: content.location,
       project: content.project,
       year: content.year,
       technology: content.technology,
-      role: content.role
+      role: content.role,
+      detail: content.detail
     };
+  }
+
+  function getListItem(key) {
+    return getGroup(key) || getFinalAssignment(key);
+  }
+
+  function getVisibleMapItems() {
+    var items = [];
+
+    assignmentGroups.forEach(function (group) {
+      if (!revealedGroups[group.key]) {
+        items.push(getGroup(group.key));
+      }
+    });
+
+    finalAssignments.forEach(function (assignment) {
+      if (!assignment.parentKey || revealedGroups[assignment.parentKey]) {
+        items.push(getFinalAssignment(assignment.key));
+      }
+    });
+
+    return items.filter(Boolean);
   }
 
   function getJourneyStation(index) {
@@ -755,7 +983,7 @@
     updateNavToggleLabel();
     updateLanguageButtons();
     renderAssignmentList();
-    updateMarkerPopups();
+    renderMapMarkers();
     renderJourney();
     setActiveNav();
   }
@@ -804,42 +1032,98 @@
     return [
       '<div class="map-popup">',
       "<h3>" + escapeHtml(assignment.project) + "</h3>",
+      '<div class="map-popup-content">',
       "<dl>",
       "<dt>" + escapeHtml(labels.location) + "</dt><dd>" + escapeHtml(assignment.location) + "</dd>",
       "<dt>" + escapeHtml(labels.project) + "</dt><dd>" + escapeHtml(assignment.project) + "</dd>",
       "<dt>" + escapeHtml(labels.year) + "</dt><dd>" + escapeHtml(assignment.year) + "</dd>",
       "<dt>" + escapeHtml(labels.technology) + "</dt><dd>" + escapeHtml(assignment.technology) + "</dd>",
       "<dt>" + escapeHtml(labels.role) + "</dt><dd>" + escapeHtml(assignment.role) + "</dd>",
+      "<dt>" + escapeHtml(labels.detail) + "</dt><dd>" + escapeHtml(assignment.detail) + "</dd>",
       "</dl>",
+      "</div>",
       "</div>"
     ].join("");
   }
 
-  function createMarkerIcon(index) {
+  function createMarkerIcon(label, type) {
+    var size = type === "group" ? 40 : 34;
+
     return window.L.divIcon({
-      className: "portfolio-marker",
-      html: '<span class="portfolio-marker-pin"><em>' + index + "</em></span>",
-      iconSize: [34, 34],
-      iconAnchor: [17, 34],
-      popupAnchor: [0, -30]
+      className: "portfolio-marker portfolio-marker-" + type,
+      html: '<span class="portfolio-marker-pin"><em>' + escapeHtml(label) + "</em></span>",
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size],
+      popupAnchor: [0, -(size - 4)]
     });
   }
 
-  function updateMarkerPopups() {
-    assignmentMarkers.forEach(function (marker, index) {
-      var assignment = getAssignment(index);
-
-      marker.setPopupContent(renderPopup(assignment));
-
-      if (marker.options) {
-        marker.options.title = assignment.location;
+  function clearMapMarkers() {
+    Object.keys(mapMarkers).forEach(function (key) {
+      if (assignmentMap && mapMarkers[key]) {
+        assignmentMap.removeLayer(mapMarkers[key]);
       }
+    });
+
+    mapMarkers = {};
+  }
+
+  function renderMapMarkers() {
+    if (!assignmentMap || !window.L) {
+      return;
+    }
+
+    clearMapMarkers();
+
+    getVisibleMapItems().forEach(function (item) {
+      var marker = window.L.marker(item.coordinates, {
+        icon: createMarkerIcon(item.label, item.type),
+        title: item.location
+      }).addTo(assignmentMap);
+
+      if (item.type === "group") {
+        marker.on("click", function () {
+          revealGroup(item.key, true);
+        });
+      } else {
+        marker.bindPopup(renderPopup(item), {
+          maxWidth: 340
+        });
+
+        marker.on("click", function () {
+          setActiveAssignment(item.key);
+        });
+
+        marker.on("popupopen", function () {
+          setActiveAssignment(item.key);
+        });
+      }
+
+      mapMarkers[item.key] = marker;
+    });
+  }
+
+  function fitInitialMap() {
+    if (!assignmentMap || !window.L) {
+      return;
+    }
+
+    var coordinates = assignmentGroups.map(function (group) {
+      return group.coordinates;
+    }).concat(finalAssignments.filter(function (assignment) {
+      return !assignment.parentKey;
+    }).map(function (assignment) {
+      return assignment.coordinates;
+    }));
+
+    assignmentMap.fitBounds(window.L.latLngBounds(coordinates), {
+      padding: [36, 36],
+      maxZoom: 4
     });
   }
 
   function renderAssignmentList() {
     var list = document.getElementById("assignment-list");
-    var labels = getValue("map.labels");
 
     if (!list) {
       return;
@@ -847,45 +1131,90 @@
 
     list.innerHTML = "";
 
-    assignments.forEach(function (_, index) {
-      var assignment = getAssignment(index);
+    assignmentListKeys.forEach(function (key) {
+      var assignment = getListItem(key);
       var button = document.createElement("button");
-      button.className = "assignment-button";
+
+      if (!assignment) {
+        return;
+      }
+
+      button.className = "assignment-button" + (assignment.type === "group" ? " assignment-button-group" : "");
       button.type = "button";
-      button.setAttribute("aria-label", getValue("map.assignmentButtonPrefix") + ": " + assignment.project);
+      button.setAttribute("data-assignment-key", assignment.key);
+      button.setAttribute("aria-label", getValue(assignment.type === "group" ? "map.groupButtonPrefix" : "map.assignmentButtonPrefix") + ": " + assignment.project);
       button.innerHTML = [
         "<strong>" + escapeHtml(assignment.project) + "</strong>",
-        '<span class="assignment-summary">' + escapeHtml(assignment.location) + " \u00b7 " + escapeHtml(assignment.year) + "</span>",
-        '<span class="assignment-detail"><span>' + escapeHtml(labels.location) + "</span><span>" + escapeHtml(assignment.location) + "</span></span>",
-        '<span class="assignment-detail"><span>' + escapeHtml(labels.project) + "</span><span>" + escapeHtml(assignment.project) + "</span></span>",
-        '<span class="assignment-detail"><span>' + escapeHtml(labels.year) + "</span><span>" + escapeHtml(assignment.year) + "</span></span>",
-        '<span class="assignment-detail"><span>' + escapeHtml(labels.technology) + "</span><span>" + escapeHtml(assignment.technology) + "</span></span>",
-        '<span class="assignment-detail"><span>' + escapeHtml(labels.role) + "</span><span>" + escapeHtml(assignment.role) + "</span></span>"
+        '<span class="assignment-meta">' + escapeHtml(assignment.location) + " \u00b7 " + escapeHtml(assignment.year) + "</span>"
       ].join("");
 
       button.addEventListener("click", function () {
-        setActiveAssignment(index);
-
-        if (assignmentMarkers[index] && assignmentMap) {
-          assignmentMap.flyTo(assignment.coordinates, 5, { duration: 0.65 });
-          setTimeout(function () {
-            assignmentMarkers[index].openPopup();
-          }, 240);
+        if (assignment.type === "group") {
+          revealGroup(assignment.key, true);
+        } else {
+          openAssignment(assignment.key);
         }
       });
 
       list.appendChild(button);
     });
 
-    setActiveAssignment(activeAssignmentIndex);
+    setActiveAssignment(activeAssignmentKey);
   }
 
-  function setActiveAssignment(index) {
-    activeAssignmentIndex = index;
+  function setActiveAssignment(key) {
+    activeAssignmentKey = key;
 
-    document.querySelectorAll(".assignment-button").forEach(function (button, buttonIndex) {
-      button.classList.toggle("is-active", buttonIndex === index);
+    document.querySelectorAll(".assignment-button").forEach(function (button) {
+      var isActive = button.getAttribute("data-assignment-key") === key;
+      button.classList.toggle("is-active", isActive);
     });
+  }
+
+  function revealGroup(key, shouldFly) {
+    var group = getGroup(key);
+
+    if (!group) {
+      return;
+    }
+
+    revealedGroups[key] = true;
+    setActiveAssignment(key);
+    renderMapMarkers();
+
+    if (assignmentMap && shouldFly) {
+      assignmentMap.flyTo(group.coordinates, group.zoom, { duration: 0.65 });
+    }
+  }
+
+  function openAssignment(key) {
+    var assignment = getFinalAssignment(key);
+
+    if (!assignment || !assignmentMap) {
+      return;
+    }
+
+    if (assignment.parentKey && !revealedGroups[assignment.parentKey]) {
+      revealedGroups[assignment.parentKey] = true;
+      renderMapMarkers();
+    }
+
+    setActiveAssignment(key);
+    assignmentMap.flyTo(assignment.coordinates, assignment.parentKey === "singapore" ? 12 : 7, { duration: 0.65 });
+
+    setTimeout(function () {
+      if (mapMarkers[key]) {
+        mapMarkers[key].openPopup();
+      }
+    }, 260);
+  }
+
+  function resetAssignmentMap() {
+    revealedGroups = {};
+    activeAssignmentKey = "spain";
+    renderMapMarkers();
+    fitInitialMap();
+    setActiveAssignment(activeAssignmentKey);
   }
 
   function initMap() {
@@ -911,41 +1240,34 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     }).addTo(assignmentMap);
 
-    assignments.forEach(function (_, index) {
-      var assignment = getAssignment(index);
-      var marker = window.L.marker(assignment.coordinates, {
-        icon: createMarkerIcon(index + 1),
-        title: assignment.location
-      })
-        .addTo(assignmentMap)
-        .bindPopup(renderPopup(assignment));
-
-      marker.on("click", function () {
-        setActiveAssignment(index);
-      });
-
-      marker.on("popupopen", function () {
-        setActiveAssignment(index);
-      });
-
-      assignmentMarkers.push(marker);
-    });
-
-    var bounds = window.L.latLngBounds(assignments.map(function (assignment) {
-      return assignment.coordinates;
-    }));
-
-    assignmentMap.fitBounds(bounds, {
-      padding: [36, 36],
-      maxZoom: 4
-    });
+    renderMapMarkers();
+    fitInitialMap();
 
     setTimeout(function () {
       assignmentMap.invalidateSize();
     }, 100);
 
     renderAssignmentList();
-    setActiveAssignment(0);
+    setActiveAssignment(activeAssignmentKey);
+
+    if (resetMapButton) {
+      resetMapButton.addEventListener("click", resetAssignmentMap);
+    }
+  }
+
+  function getJourneyCardOrder() {
+    var currentIndexes = [];
+    var previousIndexes = [];
+
+    journeyStations.forEach(function (station, index) {
+      if (station.current) {
+        currentIndexes.push(index);
+      } else {
+        previousIndexes.push(index);
+      }
+    });
+
+    return currentIndexes.concat(previousIndexes.reverse());
   }
 
   function renderJourney() {
@@ -962,23 +1284,16 @@
     journeyStations.forEach(function (station, index) {
       var content = getJourneyStation(index);
       var stationButton = document.createElement("button");
-      var card = document.createElement("article");
       var isActive = index === activeJourneyIndex;
       var stationClasses = ["station-button"];
-      var cardClasses = ["journey-card"];
-      var bullets = content.bullets.map(function (item) {
-        return "<li>" + escapeHtml(item) + "</li>";
-      }).join("");
-      var currentBadge = content.current ? '<span class="role-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
+      var stationBadge = content.current ? '<span class="station-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
 
       if (content.current) {
         stationClasses.push("is-current");
-        cardClasses.push("is-current");
       }
 
       if (isActive) {
         stationClasses.push("is-active");
-        cardClasses.push("is-active");
       }
 
       stationButton.className = stationClasses.join(" ");
@@ -996,6 +1311,7 @@
         '<span class="station-copy">',
         "<time>" + escapeHtml(content.period) + "</time>",
         "<strong>" + escapeHtml(content.station) + "</strong>",
+        stationBadge,
         "</span>"
       ].join("");
 
@@ -1003,8 +1319,30 @@
         setActiveJourney(index, true);
       });
 
+      rail.appendChild(stationButton);
+    });
+
+    getJourneyCardOrder().forEach(function (index) {
+      var content = getJourneyStation(index);
+      var card = document.createElement("article");
+      var isActive = index === activeJourneyIndex;
+      var cardClasses = ["journey-card"];
+      var bullets = content.bullets.map(function (item) {
+        return "<li>" + escapeHtml(item) + "</li>";
+      }).join("");
+      var currentBadge = content.current ? '<span class="role-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
+
+      if (content.current) {
+        cardClasses.push("is-current");
+      }
+
+      if (isActive) {
+        cardClasses.push("is-active");
+      }
+
       card.id = "journey-card-" + index;
       card.className = cardClasses.join(" ");
+      card.setAttribute("data-journey-index", String(index));
       card.tabIndex = -1;
       card.innerHTML = [
         '<div class="journey-card-topline">',
@@ -1017,7 +1355,6 @@
         "<ul>" + bullets + "</ul>"
       ].join("");
 
-      rail.appendChild(stationButton);
       cards.appendChild(card);
     });
 
@@ -1038,12 +1375,14 @@
     });
 
     cards.forEach(function (card, cardIndex) {
-      card.classList.toggle("is-active", cardIndex === index);
+      card.classList.toggle("is-active", Number(card.getAttribute("data-journey-index")) === index);
     });
 
-    if (shouldFocus && cards[index]) {
-      cards[index].focus({ preventScroll: true });
-      cards[index].scrollIntoView({ behavior: behavior, block: "center" });
+    var activeCard = document.getElementById("journey-card-" + index);
+
+    if (shouldFocus && activeCard) {
+      activeCard.focus({ preventScroll: true });
+      activeCard.scrollIntoView({ behavior: behavior, block: "center" });
     }
   }
 

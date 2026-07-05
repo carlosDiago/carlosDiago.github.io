@@ -5,8 +5,6 @@
   var currentLanguage = "en";
   var assignmentMap = null;
   var mapMarkers = {};
-  var revealedGroups = {};
-  var activeAssignmentKey = "spain";
   var activeJourneyIndex = 4;
   var journeyObserver = null;
   var journeyScrollTicking = false;
@@ -16,252 +14,12 @@
   var navMenu = document.querySelector(".nav-menu");
   var navItems = document.querySelectorAll(".nav-links a");
   var languageButtons = document.querySelectorAll("[data-lang]");
-
-  var assignmentGroups = [
-    {
-      key: "spain",
-      type: "group",
-      coordinates: [40.4168, -3.7038],
-      zoom: 6,
-      children: ["madrid", "valencia", "cataluna"],
-      label: "ES",
-      en: {
-        location: "Spain",
-        project: "Spain Railway Assignments",
-        year: "2008 - Present"
-      },
-      es: {
-        location: "Espa\u00f1a",
-        project: "Proyectos ferroviarios en Espa\u00f1a",
-        year: "2008 - Actualidad"
-      }
-    },
-    {
-      key: "singapore",
-      type: "group",
-      coordinates: [1.3335, 103.8565],
-      zoom: 11,
-      children: ["singapore-dtl1", "singapore-dtl3"],
-      label: "SG",
-      en: {
-        location: "Singapore",
-        project: "Singapore Downtown Line Assignments",
-        year: "2013 - 2017"
-      },
-      es: {
-        location: "Singapur",
-        project: "Proyectos Downtown Line en Singapur",
-        year: "2013 - 2017"
-      }
-    }
-  ];
-
-  var finalAssignments = [
-    {
-      key: "madrid",
-      parentKey: "spain",
-      coordinates: [40.4168, -3.7038],
-      label: "MD",
-      en: {
-        location: "Madrid, Spain",
-        project: "Renfe / Metro Madrid",
-        year: "2008 - Present",
-        technology: "ASFA Digital, ERTMS/ETCS, ATP/ATO, onboard signalling, maintenance engineering and warranty support.",
-        role: "National railway and metro assignments involving onboard signalling, maintenance engineering, warranty support, customer coordination and technical analysis.",
-        detail: "Field, maintenance and warranty work focused on non-confidential onboard signalling support and technical analysis."
-      },
-      es: {
-        location: "Madrid, Espa\u00f1a",
-        project: "Renfe / Metro Madrid",
-        year: "2008 - Actualidad",
-        technology: "ASFA Digital, ERTMS/ETCS, ATP/ATO, se\u00f1alizaci\u00f3n embarcada, ingenier\u00eda de mantenimiento y soporte de garant\u00edas.",
-        role: "Asignaciones nacionales ferroviarias y de metro con se\u00f1alizaci\u00f3n embarcada, ingenier\u00eda de mantenimiento, soporte de garant\u00edas, coordinaci\u00f3n con cliente y an\u00e1lisis t\u00e9cnico.",
-        detail: "Trabajo de campo, mantenimiento y garant\u00edas centrado en soporte no confidencial de se\u00f1alizaci\u00f3n embarcada y an\u00e1lisis t\u00e9cnico."
-      }
-    },
-    {
-      key: "valencia",
-      parentKey: "spain",
-      coordinates: [39.4699, -0.3763],
-      label: "VL",
-      en: {
-        location: "Valencia, Spain",
-        project: "FGV Valencia",
-        year: "2013 - 2016",
-        technology: "Onboard railway signalling systems.",
-        role: "Field support and project assignment related to onboard railway systems.",
-        detail: "Non-confidential field support for onboard railway systems in a regional railway context."
-      },
-      es: {
-        location: "Valencia, Espa\u00f1a",
-        project: "FGV Valencia",
-        year: "2013 - 2016",
-        technology: "Sistemas ferroviarios de se\u00f1alizaci\u00f3n embarcada.",
-        role: "Soporte de campo y asignaci\u00f3n de proyecto relacionada con sistemas ferroviarios embarcados.",
-        detail: "Soporte de campo no confidencial para sistemas ferroviarios embarcados en un contexto ferroviario regional."
-      }
-    },
-    {
-      key: "cataluna",
-      parentKey: "spain",
-      coordinates: [41.5912, 1.5209],
-      label: "CT",
-      en: {
-        location: "Catalu\u00f1a, Spain",
-        project: "FGC Catalu\u00f1a",
-        year: "2022",
-        technology: "Railway systems training support.",
-        role: "Training / technical support assignment.",
-        detail: "Technical support and training activities related to railway systems."
-      },
-      es: {
-        location: "Catalu\u00f1a, Espa\u00f1a",
-        project: "FGC Catalu\u00f1a",
-        year: "2022",
-        technology: "Soporte de formaci\u00f3n en sistemas ferroviarios.",
-        role: "Asignaci\u00f3n de formaci\u00f3n / soporte t\u00e9cnico.",
-        detail: "Actividades de soporte t\u00e9cnico y formaci\u00f3n relacionadas con sistemas ferroviarios."
-      }
-    },
-    {
-      key: "caracas",
-      coordinates: [10.4806, -66.9036],
-      label: "CC",
-      en: {
-        location: "Caracas, Venezuela",
-        project: "CAMETRO Line 1",
-        year: "2011 - 2012",
-        technology: "Metro onboard systems.",
-        role: "On-site commissioning activities for CAMETRO Line 1 onboard systems.",
-        detail: "Commissioning support performed on site for metro onboard systems."
-      },
-      es: {
-        location: "Caracas, Venezuela",
-        project: "CAMETRO L\u00ednea 1",
-        year: "2011 - 2012",
-        technology: "Sistemas embarcados de metro.",
-        role: "Actividades in situ de puesta en servicio para los sistemas embarcados de CAMETRO L\u00ednea 1.",
-        detail: "Soporte de puesta en servicio realizado en campo para sistemas embarcados de metro."
-      }
-    },
-    {
-      key: "istanbul",
-      coordinates: [41.0082, 28.9784],
-      label: "IS",
-      en: {
-        location: "Istanbul, Turkey",
-        project: "Marmaray",
-        year: "2014",
-        technology: "Railway onboard systems.",
-        role: "On-site commissioning support for Marmaray railway project.",
-        detail: "Commissioning support for railway onboard systems during project execution."
-      },
-      es: {
-        location: "Estambul, Turqu\u00eda",
-        project: "Marmaray",
-        year: "2014",
-        technology: "Sistemas ferroviarios embarcados.",
-        role: "Soporte in situ de puesta en servicio para el proyecto ferroviario Marmaray.",
-        detail: "Soporte de puesta en servicio para sistemas ferroviarios embarcados durante la ejecuci\u00f3n del proyecto."
-      }
-    },
-    {
-      key: "riyadh",
-      coordinates: [24.7136, 46.6753],
-      label: "RY",
-      en: {
-        location: "Riyadh, Saudi Arabia",
-        project: "HSR Push-Pull",
-        year: "2015",
-        technology: "High-speed railway onboard systems.",
-        role: "On-site project execution support for HSR Push-Pull railway project.",
-        detail: "On-site execution support for high-speed onboard systems."
-      },
-      es: {
-        location: "Riad, Arabia Saud\u00ed",
-        project: "HSR Push-Pull",
-        year: "2015",
-        technology: "Sistemas embarcados de alta velocidad.",
-        role: "Soporte in situ a la ejecuci\u00f3n del proyecto ferroviario HSR Push-Pull.",
-        detail: "Soporte de ejecuci\u00f3n en campo para sistemas embarcados de alta velocidad."
-      }
-    },
-    {
-      key: "singapore-dtl1",
-      parentKey: "singapore",
-      coordinates: [1.3521, 103.8198],
-      label: "D1",
-      en: {
-        location: "Singapore",
-        project: "Downtown Line 1",
-        year: "2013",
-        technology: "CBTC / onboard signalling.",
-        role: "On-site testing and commissioning activities for Downtown Line 1.",
-        detail: "Testing and commissioning work for CBTC onboard signalling."
-      },
-      es: {
-        location: "Singapur",
-        project: "Downtown Line 1",
-        year: "2013",
-        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada.",
-        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 1.",
-        detail: "Trabajo de pruebas y puesta en servicio para se\u00f1alizaci\u00f3n embarcada CBTC."
-      }
-    },
-    {
-      key: "singapore-dtl3",
-      parentKey: "singapore",
-      coordinates: [1.3147, 103.8927],
-      label: "D3",
-      en: {
-        location: "Singapore",
-        project: "Downtown Line 3",
-        year: "2017",
-        technology: "CBTC / onboard signalling.",
-        role: "On-site testing and commissioning activities for Downtown Line 3.",
-        detail: "Testing and commissioning work for CBTC onboard signalling."
-      },
-      es: {
-        location: "Singapur",
-        project: "Downtown Line 3",
-        year: "2017",
-        technology: "CBTC / se\u00f1alizaci\u00f3n embarcada.",
-        role: "Actividades in situ de pruebas y puesta en servicio para Downtown Line 3.",
-        detail: "Trabajo de pruebas y puesta en servicio para se\u00f1alizaci\u00f3n embarcada CBTC."
-      }
-    },
-    {
-      key: "changsha",
-      coordinates: [28.2282, 112.9388],
-      label: "CS",
-      en: {
-        location: "Changsha, China",
-        project: "Metro Line 2",
-        year: "2019",
-        technology: "CBTC onboard equipment.",
-        role: "On-site maintenance engineering support and technical training for CBTC onboard equipment maintainers.",
-        detail: "Maintenance engineering support and technical training for CBTC onboard equipment maintainers."
-      },
-      es: {
-        location: "Changsha, China",
-        project: "Metro L\u00ednea 2",
-        year: "2019",
-        technology: "Equipos embarcados CBTC.",
-        role: "Soporte in situ de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para mantenedores de equipos embarcados CBTC.",
-        detail: "Soporte de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para mantenedores de equipos embarcados CBTC."
-      }
-    }
-  ];
-
-  var assignmentListKeys = [
-    "spain",
-    "caracas",
-    "istanbul",
-    "riyadh",
-    "singapore-dtl1",
-    "singapore-dtl3",
-    "changsha"
-  ];
+  var projectDataUrl = "assets/data/projects.json";
+  var projectData = null;
+  var projectNodes = {};
+  var initialProjectIds = [];
+  var activeAssignmentKey = "";
+  var currentProjectScopeId = "";
 
   var journeyStations = [
     {
@@ -817,80 +575,81 @@
     return value === undefined || value === null ? "" : value;
   }
 
-  function findByKey(collection, key) {
-    for (var index = 0; index < collection.length; index += 1) {
-      if (collection[index].key === key) {
-        return collection[index];
-      }
+  function normalizeProjectData(data) {
+    projectData = data || {};
+    projectNodes = {};
+    initialProjectIds = Array.isArray(projectData.initialNodeIds) ? projectData.initialNodeIds.slice() : [];
+
+    if (Array.isArray(projectData.nodes)) {
+      projectData.nodes.forEach(function (node) {
+        if (node && node.id) {
+          projectNodes[node.id] = node;
+        }
+      });
     }
 
-    return null;
+    if (!initialProjectIds.length) {
+      initialProjectIds = Object.keys(projectNodes).filter(function (id) {
+        return !projectNodes[id].parentId;
+      });
+    }
+
+    activeAssignmentKey = initialProjectIds[0] || "";
+    currentProjectScopeId = "";
   }
 
-  function getGroup(key) {
-    var group = findByKey(assignmentGroups, key);
-    var content = group && (group[currentLanguage] || group.en);
+  function hasProjectData() {
+    return Boolean(projectData && Object.keys(projectNodes).length);
+  }
 
-    if (!group || !content) {
+  function getProjectNode(id) {
+    return projectNodes[id] || null;
+  }
+
+  function getProjectContent(node) {
+    if (!node) {
+      return null;
+    }
+
+    return node[currentLanguage] || node.en || null;
+  }
+
+  function getProjectItem(id) {
+    var node = getProjectNode(id);
+    var content = getProjectContent(node);
+
+    if (!node || !content) {
       return null;
     }
 
     return {
-      type: "group",
-      key: group.key,
-      coordinates: group.coordinates,
-      zoom: group.zoom,
-      children: group.children,
-      label: group.label,
-      location: content.location,
-      project: content.project,
-      year: content.year
+      id: node.id,
+      key: node.id,
+      type: node.type,
+      parentId: node.parentId || "",
+      level: node.level || "",
+      coordinates: node.coordinates,
+      zoomLevel: node.zoomLevel || 10,
+      children: Array.isArray(node.children) ? node.children : [],
+      label: node.markerLabel || "",
+      title: content.title || content.project || "",
+      subtitle: content.subtitle || content.location || "",
+      location: content.location || "",
+      project: content.project || content.title || "",
+      year: content.year || "",
+      technologyContext: content.technologyContext || "",
+      role: content.role || "",
+      detail: content.detail || ""
     };
-  }
-
-  function getFinalAssignment(key) {
-    var assignment = findByKey(finalAssignments, key);
-    var content = assignment && (assignment[currentLanguage] || assignment.en);
-
-    if (!assignment || !content) {
-      return null;
-    }
-
-    return {
-      type: "assignment",
-      key: assignment.key,
-      parentKey: assignment.parentKey || "",
-      coordinates: assignment.coordinates,
-      label: assignment.label,
-      location: content.location,
-      project: content.project,
-      year: content.year,
-      technology: content.technology,
-      role: content.role,
-      detail: content.detail
-    };
-  }
-
-  function getListItem(key) {
-    return getGroup(key) || getFinalAssignment(key);
   }
 
   function getVisibleMapItems() {
-    var items = [];
+    var scope = currentProjectScopeId ? getProjectNode(currentProjectScopeId) : null;
+    var visibleIds = scope && Array.isArray(scope.children) ? scope.children : initialProjectIds;
 
-    assignmentGroups.forEach(function (group) {
-      if (!revealedGroups[group.key]) {
-        items.push(getGroup(group.key));
-      }
-    });
-
-    finalAssignments.forEach(function (assignment) {
-      if (!assignment.parentKey || revealedGroups[assignment.parentKey]) {
-        items.push(getFinalAssignment(assignment.key));
-      }
-    });
-
-    return items.filter(Boolean);
+    return visibleIds.map(function (id) {
+      return getProjectItem(id);
+    }).filter(Boolean);
   }
 
   function getJourneyStation(index) {
@@ -1033,13 +792,14 @@
 
     return [
       '<div class="map-popup">',
-      "<h3>" + escapeHtml(assignment.project) + "</h3>",
+      "<h3>" + escapeHtml(assignment.title) + "</h3>",
+      '<p class="map-popup-subtitle">' + escapeHtml(assignment.subtitle) + "</p>",
       '<div class="map-popup-content">',
       "<dl>",
       "<dt>" + escapeHtml(labels.location) + "</dt><dd>" + escapeHtml(assignment.location) + "</dd>",
       "<dt>" + escapeHtml(labels.project) + "</dt><dd>" + escapeHtml(assignment.project) + "</dd>",
       "<dt>" + escapeHtml(labels.year) + "</dt><dd>" + escapeHtml(assignment.year) + "</dd>",
-      "<dt>" + escapeHtml(labels.technology) + "</dt><dd>" + escapeHtml(assignment.technology) + "</dd>",
+      "<dt>" + escapeHtml(labels.technology) + "</dt><dd>" + escapeHtml(assignment.technologyContext) + "</dd>",
       "<dt>" + escapeHtml(labels.role) + "</dt><dd>" + escapeHtml(assignment.role) + "</dd>",
       "<dt>" + escapeHtml(labels.detail) + "</dt><dd>" + escapeHtml(assignment.detail) + "</dd>",
       "</dl>",
@@ -1071,7 +831,7 @@
   }
 
   function renderMapMarkers() {
-    if (!assignmentMap || !window.L) {
+    if (!assignmentMap || !window.L || !hasProjectData()) {
       return;
     }
 
@@ -1085,7 +845,7 @@
 
       if (item.type === "group") {
         marker.on("click", function () {
-          revealGroup(item.key, true);
+          revealGroup(item.id, true);
         });
       } else {
         marker.bindPopup(renderPopup(item), {
@@ -1093,35 +853,82 @@
         });
 
         marker.on("click", function () {
-          setActiveAssignment(item.key);
+          setActiveAssignment(item.id);
         });
 
         marker.on("popupopen", function () {
-          setActiveAssignment(item.key);
+          setActiveAssignment(item.id);
         });
       }
 
-      mapMarkers[item.key] = marker;
+      mapMarkers[item.id] = marker;
     });
   }
 
   function fitInitialMap() {
-    if (!assignmentMap || !window.L) {
+    if (!assignmentMap || !window.L || !hasProjectData()) {
       return;
     }
 
-    var coordinates = assignmentGroups.map(function (group) {
-      return group.coordinates;
-    }).concat(finalAssignments.filter(function (assignment) {
-      return !assignment.parentKey;
-    }).map(function (assignment) {
-      return assignment.coordinates;
-    }));
+    var coordinates = initialProjectIds.map(function (id) {
+      var item = getProjectItem(id);
+      return item && item.coordinates;
+    }).filter(Boolean);
+
+    if (!coordinates.length) {
+      return;
+    }
 
     assignmentMap.fitBounds(window.L.latLngBounds(coordinates), {
       padding: [36, 36],
       maxZoom: 4
     });
+  }
+
+  function fitGroupChildren(group) {
+    var childCoordinates = group.children.map(function (childId) {
+      var child = getProjectItem(childId);
+      return child && child.coordinates;
+    }).filter(Boolean);
+
+    if (!assignmentMap || !window.L) {
+      return;
+    }
+
+    if (childCoordinates.length > 1) {
+      assignmentMap.fitBounds(window.L.latLngBounds(childCoordinates), {
+        padding: [48, 48],
+        maxZoom: group.zoomLevel
+      });
+      return;
+    }
+
+    assignmentMap.flyTo(group.coordinates, group.zoomLevel, { duration: 0.65 });
+  }
+
+  function loadProjectData() {
+    if (!window.fetch) {
+      renderAssignmentList();
+      return;
+    }
+
+    window.fetch(projectDataUrl, { cache: "no-cache" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Unable to load project data");
+        }
+
+        return response.json();
+      })
+      .then(function (data) {
+        normalizeProjectData(data);
+        renderAssignmentList();
+        renderMapMarkers();
+        fitInitialMap();
+        setActiveAssignment(activeAssignmentKey);
+      }, function () {
+        renderAssignmentList();
+      });
   }
 
   function renderAssignmentList() {
@@ -1133,8 +940,7 @@
 
     list.innerHTML = "";
 
-    assignmentListKeys.forEach(function (key) {
-      var assignment = getListItem(key);
+    getVisibleMapItems().forEach(function (assignment) {
       var button = document.createElement("button");
 
       if (!assignment) {
@@ -1143,18 +949,18 @@
 
       button.className = "assignment-button" + (assignment.type === "group" ? " assignment-button-group" : "");
       button.type = "button";
-      button.setAttribute("data-assignment-key", assignment.key);
-      button.setAttribute("aria-label", getValue(assignment.type === "group" ? "map.groupButtonPrefix" : "map.assignmentButtonPrefix") + ": " + assignment.project);
+      button.setAttribute("data-assignment-key", assignment.id);
+      button.setAttribute("aria-label", getValue(assignment.type === "group" ? "map.groupButtonPrefix" : "map.assignmentButtonPrefix") + ": " + assignment.title);
       button.innerHTML = [
-        "<strong>" + escapeHtml(assignment.project) + "</strong>",
-        '<span class="assignment-meta">' + escapeHtml(assignment.location) + " \u00b7 " + escapeHtml(assignment.year) + "</span>"
+        "<strong>" + escapeHtml(assignment.title) + "</strong>",
+        '<span class="assignment-meta">' + escapeHtml(assignment.subtitle) + "</span>"
       ].join("");
 
       button.addEventListener("click", function () {
         if (assignment.type === "group") {
-          revealGroup(assignment.key, true);
+          revealGroup(assignment.id, true);
         } else {
-          openAssignment(assignment.key);
+          openAssignment(assignment.id);
         }
       });
 
@@ -1174,35 +980,37 @@
   }
 
   function revealGroup(key, shouldFly) {
-    var group = getGroup(key);
+    var group = getProjectItem(key);
 
-    if (!group) {
+    if (!group || group.type !== "group") {
       return;
     }
 
-    revealedGroups[key] = true;
+    currentProjectScopeId = key;
     setActiveAssignment(key);
     renderMapMarkers();
+    renderAssignmentList();
 
     if (assignmentMap && shouldFly) {
-      assignmentMap.flyTo(group.coordinates, group.zoom, { duration: 0.65 });
+      fitGroupChildren(group);
     }
   }
 
   function openAssignment(key) {
-    var assignment = getFinalAssignment(key);
+    var assignment = getProjectItem(key);
 
-    if (!assignment || !assignmentMap) {
+    if (!assignment || assignment.type !== "project" || !assignmentMap) {
       return;
     }
 
-    if (assignment.parentKey && !revealedGroups[assignment.parentKey]) {
-      revealedGroups[assignment.parentKey] = true;
+    if (assignment.parentId && currentProjectScopeId !== assignment.parentId) {
+      currentProjectScopeId = assignment.parentId;
       renderMapMarkers();
+      renderAssignmentList();
     }
 
     setActiveAssignment(key);
-    assignmentMap.flyTo(assignment.coordinates, assignment.parentKey === "singapore" ? 12 : 7, { duration: 0.65 });
+    assignmentMap.flyTo(assignment.coordinates, assignment.zoomLevel, { duration: 0.65 });
 
     setTimeout(function () {
       if (mapMarkers[key]) {
@@ -1212,9 +1020,10 @@
   }
 
   function resetAssignmentMap() {
-    revealedGroups = {};
-    activeAssignmentKey = "spain";
+    currentProjectScopeId = "";
+    activeAssignmentKey = initialProjectIds[0] || "";
     renderMapMarkers();
+    renderAssignmentList();
     fitInitialMap();
     setActiveAssignment(activeAssignmentKey);
   }
@@ -1509,6 +1318,7 @@
     initLanguageControls();
     applyLanguage(getInitialLanguage());
     initMap();
+    loadProjectData();
     initRevealAnimations();
     setActiveNav();
   }

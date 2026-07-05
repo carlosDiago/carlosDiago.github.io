@@ -1,0 +1,836 @@
+{
+  "schemaVersion": 1,
+  "defaultCenter": [
+    27.5,
+    24
+  ],
+  "defaultZoom": 2,
+  "initialNodeIds": [
+    "spain",
+    "caracas-cametro-line-1",
+    "istanbul-marmaray",
+    "riyadh-hsr-push-pull",
+    "singapore",
+    "changsha-metro-line-2"
+  ],
+  "nodes": [
+    {
+      "id": "spain",
+      "type": "group",
+      "parentId": null,
+      "level": "country",
+      "coordinates": [
+        40.4168,
+        -3.7038
+      ],
+      "markerLabel": "ES",
+      "children": [
+        "madrid",
+        "valencia",
+        "cataluna",
+        "pais-vasco"
+      ],
+      "zoomLevel": 6,
+      "en": {
+        "title": "Spain",
+        "subtitle": "National railway and metro assignment areas",
+        "location": "Spain",
+        "project": "Spain Railway Assignments",
+        "year": "2008 - Present",
+        "technologyContext": "Onboard railway systems across national rail, metro and regional environments.",
+        "role": "Field, testing, commissioning, maintenance engineering and technical support assignments.",
+        "detail": "Group marker for non-confidential railway project assignments in Spain."
+      },
+      "es": {
+        "title": "Espa\u00f1a",
+        "subtitle": "\u00c1reas de asignaciones ferroviarias y de metro",
+        "location": "Espa\u00f1a",
+        "project": "Proyectos ferroviarios en Espa\u00f1a",
+        "year": "2008 - Actualidad",
+        "technologyContext": "Sistemas ferroviarios embarcados en entornos de ferrocarril nacional, metro y regional.",
+        "role": "Asignaciones de campo, pruebas, puesta en servicio, ingenier\u00eda de mantenimiento y soporte t\u00e9cnico.",
+        "detail": "Marcador agrupado para asignaciones de proyecto ferroviarias no confidenciales en Espa\u00f1a."
+      }
+    },
+    {
+      "id": "madrid",
+      "type": "group",
+      "parentId": "spain",
+      "level": "city",
+      "coordinates": [
+        40.4168,
+        -3.7038
+      ],
+      "markerLabel": "MD",
+      "children": [
+        "metro-madrid",
+        "renfe-madrid",
+        "siemens-tres-cantos"
+      ],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Madrid",
+        "subtitle": "Metro Madrid and Renfe assignment groups",
+        "location": "Madrid, Spain",
+        "project": "Madrid railway assignment groups",
+        "year": "2008 - Present",
+        "technologyContext": "Onboard signalling and railway systems in metro and national rail environments.",
+        "role": "Testing, commissioning, field support, maintenance engineering and project execution activities.",
+        "detail": "Madrid group marker for public-safe project areas."
+      },
+      "es": {
+        "title": "Madrid",
+        "subtitle": "Grupos de asignaciones Metro Madrid y Renfe",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Grupos de asignaciones ferroviarias en Madrid",
+        "year": "2008 - Actualidad",
+        "technologyContext": "Se\u00f1alizaci\u00f3n embarcada y sistemas ferroviarios en entornos de metro y ferrocarril nacional.",
+        "role": "Actividades de pruebas, puesta en servicio, soporte de campo, ingenier\u00eda de mantenimiento y ejecuci\u00f3n de proyectos.",
+        "detail": "Marcador agrupado de Madrid para \u00e1reas de proyecto con informaci\u00f3n p\u00fablica segura."
+      }
+    },
+    {
+      "id": "metro-madrid",
+      "type": "group",
+      "parentId": "madrid",
+      "level": "operator",
+      "coordinates": [
+        40.4217,
+        -3.6767
+      ],
+      "markerLabel": "MM",
+      "children": [
+        "metro-madrid-canillejas",
+        "metro-madrid-villaverde"
+      ],
+      "zoomLevel": 12,
+      "en": {
+        "title": "Metro Madrid",
+        "subtitle": "ATP/ATO onboard equipment assignment sites",
+        "location": "Madrid, Spain",
+        "project": "Metro Madrid ATP/ATO onboard systems",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, onboard equipment, train series 3000 / 9000 and other Metro Madrid train series.",
+        "role": "Testing and commissioning technician during the Project Execution stage, and later Customer Service / Maintenance Engineer for Metro Madrid ATP/ATO maintenance activities.",
+        "detail": "Field work related to installation support, static and dynamic testing, adjustment, commissioning, troubleshooting, incident resolution and maintenance support of onboard ATP/ATO and CBTC equipment."
+      },
+      "es": {
+        "title": "Metro Madrid",
+        "subtitle": "Sedes de asignaciones de equipos embarcados ATP/ATO",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Sistemas embarcados ATP/ATO de Metro Madrid",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, equipos embarcados, series 3000 / 9000 y otras series de trenes de Metro de Madrid.",
+        "role": "T\u00e9cnico de pruebas y puesta en servicio durante la etapa de Project Execution y posteriormente Customer Service / Maintenance Engineer para actividades de mantenimiento ATP/ATO de Metro de Madrid.",
+        "detail": "Trabajo de campo relacionado con soporte a instalaci\u00f3n, pruebas est\u00e1ticas y din\u00e1micas, ajuste, puesta en servicio, troubleshooting, resoluci\u00f3n de incidencias y soporte de mantenimiento de equipos embarcados ATP/ATO y CBTC."
+      }
+    },
+    {
+      "id": "metro-madrid-canillejas",
+      "type": "project",
+      "parentId": "metro-madrid",
+      "level": "project",
+      "coordinates": [
+        40.449,
+        -3.609
+      ],
+      "markerLabel": "CJ",
+      "children": [],
+      "zoomLevel": 14,
+      "en": {
+        "title": "Canillejas workshops",
+        "subtitle": "Metro Madrid ATP/ATO onboard systems",
+        "location": "Madrid, Spain",
+        "project": "Metro Madrid ATP/ATO onboard systems",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, onboard equipment, train series 3000 / 9000 and other Metro Madrid train series.",
+        "role": "Testing and commissioning technician during the Project Execution stage, and later Customer Service / Maintenance Engineer for Metro Madrid ATP/ATO maintenance activities.",
+        "detail": "Field work related to installation support, static and dynamic testing, adjustment, commissioning, troubleshooting, incident resolution and maintenance support of onboard ATP/ATO and CBTC equipment."
+      },
+      "es": {
+        "title": "Talleres de Canillejas",
+        "subtitle": "Sistemas embarcados ATP/ATO de Metro Madrid",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Sistemas embarcados ATP/ATO de Metro Madrid",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, equipos embarcados, series 3000 / 9000 y otras series de trenes de Metro de Madrid.",
+        "role": "T\u00e9cnico de pruebas y puesta en servicio durante la etapa de Project Execution y posteriormente Customer Service / Maintenance Engineer para actividades de mantenimiento ATP/ATO de Metro de Madrid.",
+        "detail": "Trabajo de campo relacionado con soporte a instalaci\u00f3n, pruebas est\u00e1ticas y din\u00e1micas, ajuste, puesta en servicio, troubleshooting, resoluci\u00f3n de incidencias y soporte de mantenimiento de equipos embarcados ATP/ATO y CBTC."
+      }
+    },
+    {
+      "id": "metro-madrid-villaverde",
+      "type": "project",
+      "parentId": "metro-madrid",
+      "level": "project",
+      "coordinates": [
+        40.346,
+        -3.704
+      ],
+      "markerLabel": "VV",
+      "children": [],
+      "zoomLevel": 14,
+      "en": {
+        "title": "Villaverde workshops",
+        "subtitle": "Metro Madrid ATP/ATO onboard systems",
+        "location": "Madrid, Spain",
+        "project": "Metro Madrid ATP/ATO onboard systems",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, onboard equipment, train series 3000 / 9000 and other Metro Madrid train series.",
+        "role": "Testing and commissioning technician during the Project Execution stage, and later Customer Service / Maintenance Engineer for Metro Madrid ATP/ATO maintenance activities.",
+        "detail": "Field work related to installation support, static and dynamic testing, adjustment, commissioning, troubleshooting, incident resolution and maintenance support of onboard ATP/ATO and CBTC equipment."
+      },
+      "es": {
+        "title": "Talleres de Villaverde",
+        "subtitle": "Sistemas embarcados ATP/ATO de Metro Madrid",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Sistemas embarcados ATP/ATO de Metro Madrid",
+        "year": "2008 - 2013 / 2017 - 2022",
+        "technologyContext": "ATP/ATO, CBTC, equipos embarcados, series 3000 / 9000 y otras series de trenes de Metro de Madrid.",
+        "role": "T\u00e9cnico de pruebas y puesta en servicio durante la etapa de Project Execution y posteriormente Customer Service / Maintenance Engineer para actividades de mantenimiento ATP/ATO de Metro de Madrid.",
+        "detail": "Trabajo de campo relacionado con soporte a instalaci\u00f3n, pruebas est\u00e1ticas y din\u00e1micas, ajuste, puesta en servicio, troubleshooting, resoluci\u00f3n de incidencias y soporte de mantenimiento de equipos embarcados ATP/ATO y CBTC."
+      }
+    },
+    {
+      "id": "renfe-madrid",
+      "type": "group",
+      "parentId": "madrid",
+      "level": "operator",
+      "coordinates": [
+        40.431,
+        -3.685
+      ],
+      "markerLabel": "RF",
+      "children": [
+        "renfe-fuencarral",
+        "renfe-cerro-negro",
+        "renfe-santa-catalina"
+      ],
+      "zoomLevel": 12,
+      "en": {
+        "title": "Renfe Madrid",
+        "subtitle": "ASFA Digital onboard equipment assignment sites",
+        "location": "Madrid, Spain",
+        "project": "ASFA Digital onboard equipment",
+        "year": "2013 - 2017",
+        "technologyContext": "ASFA Digital onboard equipment, mainly ASFA Digital 1 to ASFA Digital 2 migration/replacement activities.",
+        "role": "Project Execution and commissioning activities for onboard ASFA Digital equipment.",
+        "detail": "Field assignment across different Renfe Madrid workshops depending on project needs, focused on onboard ASFA Digital equipment commissioning and support."
+      },
+      "es": {
+        "title": "Renfe Madrid",
+        "subtitle": "Sedes de asignaciones de equipos embarcados ASFA Digital",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Equipos embarcados ASFA Digital",
+        "year": "2013 - 2017",
+        "technologyContext": "Equipos embarcados ASFA Digital, principalmente actividades de migraci\u00f3n/sustituci\u00f3n de ASFA Digital 1 a ASFA Digital 2.",
+        "role": "Actividades de Project Execution y puesta en servicio de equipos embarcados ASFA Digital.",
+        "detail": "Asignaci\u00f3n de campo en distintos talleres Renfe de Madrid seg\u00fan necesidades del proyecto, centrada en puesta en servicio y soporte de equipos embarcados ASFA Digital."
+      }
+    },
+    {
+      "id": "renfe-fuencarral",
+      "type": "project",
+      "parentId": "renfe-madrid",
+      "level": "project",
+      "coordinates": [
+        40.499,
+        -3.682
+      ],
+      "markerLabel": "FC",
+      "children": [],
+      "zoomLevel": 14,
+      "en": {
+        "title": "Fuencarral",
+        "subtitle": "ASFA Digital onboard equipment",
+        "location": "Madrid, Spain",
+        "project": "ASFA Digital onboard equipment",
+        "year": "2013 - 2017",
+        "technologyContext": "ASFA Digital 1 to ASFA Digital 2 migration/replacement on onboard equipment. Main train series: 446, 447 and 450.",
+        "role": "Project Execution and commissioning support for onboard ASFA Digital equipment.",
+        "detail": "On-site project execution activities in Renfe Fuencarral environment, focused on onboard ASFA Digital equipment commissioning, field support and project needs."
+      },
+      "es": {
+        "title": "Fuencarral",
+        "subtitle": "Equipos embarcados ASFA Digital",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Equipos embarcados ASFA Digital",
+        "year": "2013 - 2017",
+        "technologyContext": "Migraci\u00f3n/sustituci\u00f3n de ASFA Digital 1 a ASFA Digital 2 en equipos embarcados. Series principales: 446, 447 y 450.",
+        "role": "Project Execution y soporte de puesta en servicio de equipos embarcados ASFA Digital.",
+        "detail": "Actividades in situ de ejecuci\u00f3n de proyecto en el entorno de Renfe Fuencarral, centradas en puesta en servicio, soporte de campo y necesidades de proyecto sobre equipos embarcados ASFA Digital."
+      }
+    },
+    {
+      "id": "renfe-cerro-negro",
+      "type": "project",
+      "parentId": "renfe-madrid",
+      "level": "project",
+      "coordinates": [
+        40.389,
+        -3.671
+      ],
+      "markerLabel": "CN",
+      "children": [],
+      "zoomLevel": 14,
+      "en": {
+        "title": "Cerro Negro",
+        "subtitle": "ASFA Digital onboard equipment",
+        "location": "Madrid, Spain",
+        "project": "ASFA Digital onboard equipment",
+        "year": "2013 - 2017",
+        "technologyContext": "ASFA Digital 1 to ASFA Digital 2 migration/replacement on onboard equipment. Main train series: 446, 447 and 450.",
+        "role": "Project Execution and commissioning support for onboard ASFA Digital equipment.",
+        "detail": "On-site project execution activities in Renfe Cerro Negro environment, alternating with other Renfe Madrid workshops according to project needs."
+      },
+      "es": {
+        "title": "Cerro Negro",
+        "subtitle": "Equipos embarcados ASFA Digital",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Equipos embarcados ASFA Digital",
+        "year": "2013 - 2017",
+        "technologyContext": "Migraci\u00f3n/sustituci\u00f3n de ASFA Digital 1 a ASFA Digital 2 en equipos embarcados. Series principales: 446, 447 y 450.",
+        "role": "Project Execution y soporte de puesta en servicio de equipos embarcados ASFA Digital.",
+        "detail": "Actividades in situ de ejecuci\u00f3n de proyecto en el entorno de Renfe Cerro Negro, alternando con otros talleres Renfe de Madrid seg\u00fan necesidades del proyecto."
+      }
+    },
+    {
+      "id": "renfe-santa-catalina",
+      "type": "project",
+      "parentId": "renfe-madrid",
+      "level": "project",
+      "coordinates": [
+        40.382,
+        -3.69
+      ],
+      "markerLabel": "SC",
+      "children": [],
+      "zoomLevel": 14,
+      "en": {
+        "title": "Santa Catalina",
+        "subtitle": "ASFA Digital onboard equipment",
+        "location": "Madrid, Spain",
+        "project": "ASFA Digital onboard equipment",
+        "year": "2013 - 2017",
+        "technologyContext": "ASFA Digital onboard equipment on train series such as 120, 121, 100 and 114.",
+        "role": "Project Execution and commissioning support for onboard ASFA Digital equipment.",
+        "detail": "On-site project execution activities in Renfe Santa Catalina environment, focused on onboard ASFA Digital equipment commissioning and support."
+      },
+      "es": {
+        "title": "Santa Catalina",
+        "subtitle": "Equipos embarcados ASFA Digital",
+        "location": "Madrid, Espa\u00f1a",
+        "project": "Equipos embarcados ASFA Digital",
+        "year": "2013 - 2017",
+        "technologyContext": "Equipos embarcados ASFA Digital en series de tren como 120, 121, 100 y 114.",
+        "role": "Project Execution y soporte de puesta en servicio de equipos embarcados ASFA Digital.",
+        "detail": "Actividades in situ de ejecuci\u00f3n de proyecto en el entorno de Renfe Santa Catalina, centradas en puesta en servicio y soporte de equipos embarcados ASFA Digital."
+      }
+    },
+    {
+      "id": "siemens-tres-cantos",
+      "type": "project",
+      "parentId": "madrid",
+      "level": "site",
+      "coordinates": [
+        40.6009,
+        -3.7081
+      ],
+      "markerLabel": "TC",
+      "children": [],
+      "zoomLevel": 13,
+      "en": {
+        "title": "Siemens Tres Cantos office",
+        "subtitle": "Professional base \u00b7 2017 - Present",
+        "location": "Tres Cantos, Madrid, Spain",
+        "project": "Siemens Mobility engineering and service base",
+        "year": "2017 - Present",
+        "technologyContext": "Maintenance engineering, warranty management, digital workflows and technical coordination for railway systems.",
+        "role": "Professional base for maintenance engineering, technical warranty management, digitalisation and customer-facing technical coordination.",
+        "detail": "Non-confidential office/base reference for railway systems engineering and service activities."
+      },
+      "es": {
+        "title": "Oficina Siemens Tres Cantos",
+        "subtitle": "Base profesional \u00b7 2017 - Actualidad",
+        "location": "Tres Cantos, Madrid, Espa\u00f1a",
+        "project": "Base de ingenier\u00eda y servicio de Siemens Mobility",
+        "year": "2017 - Actualidad",
+        "technologyContext": "Ingenier\u00eda de mantenimiento, gesti\u00f3n de garant\u00edas, flujos digitales y coordinaci\u00f3n t\u00e9cnica de sistemas ferroviarios.",
+        "role": "Base profesional para ingenier\u00eda de mantenimiento, gesti\u00f3n t\u00e9cnica de garant\u00edas, digitalizaci\u00f3n y coordinaci\u00f3n t\u00e9cnica con cliente.",
+        "detail": "Referencia no confidencial de oficina/base para actividades de ingenier\u00eda y servicio de sistemas ferroviarios."
+      }
+    },
+    {
+      "id": "valencia",
+      "type": "group",
+      "parentId": "spain",
+      "level": "region",
+      "coordinates": [
+        39.4699,
+        -0.3763
+      ],
+      "markerLabel": "VL",
+      "children": [
+        "fgv-valencia"
+      ],
+      "zoomLevel": 10,
+      "en": {
+        "title": "Valencia",
+        "subtitle": "FGV Valencia assignment area",
+        "location": "Valencia, Spain",
+        "project": "Reception and commissioning of ATP/ATO onboard equipment on Metro Valencia 4300 train series.",
+        "year": "2009 - 2011",
+        "technologyContext": "ATP/ATO onboard equipment on Metro Valencia 4300 train series.",
+        "role": "On-site commissioning support, with remote incident assistance and basic log analysis support when required.",
+        "detail": ""
+      },
+      "es": {
+        "title": "Valencia",
+        "subtitle": "\u00c1rea de asignaci\u00f3n FGV Valencia",
+        "location": "Valencia, Espa\u00f1a",
+        "project": "Recepci\u00f3n y puesta en servicio de equipos embarcados ATP/ATO en trenes serie 4300 de Metrovalencia.",
+        "year": "2009 - 2011",
+        "technologyContext": "Equipos embarcados ATP/ATO en trenes serie 4300 de Metrovalencia.",
+        "role": "Soporte in situ de puesta en servicio, con asistencia remota a incidencias y apoyo en an\u00e1lisis b\u00e1sico de logs cuando fue necesario.",
+        "detail": ""
+      }
+    },
+    {
+      "id": "fgv-valencia",
+      "type": "project",
+      "parentId": "valencia",
+      "level": "project",
+      "coordinates": [
+        39.4699,
+        -0.3763
+      ],
+      "markerLabel": "FGV",
+      "children": [],
+      "zoomLevel": 12,
+      "en": {
+        "title": "FGV Valencia",
+        "subtitle": "ATP/ATO commissioning \u00b7 2009 - 2011",
+        "location": "Valencia, Spain",
+        "project": "Reception and commissioning of ATP/ATO onboard equipment on Metro Valencia 4300 train series.",
+        "year": "2009 - 2011",
+        "technologyContext": "ATP/ATO onboard equipment on Metro Valencia 4300 train series.",
+        "role": "On-site commissioning support, with remote incident assistance and basic log analysis support when required.",
+        "detail": ""
+      },
+      "es": {
+        "title": "FGV Valencia",
+        "subtitle": "Puesta en servicio ATP/ATO \u00b7 2009 - 2011",
+        "location": "Valencia, Espa\u00f1a",
+        "project": "Recepci\u00f3n y puesta en servicio de equipos embarcados ATP/ATO en trenes serie 4300 de Metrovalencia.",
+        "year": "2009 - 2011",
+        "technologyContext": "Equipos embarcados ATP/ATO en trenes serie 4300 de Metrovalencia.",
+        "role": "Soporte in situ de puesta en servicio, con asistencia remota a incidencias y apoyo en an\u00e1lisis b\u00e1sico de logs cuando fue necesario.",
+        "detail": ""
+      }
+    },
+    {
+      "id": "cataluna",
+      "type": "group",
+      "parentId": "spain",
+      "level": "region",
+      "coordinates": [
+        41.5912,
+        1.5209
+      ],
+      "markerLabel": "CT",
+      "children": [
+        "rodalies-cataluna",
+        "fgc-rubi"
+      ],
+      "zoomLevel": 8,
+      "en": {
+        "title": "Catalonia",
+        "subtitle": "Rodalies and FGC assignment areas",
+        "location": "Catalonia, Spain",
+        "project": "Rodalies Catalu\u00f1a and FGC Catalu\u00f1a assignments",
+        "year": "2016 / 2022",
+        "technologyContext": "Railway systems technical support.",
+        "role": "Technical training / support assignment.",
+        "detail": "Detailed non-confidential project description pending completion."
+      },
+      "es": {
+        "title": "Catalu\u00f1a",
+        "subtitle": "\u00c1reas de asignaci\u00f3n Rodalies y FGC",
+        "location": "Catalu\u00f1a, Espa\u00f1a",
+        "project": "Asignaciones Rodalies Catalu\u00f1a y FGC Catalu\u00f1a",
+        "year": "2016 / 2022",
+        "technologyContext": "Soporte t\u00e9cnico relacionado con sistemas ferroviarios.",
+        "role": "Asignaci\u00f3n de formaci\u00f3n / soporte t\u00e9cnico.",
+        "detail": "Detalle no confidencial del proyecto pendiente de completar."
+      }
+    },
+    {
+      "id": "rodalies-cataluna",
+      "type": "project",
+      "parentId": "cataluna",
+      "level": "project",
+      "coordinates": [
+        41.3851,
+        2.1734
+      ],
+      "markerLabel": "RD",
+      "children": [],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Rodalies Catalu\u00f1a",
+        "subtitle": "ASFA Digital 2 commissioning \u00b7 2016",
+        "location": "Barcelona area, Catalu\u00f1a, Spain",
+        "project": "ASFA Digital 2 onboard equipment commissioning",
+        "year": "2016",
+        "technologyContext": "ASFA Digital 2 onboard equipment in Rodalies environment, including Cornell\u00e0, Montcada and Sant Andreu Condal areas.",
+        "role": "Testing and commissioning support for ASFA Digital 2 onboard equipment.",
+        "detail": ""
+      },
+      "es": {
+        "title": "Rodalies Catalu\u00f1a",
+        "subtitle": "Puesta en servicio ASFA Digital 2 \u00b7 2016",
+        "location": "\u00c1rea de Barcelona, Catalu\u00f1a, Espa\u00f1a",
+        "project": "Puesta en servicio de equipos embarcados ASFA Digital 2",
+        "year": "2016",
+        "technologyContext": "Equipos embarcados ASFA Digital 2 en entorno Rodalies, incluyendo zonas de Cornell\u00e0, Montcada y Sant Andreu Condal.",
+        "role": "Soporte de pruebas y puesta en servicio de equipos embarcados ASFA Digital 2.",
+        "detail": ""
+      }
+    },
+    {
+      "id": "fgc-rubi",
+      "type": "project",
+      "parentId": "cataluna",
+      "level": "project",
+      "coordinates": [
+        41.4923,
+        2.0311
+      ],
+      "markerLabel": "FGC",
+      "children": [],
+      "zoomLevel": 12,
+      "en": {
+        "title": "FGC Rub\u00ed",
+        "subtitle": "ATP/ATO training support \u00b7 2022",
+        "location": "Rub\u00ed, Catalu\u00f1a, Spain",
+        "project": "FGC ATP/ATO technical training",
+        "year": "2022",
+        "technologyContext": "ATP/ATO railway systems.",
+        "role": "Maintenance engineering support and technical training.",
+        "detail": ""
+      },
+      "es": {
+        "title": "FGC Rub\u00ed",
+        "subtitle": "Formaci\u00f3n ATP/ATO \u00b7 2022",
+        "location": "Rub\u00ed, Catalu\u00f1a, Espa\u00f1a",
+        "project": "Formaci\u00f3n t\u00e9cnica ATP/ATO para FGC",
+        "year": "2022",
+        "technologyContext": "Sistemas ferroviarios ATP/ATO.",
+        "role": "Soporte de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica.",
+        "detail": ""
+      }
+    },
+    {
+      "id": "pais-vasco",
+      "type": "group",
+      "parentId": "spain",
+      "level": "region",
+      "coordinates": [
+        43.0756,
+        -2.2237
+      ],
+      "markerLabel": "PV",
+      "children": [
+        "caf-gipuzkoa"
+      ],
+      "zoomLevel": 9,
+      "en": {
+        "title": "Basque Country",
+        "subtitle": "CAF Beasain assignment area",
+        "location": "Basque Country, Spain",
+        "project": "CAF Beasain / CAF Gipuzkoa",
+        "year": "2014",
+        "technologyContext": "ERTMS MK2 onboard equipment.",
+        "role": "Testing, commissioning and factory support.",
+        "detail": "Group marker for CAF Beasain assignment in Gipuzkoa."
+      },
+      "es": {
+        "title": "Pa\u00eds Vasco",
+        "subtitle": "\u00c1rea de asignaci\u00f3n CAF Beasain",
+        "location": "Pa\u00eds Vasco, Espa\u00f1a",
+        "project": "CAF Beasain / CAF Gipuzkoa",
+        "year": "2014",
+        "technologyContext": "Equipos embarcados ERTMS MK2.",
+        "role": "Pruebas, puesta en servicio y soporte en f\u00e1brica.",
+        "detail": "Marcador agrupado para asignaci\u00f3n CAF Beasain en Gipuzkoa."
+      }
+    },
+    {
+      "id": "caf-gipuzkoa",
+      "type": "project",
+      "parentId": "pais-vasco",
+      "level": "project",
+      "coordinates": [
+        43.0483,
+        -2.2017
+      ],
+      "markerLabel": "CAF",
+      "children": [],
+      "zoomLevel": 12,
+      "en": {
+        "title": "CAF Beasain",
+        "subtitle": "ERTMS MK2 factory support \u00b7 2014",
+        "location": "Beasain, Gipuzkoa, Spain",
+        "project": "ERTMS MK2 commissioning support for Auckland trains",
+        "year": "2014",
+        "technologyContext": "ERTMS MK2 onboard equipment.",
+        "role": "Testing, commissioning and factory support.",
+        "detail": ""
+      },
+      "es": {
+        "title": "CAF Beasain",
+        "subtitle": "Soporte en f\u00e1brica ERTMS MK2 \u00b7 2014",
+        "location": "Beasain, Gipuzkoa, Espa\u00f1a",
+        "project": "Puesta en servicio de equipos ERTMS MK2 para trenes de Auckland",
+        "year": "2014",
+        "technologyContext": "Equipos embarcados ERTMS MK2.",
+        "role": "Pruebas, puesta en servicio y soporte en f\u00e1brica.",
+        "detail": ""
+      }
+    },
+    {
+      "id": "caracas-cametro-line-1",
+      "type": "project",
+      "parentId": null,
+      "level": "project",
+      "coordinates": [
+        10.4806,
+        -66.9036
+      ],
+      "markerLabel": "CC",
+      "children": [],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Caracas",
+        "subtitle": "CAMETRO Line 1 \u00b7 2011 - 2012",
+        "location": "Caracas, Venezuela",
+        "project": "CAMETRO Line 1",
+        "year": "2011 - 2012",
+        "technologyContext": "CBTC MK1 onboard systems.",
+        "role": "Static and dynamic testing, commissioning, troubleshooting and local staff support/training.",
+        "detail": "On-site work in trains and depot/workshop environments. Stays varied depending on project needs."
+      },
+      "es": {
+        "title": "Caracas",
+        "subtitle": "CAMETRO L\u00ednea 1 \u00b7 2011 - 2012",
+        "location": "Caracas, Venezuela",
+        "project": "CAMETRO L\u00ednea 1",
+        "year": "2011 - 2012",
+        "technologyContext": "Sistemas embarcados CBTC MK1.",
+        "role": "Pruebas est\u00e1ticas y din\u00e1micas, puesta en servicio, troubleshooting y apoyo/formaci\u00f3n a personal local.",
+        "detail": "Trabajo in situ en trenes y entornos de dep\u00f3sito/taller. Las estancias variaban seg\u00fan las necesidades del proyecto."
+      }
+    },
+    {
+      "id": "istanbul-marmaray",
+      "type": "project",
+      "parentId": null,
+      "level": "project",
+      "coordinates": [
+        41.0082,
+        28.9784
+      ],
+      "markerLabel": "IS",
+      "children": [],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Istanbul",
+        "subtitle": "Marmaray \u00b7 2014",
+        "location": "Istanbul, Turkey",
+        "project": "Marmaray",
+        "year": "2014",
+        "technologyContext": "CBTC MK2 onboard systems.",
+        "role": "Static and dynamic testing, commissioning, troubleshooting and local staff support/training.",
+        "detail": "On-site work in trains and depot/workshop environments during project execution."
+      },
+      "es": {
+        "title": "Estambul",
+        "subtitle": "Marmaray \u00b7 2014",
+        "location": "Estambul, Turqu\u00eda",
+        "project": "Marmaray",
+        "year": "2014",
+        "technologyContext": "Sistemas embarcados CBTC MK2.",
+        "role": "Pruebas est\u00e1ticas y din\u00e1micas, puesta en servicio, troubleshooting y apoyo/formaci\u00f3n a personal local.",
+        "detail": "Trabajo in situ en trenes y entornos de dep\u00f3sito/taller durante la ejecuci\u00f3n del proyecto."
+      }
+    },
+    {
+      "id": "riyadh-hsr-push-pull",
+      "type": "project",
+      "parentId": null,
+      "level": "project",
+      "coordinates": [
+        24.7136,
+        46.6753
+      ],
+      "markerLabel": "RY",
+      "children": [],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Riyadh",
+        "subtitle": "HSR Push-Pull \u00b7 2015",
+        "location": "Riyadh, Saudi Arabia",
+        "project": "HSR Push-Pull",
+        "year": "2015",
+        "technologyContext": "ERTMS MK1 onboard systems.",
+        "role": "Static and dynamic testing, commissioning, troubleshooting and local staff support/training.",
+        "detail": "On-site work in trains and depot/workshop environments for high-speed onboard systems."
+      },
+      "es": {
+        "title": "Riad",
+        "subtitle": "HSR Push-Pull \u00b7 2015",
+        "location": "Riad, Arabia Saud\u00ed",
+        "project": "HSR Push-Pull",
+        "year": "2015",
+        "technologyContext": "Sistemas embarcados ERTMS MK1.",
+        "role": "Pruebas est\u00e1ticas y din\u00e1micas, puesta en servicio, troubleshooting y apoyo/formaci\u00f3n a personal local.",
+        "detail": "Trabajo in situ en trenes y entornos de dep\u00f3sito/taller para sistemas embarcados de alta velocidad."
+      }
+    },
+    {
+      "id": "singapore",
+      "type": "group",
+      "parentId": null,
+      "level": "country",
+      "coordinates": [
+        1.3335,
+        103.8565
+      ],
+      "markerLabel": "SG",
+      "children": [
+        "singapore-dtl1",
+        "singapore-dtl3"
+      ],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Singapore",
+        "subtitle": "Downtown Line assignment group",
+        "location": "Singapore",
+        "project": "Singapore Downtown Line Assignments",
+        "year": "2013 - 2017",
+        "technologyContext": "CBTC / onboard signalling.",
+        "role": "Testing and commissioning assignments for Downtown Line projects.",
+        "detail": "Group marker for Singapore Downtown Line assignments."
+      },
+      "es": {
+        "title": "Singapur",
+        "subtitle": "Grupo de asignaciones Downtown Line",
+        "location": "Singapur",
+        "project": "Proyectos Downtown Line en Singapur",
+        "year": "2013 - 2017",
+        "technologyContext": "CBTC / se\u00f1alizaci\u00f3n embarcada.",
+        "role": "Asignaciones de pruebas y puesta en servicio para proyectos Downtown Line.",
+        "detail": "Marcador agrupado para asignaciones Downtown Line en Singapur."
+      }
+    },
+    {
+      "id": "singapore-dtl1",
+      "type": "project",
+      "parentId": "singapore",
+      "level": "project",
+      "coordinates": [
+        1.3521,
+        103.8198
+      ],
+      "markerLabel": "D1",
+      "children": [],
+      "zoomLevel": 12,
+      "en": {
+        "title": "Downtown Line 1",
+        "subtitle": "Singapore \u00b7 2013",
+        "location": "Singapore",
+        "project": "Downtown Line 1",
+        "year": "2013",
+        "technologyContext": "CBTC MK2 onboard systems.",
+        "role": "Static and dynamic testing, commissioning, troubleshooting and local staff support/training.",
+        "detail": "On-site work in trains and depot/workshop environments for Downtown Line CBTC onboard systems."
+      },
+      "es": {
+        "title": "Downtown Line 1",
+        "subtitle": "Singapur \u00b7 2013",
+        "location": "Singapur",
+        "project": "Downtown Line 1",
+        "year": "2013",
+        "technologyContext": "Sistemas embarcados CBTC MK2.",
+        "role": "Pruebas est\u00e1ticas y din\u00e1micas, puesta en servicio, troubleshooting y apoyo/formaci\u00f3n a personal local.",
+        "detail": "Trabajo in situ en trenes y entornos de dep\u00f3sito/taller para sistemas embarcados CBTC de Downtown Line."
+      }
+    },
+    {
+      "id": "singapore-dtl3",
+      "type": "project",
+      "parentId": "singapore",
+      "level": "project",
+      "coordinates": [
+        1.3147,
+        103.8927
+      ],
+      "markerLabel": "D3",
+      "children": [],
+      "zoomLevel": 12,
+      "en": {
+        "title": "Downtown Line 3",
+        "subtitle": "Singapore \u00b7 2017",
+        "location": "Singapore",
+        "project": "Downtown Line 3",
+        "year": "2017",
+        "technologyContext": "CBTC MK2 onboard systems.",
+        "role": "Static and dynamic testing, commissioning, troubleshooting and local staff support/training.",
+        "detail": "On-site work in trains and depot/workshop environments for Downtown Line CBTC onboard systems."
+      },
+      "es": {
+        "title": "Downtown Line 3",
+        "subtitle": "Singapur \u00b7 2017",
+        "location": "Singapur",
+        "project": "Downtown Line 3",
+        "year": "2017",
+        "technologyContext": "Sistemas embarcados CBTC MK2.",
+        "role": "Pruebas est\u00e1ticas y din\u00e1micas, puesta en servicio, troubleshooting y apoyo/formaci\u00f3n a personal local.",
+        "detail": "Trabajo in situ en trenes y entornos de dep\u00f3sito/taller para sistemas embarcados CBTC de Downtown Line."
+      }
+    },
+    {
+      "id": "changsha-metro-line-2",
+      "type": "project",
+      "parentId": null,
+      "level": "project",
+      "coordinates": [
+        28.2282,
+        112.9388
+      ],
+      "markerLabel": "CS",
+      "children": [],
+      "zoomLevel": 11,
+      "en": {
+        "title": "Changsha",
+        "subtitle": "Metro Line 2 \u00b7 2019",
+        "location": "Changsha, China",
+        "project": "Metro Line 2",
+        "year": "2019",
+        "technologyContext": "CBTC onboard equipment.",
+        "role": "Maintenance engineering support and technical training for CBTC onboard equipment teams.",
+        "detail": "On-site support focused on maintenance engineering and technical training in depot/workshop environment."
+      },
+      "es": {
+        "title": "Changsha",
+        "subtitle": "Metro L\u00ednea 2 \u00b7 2019",
+        "location": "Changsha, China",
+        "project": "Metro L\u00ednea 2",
+        "year": "2019",
+        "technologyContext": "Equipos embarcados CBTC.",
+        "role": "Soporte de ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica para equipos embarcados CBTC.",
+        "detail": "Soporte in situ centrado en ingenier\u00eda de mantenimiento y formaci\u00f3n t\u00e9cnica en entorno de dep\u00f3sito/taller."
+      }
+    }
+  ]
+}

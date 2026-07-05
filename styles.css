@@ -1069,26 +1069,45 @@ button:focus-visible {
 .assignment-panel-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
 }
 
-.map-reset-button {
+.assignment-panel-header h3 {
+  flex: 1 1 120px;
+}
+
+.assignment-panel-actions {
+  display: flex;
+  flex: 1 1 220px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.map-panel-button {
   min-height: 34px;
   border: 1px solid rgba(19, 184, 173, 0.34);
   border-radius: var(--radius);
   background: var(--surface-soft);
   color: var(--navy-950);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 900;
-  padding: 7px 10px;
+  padding: 7px 9px;
+  white-space: nowrap;
 }
 
-.map-reset-button:hover {
+.map-panel-button:hover:not(:disabled) {
   border-color: var(--teal-500);
   background: var(--teal-100);
+}
+
+.map-panel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .assignment-list {
@@ -1132,6 +1151,18 @@ button:focus-visible {
 
 .assignment-meta {
   font-weight: 800;
+}
+
+.assignment-load-error {
+  margin: 0;
+  border: 1px solid rgba(19, 184, 173, 0.34);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 12px;
 }
 
 .assignment-button-group {
@@ -1178,11 +1209,11 @@ button:focus-visible {
   color: var(--teal-500);
 }
 
-.portfolio-marker-assignment .portfolio-marker-pin {
+.portfolio-marker-project .portfolio-marker-pin {
   background: var(--teal-600);
 }
 
-.portfolio-marker-assignment .portfolio-marker-pin em {
+.portfolio-marker-project .portfolio-marker-pin em {
   font-size: 0.68rem;
 }
 
@@ -1212,6 +1243,13 @@ button:focus-visible {
   font-size: 1rem;
 }
 
+.map-popup-subtitle {
+  margin: -4px 0 10px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
 .map-popup dl {
   display: grid;
   grid-template-columns: minmax(96px, max-content) 1fr;
@@ -1229,7 +1267,7 @@ button:focus-visible {
   color: var(--ink);
 }
 
-.map-popup p {
+.map-popup p:not(.map-popup-subtitle) {
   margin: 0;
   color: var(--muted);
 }

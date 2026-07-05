@@ -8,6 +8,8 @@
   var revealedGroups = {};
   var activeAssignmentKey = "spain";
   var activeJourneyIndex = 4;
+  var journeyObserver = null;
+  var journeyScrollTicking = false;
   var resetMapButton = document.querySelector("[data-map-reset]");
 
   var navToggle = document.querySelector("[data-nav-toggle]");
@@ -1255,7 +1257,7 @@
     }
   }
 
-  function getJourneyCardOrder() {
+  function getJourneyDisplayOrder() {
     var currentIndexes = [];
     var previousIndexes = [];
 
@@ -1278,31 +1280,45 @@
       return;
     }
 
+    if (journeyObserver) {
+      journeyObserver.disconnect();
+      journeyObserver = null;
+    }
+
     rail.innerHTML = "";
     cards.innerHTML = "";
 
-    journeyStations.forEach(function (station, index) {
+    getJourneyDisplayOrder().forEach(function (index) {
       var content = getJourneyStation(index);
       var stationButton = document.createElement("button");
       var isActive = index === activeJourneyIndex;
       var stationClasses = ["station-button"];
       var stationBadge = content.current ? '<span class="station-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
+      var card = document.createElement("article");
+      var cardClasses = ["journey-card"];
+      var bullets = content.bullets.map(function (item) {
+        return "<li>" + escapeHtml(item) + "</li>";
+      }).join("");
+      var currentBadge = content.current ? '<span class="role-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
 
       if (content.current) {
         stationClasses.push("is-current");
+        cardClasses.push("is-current");
       }
 
       if (isActive) {
         stationClasses.push("is-active");
+        cardClasses.push("is-active");
       }
 
       stationButton.className = stationClasses.join(" ");
       stationButton.type = "button";
+      stationButton.setAttribute("data-journey-index", String(index));
       stationButton.setAttribute("aria-pressed", String(isActive));
       stationButton.setAttribute("aria-controls", "journey-card-" + index);
       stationButton.setAttribute("aria-label", getValue("journey.focusPrefix") + ": " + content.title);
 
-      if (content.current) {
+      if (isActive) {
         stationButton.setAttribute("aria-current", "step");
       }
 
@@ -1320,25 +1336,6 @@
       });
 
       rail.appendChild(stationButton);
-    });
-
-    getJourneyCardOrder().forEach(function (index) {
-      var content = getJourneyStation(index);
-      var card = document.createElement("article");
-      var isActive = index === activeJourneyIndex;
-      var cardClasses = ["journey-card"];
-      var bullets = content.bullets.map(function (item) {
-        return "<li>" + escapeHtml(item) + "</li>";
-      }).join("");
-      var currentBadge = content.current ? '<span class="role-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
-
-      if (content.current) {
-        cardClasses.push("is-current");
-      }
-
-      if (isActive) {
-        cardClasses.push("is-active");
-      }
 
       card.id = "journey-card-" + index;
       card.className = cardClasses.join(" ");
@@ -1359,6 +1356,7 @@
     });
 
     setActiveJourney(activeJourneyIndex, false);
+    initJourneyObserver();
   }
 
   function setActiveJourney(index, shouldFocus) {
@@ -1368,13 +1366,25 @@
 
     activeJourneyIndex = index;
 
-    buttons.forEach(function (button, buttonIndex) {
-      var isActive = buttonIndex === index;
+    buttons.forEach(function (button) {
+      var isActive = Number(button.getAttribute("data-journey-index")) === index;
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
+
+      if (isActive) {
+        var panel = button.closest(".journey-rail-panel");
+
+        button.setAttribute("aria-current", "step");
+
+        if (panel && (panel.scrollHeight > panel.clientHeight || panel.scrollWidth > panel.clientWidth)) {
+          button.scrollIntoView({ block: "nearest", inline: "nearest" });
+        }
+      } else {
+        button.removeAttribute("aria-current");
+      }
     });
 
-    cards.forEach(function (card, cardIndex) {
+    cards.forEach(function (card) {
       card.classList.toggle("is-active", Number(card.getAttribute("data-journey-index")) === index);
     });
 
@@ -1382,8 +1392,86 @@
 
     if (shouldFocus && activeCard) {
       activeCard.focus({ preventScroll: true });
-      activeCard.scrollIntoView({ behavior: behavior, block: "center" });
+      activeCard.scrollIntoView({ behavior: behavior, block: "start" });
     }
+  }
+
+  function getJourneyActiveLine() {
+    var navHeight = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue("--nav-height"), 10) || 76;
+    return navHeight + Math.min(180, Math.max(96, window.innerHeight * 0.24));
+  }
+
+  function updateActiveJourneyFromViewport() {
+    var section = document.getElementById("journey");
+    var cards = document.querySelectorAll(".journey-card");
+    var targetY = getJourneyActiveLine();
+    var bestIndex = null;
+    var bestDistance = Infinity;
+
+    if (!section || !cards.length) {
+      return;
+    }
+
+    var sectionRect = section.getBoundingClientRect();
+
+    if (sectionRect.bottom < targetY || sectionRect.top > window.innerHeight) {
+      return;
+    }
+
+    cards.forEach(function (card) {
+      var rect = card.getBoundingClientRect();
+      var distance = rect.top <= targetY && rect.bottom >= targetY ? 0 : Math.abs(rect.top - targetY);
+
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestIndex = Number(card.getAttribute("data-journey-index"));
+      }
+    });
+
+    if (bestIndex !== null && bestIndex !== activeJourneyIndex) {
+      setActiveJourney(bestIndex, false);
+    }
+  }
+
+  function queueJourneyViewportUpdate() {
+    var schedule = window.requestAnimationFrame || function (callback) {
+      return window.setTimeout(callback, 16);
+    };
+
+    if (journeyScrollTicking) {
+      return;
+    }
+
+    journeyScrollTicking = true;
+
+    schedule(function () {
+      journeyScrollTicking = false;
+      updateActiveJourneyFromViewport();
+    });
+  }
+
+  function initJourneyObserver() {
+    var cards = document.querySelectorAll(".journey-card");
+    var observerOffset = Math.round(getJourneyActiveLine());
+
+    if (!cards.length) {
+      return;
+    }
+
+    if ("IntersectionObserver" in window) {
+      journeyObserver = new IntersectionObserver(function () {
+        queueJourneyViewportUpdate();
+      }, {
+        rootMargin: "-" + observerOffset + "px 0px -35% 0px",
+        threshold: [0, 0.12, 0.35, 0.65]
+      });
+
+      cards.forEach(function (card) {
+        journeyObserver.observe(card);
+      });
+    }
+
+    queueJourneyViewportUpdate();
   }
 
   function initRevealAnimations() {
@@ -1426,7 +1514,10 @@
   }
 
   window.addEventListener("scroll", setActiveNav, { passive: true });
+  window.addEventListener("scroll", queueJourneyViewportUpdate, { passive: true });
+  window.addEventListener("resize", queueJourneyViewportUpdate);
   window.addEventListener("load", setActiveNav);
+  window.addEventListener("load", queueJourneyViewportUpdate);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initPage);

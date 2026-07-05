@@ -293,7 +293,10 @@
           <aside class="assignment-panel" aria-label="Project assignment list" data-i18n-aria-label="map.panelLabel" data-animate>
             <div class="assignment-panel-header">
               <h3 data-i18n="map.assignmentsTitle">Assignments</h3>
-              <button class="map-reset-button" type="button" data-map-reset data-i18n="map.resetButton">Reset map</button>
+              <div class="assignment-panel-actions">
+                <button class="map-panel-button map-back-button" type="button" data-map-back data-i18n="map.backButton" disabled>Back one level</button>
+                <button class="map-panel-button map-reset-button" type="button" data-map-reset data-i18n="map.resetButton">Reset map</button>
+              </div>
             </div>
             <div class="assignment-list" id="assignment-list"></div>
           </aside>

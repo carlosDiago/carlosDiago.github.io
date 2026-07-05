@@ -1069,26 +1069,45 @@ button:focus-visible {
 .assignment-panel-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
 }
 
-.map-reset-button {
+.assignment-panel-header h3 {
+  flex: 1 1 120px;
+}
+
+.assignment-panel-actions {
+  display: flex;
+  flex: 1 1 220px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.map-panel-button {
   min-height: 34px;
   border: 1px solid rgba(19, 184, 173, 0.34);
   border-radius: var(--radius);
   background: var(--surface-soft);
   color: var(--navy-950);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 900;
-  padding: 7px 10px;
+  padding: 7px 9px;
+  white-space: nowrap;
 }
 
-.map-reset-button:hover {
+.map-panel-button:hover:not(:disabled) {
   border-color: var(--teal-500);
   background: var(--teal-100);
+}
+
+.map-panel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .assignment-list {
@@ -1132,6 +1151,18 @@ button:focus-visible {
 
 .assignment-meta {
   font-weight: 800;
+}
+
+.assignment-load-error {
+  margin: 0;
+  border: 1px solid rgba(19, 184, 173, 0.34);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 12px;
 }
 
 .assignment-button-group {

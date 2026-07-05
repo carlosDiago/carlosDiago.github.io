@@ -9,6 +9,7 @@
   var journeyObserver = null;
   var journeyScrollTicking = false;
   var resetMapButton = document.querySelector("[data-map-reset]");
+  var backMapButton = document.querySelector("[data-map-back]");
 
   var navToggle = document.querySelector("[data-nav-toggle]");
   var navMenu = document.querySelector(".nav-menu");
@@ -20,6 +21,7 @@
   var initialProjectIds = [];
   var activeAssignmentKey = "";
   var currentProjectScopeId = "";
+  var projectNavigationHistory = [];
 
   var journeyStations = [
     {
@@ -276,8 +278,10 @@
         mapLabel: "Interactive world map with project assignments",
         panelLabel: "Project assignment list",
         assignmentsTitle: "Assignments",
+        backButton: "Back one level",
         resetButton: "Reset map",
         fallback: "Map library unavailable. Project assignments remain listed beside the map.",
+        dataLoadError: "Project data could not be loaded. Open this page through GitHub Pages or a local web server so assets/data/projects.json can be read.",
         assignmentButtonPrefix: "Open assignment",
         groupButtonPrefix: "Zoom into assignment area",
         labels: {
@@ -463,8 +467,10 @@
         mapLabel: "Mapa mundial interactivo con proyectos ferroviarios",
         panelLabel: "Lista de proyectos ferroviarios",
         assignmentsTitle: "Proyectos",
+        backButton: "Nivel anterior",
         resetButton: "Restablecer mapa",
         fallback: "La librer\u00eda del mapa no est\u00e1 disponible. Los proyectos siguen listados junto al mapa.",
+        dataLoadError: "No se han podido cargar los datos de proyecto. Abre esta p\u00e1gina desde GitHub Pages o desde un servidor local para que el navegador pueda leer assets/data/projects.json.",
         assignmentButtonPrefix: "Abrir proyecto",
         groupButtonPrefix: "Ampliar zona de proyectos",
         labels: {
@@ -789,6 +795,17 @@
 
   function renderPopup(assignment) {
     var labels = getValue("map.labels");
+    var rows = [
+      [labels.location, assignment.location],
+      [labels.project, assignment.project],
+      [labels.year, assignment.year],
+      [labels.technology, assignment.technologyContext],
+      [labels.role, assignment.role]
+    ];
+
+    if (assignment.detail) {
+      rows.push([labels.detail, assignment.detail]);
+    }
 
     return [
       '<div class="map-popup">',
@@ -796,12 +813,9 @@
       '<p class="map-popup-subtitle">' + escapeHtml(assignment.subtitle) + "</p>",
       '<div class="map-popup-content">',
       "<dl>",
-      "<dt>" + escapeHtml(labels.location) + "</dt><dd>" + escapeHtml(assignment.location) + "</dd>",
-      "<dt>" + escapeHtml(labels.project) + "</dt><dd>" + escapeHtml(assignment.project) + "</dd>",
-      "<dt>" + escapeHtml(labels.year) + "</dt><dd>" + escapeHtml(assignment.year) + "</dd>",
-      "<dt>" + escapeHtml(labels.technology) + "</dt><dd>" + escapeHtml(assignment.technologyContext) + "</dd>",
-      "<dt>" + escapeHtml(labels.role) + "</dt><dd>" + escapeHtml(assignment.role) + "</dd>",
-      "<dt>" + escapeHtml(labels.detail) + "</dt><dd>" + escapeHtml(assignment.detail) + "</dd>",
+      rows.map(function (row) {
+        return "<dt>" + escapeHtml(row[0]) + "</dt><dd>" + escapeHtml(row[1]) + "</dd>";
+      }).join(""),
       "</dl>",
       "</div>",
       "</div>"
@@ -906,13 +920,63 @@
     assignmentMap.flyTo(group.coordinates, group.zoomLevel, { duration: 0.65 });
   }
 
+  function renderProjectDataError() {
+    var list = document.getElementById("assignment-list");
+
+    if (list) {
+      list.innerHTML = '<p class="assignment-load-error">' + escapeHtml(getValue("map.dataLoadError")) + "</p>";
+    }
+  }
+
+  function applyProjectData(data) {
+    normalizeProjectData(data);
+    renderAssignmentList();
+    renderMapMarkers();
+    fitInitialMap();
+    setActiveAssignment(activeAssignmentKey);
+  }
+
+  function loadProjectDataWithXhr(url) {
+    return new Promise(function (resolve, reject) {
+      var request = new XMLHttpRequest();
+
+      request.overrideMimeType("application/json");
+      request.open("GET", url, true);
+
+      request.onreadystatechange = function () {
+        if (request.readyState !== 4) {
+          return;
+        }
+
+        if ((request.status >= 200 && request.status < 300) || request.status === 0) {
+          try {
+            resolve(JSON.parse(request.responseText));
+          } catch (error) {
+            reject(error);
+          }
+          return;
+        }
+
+        reject(new Error("Unable to load project data"));
+      };
+
+      request.onerror = function () {
+        reject(new Error("Unable to load project data"));
+      };
+
+      request.send();
+    });
+  }
+
   function loadProjectData() {
+    var projectDataAbsoluteUrl = new URL(projectDataUrl, document.baseURI).href;
+
     if (!window.fetch) {
-      renderAssignmentList();
+      loadProjectDataWithXhr(projectDataAbsoluteUrl).then(applyProjectData, renderProjectDataError);
       return;
     }
 
-    window.fetch(projectDataUrl, { cache: "no-cache" })
+    window.fetch(projectDataAbsoluteUrl, { cache: "no-cache" })
       .then(function (response) {
         if (!response.ok) {
           throw new Error("Unable to load project data");
@@ -920,14 +984,8 @@
 
         return response.json();
       })
-      .then(function (data) {
-        normalizeProjectData(data);
-        renderAssignmentList();
-        renderMapMarkers();
-        fitInitialMap();
-        setActiveAssignment(activeAssignmentKey);
-      }, function () {
-        renderAssignmentList();
+      .then(applyProjectData, function () {
+        loadProjectDataWithXhr(projectDataAbsoluteUrl).then(applyProjectData, renderProjectDataError);
       });
   }
 
@@ -970,6 +1028,23 @@
     setActiveAssignment(activeAssignmentKey);
   }
 
+  function updateBackMapButton() {
+    if (!backMapButton) {
+      return;
+    }
+
+    var activeItem = getProjectItem(activeAssignmentKey);
+    var hasProjectSelection = Boolean(
+      activeItem &&
+      activeItem.type === "project" &&
+      currentProjectScopeId &&
+      activeItem.parentId === currentProjectScopeId
+    );
+    var hasPreviousLevel = projectNavigationHistory.length > 0 || hasProjectSelection;
+    backMapButton.disabled = !hasPreviousLevel;
+    backMapButton.setAttribute("aria-disabled", String(!hasPreviousLevel));
+  }
+
   function setActiveAssignment(key) {
     activeAssignmentKey = key;
 
@@ -977,6 +1052,98 @@
       var isActive = button.getAttribute("data-assignment-key") === key;
       button.classList.toggle("is-active", isActive);
     });
+
+    updateBackMapButton();
+  }
+
+  function getCurrentMapState() {
+    var center = null;
+    var zoom = null;
+
+    if (assignmentMap) {
+      var mapCenter = assignmentMap.getCenter();
+      center = [mapCenter.lat, mapCenter.lng];
+      zoom = assignmentMap.getZoom();
+    }
+
+    return {
+      scopeId: currentProjectScopeId,
+      activeKey: activeAssignmentKey,
+      center: center,
+      zoom: zoom
+    };
+  }
+
+  function pushProjectNavigationState() {
+    projectNavigationHistory.push(getCurrentMapState());
+    updateBackMapButton();
+  }
+
+  function restoreProjectNavigationState(state) {
+    if (!state) {
+      return;
+    }
+
+    currentProjectScopeId = state.scopeId || "";
+    activeAssignmentKey = state.activeKey || initialProjectIds[0] || "";
+
+    renderMapMarkers();
+    renderAssignmentList();
+    setActiveAssignment(activeAssignmentKey);
+
+    if (!assignmentMap) {
+      return;
+    }
+
+    if (state.center && typeof state.zoom === "number") {
+      assignmentMap.flyTo(state.center, state.zoom, { duration: 0.45 });
+      return;
+    }
+
+    if (currentProjectScopeId) {
+      fitGroupChildren(getProjectItem(currentProjectScopeId));
+      return;
+    }
+
+    fitInitialMap();
+  }
+
+  function restoreCurrentProjectScopeView() {
+    if (!currentProjectScopeId) {
+      return false;
+    }
+
+    var activeItem = getProjectItem(activeAssignmentKey);
+
+    if (!activeItem || activeItem.type !== "project" || activeItem.parentId !== currentProjectScopeId) {
+      return false;
+    }
+
+    activeAssignmentKey = currentProjectScopeId;
+    renderAssignmentList();
+    setActiveAssignment(activeAssignmentKey);
+
+    if (assignmentMap) {
+      assignmentMap.closePopup();
+      fitGroupChildren(getProjectItem(currentProjectScopeId));
+    }
+
+    updateBackMapButton();
+    return true;
+  }
+
+  function backOneProjectLevel() {
+    if (restoreCurrentProjectScopeView()) {
+      return;
+    }
+
+    if (!projectNavigationHistory.length) {
+      updateBackMapButton();
+      return;
+    }
+
+    restoreProjectNavigationState(projectNavigationHistory.pop());
+    updateBackMapButton();
   }
 
   function revealGroup(key, shouldFly) {
@@ -984,6 +1151,10 @@
 
     if (!group || group.type !== "group") {
       return;
+    }
+
+    if (currentProjectScopeId !== key) {
+      pushProjectNavigationState();
     }
 
     currentProjectScopeId = key;
@@ -1020,12 +1191,25 @@
   }
 
   function resetAssignmentMap() {
+    projectNavigationHistory = [];
     currentProjectScopeId = "";
     activeAssignmentKey = initialProjectIds[0] || "";
     renderMapMarkers();
     renderAssignmentList();
     fitInitialMap();
     setActiveAssignment(activeAssignmentKey);
+  }
+
+  function initMapControls() {
+    if (backMapButton) {
+      backMapButton.addEventListener("click", backOneProjectLevel);
+    }
+
+    if (resetMapButton) {
+      resetMapButton.addEventListener("click", resetAssignmentMap);
+    }
+
+    updateBackMapButton();
   }
 
   function initMap() {
@@ -1061,9 +1245,6 @@
     renderAssignmentList();
     setActiveAssignment(activeAssignmentKey);
 
-    if (resetMapButton) {
-      resetMapButton.addEventListener("click", resetAssignmentMap);
-    }
   }
 
   function getJourneyDisplayOrder() {
@@ -1317,6 +1498,7 @@
     initNavigation();
     initLanguageControls();
     applyLanguage(getInitialLanguage());
+    initMapControls();
     initMap();
     loadProjectData();
     initRevealAnimations();

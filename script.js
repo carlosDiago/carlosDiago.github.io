@@ -800,7 +800,8 @@
   }
 
   function setActiveNav() {
-    var fromTop = window.scrollY + 120;
+    var navHeight = siteNav ? siteNav.getBoundingClientRect().height : 0;
+    var fromTop = window.scrollY + navHeight + 32;
 
     navItems.forEach(function (link) {
       var section = document.querySelector(link.getAttribute("href"));

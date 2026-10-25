@@ -19,7 +19,7 @@ The site is built with plain HTML, CSS and JavaScript. It has no build step, no 
 - `index.html` - semantic page structure and English fallback content.
 - `styles.css` - responsive visual system, railway-line journey, dashboard cards, layout and Leaflet popup styling.
 - `script.js` - bilingual dictionary, mobile navigation, section highlighting, reveal effects, hierarchical interactive map markers and journey station focus.
-- `assets/cv/Carlos_Diago_CV.pdf` - harmless placeholder retained in the assets folder; it is not linked from the visible UI.
+- `assets/cv/Carlos_Diago_CV.pdf` - final CV used for the Metro application.
 - `assets/img/` - optional folder for future image assets.
 
 ## Local Use

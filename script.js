@@ -2,7 +2,7 @@
   "use strict";
 
   var supportedLanguages = ["en", "es"];
-  var currentLanguage = "en";
+  var currentLanguage = "es";
   var assignmentMap = null;
   var mapMarkers = {};
   var activeJourneyIndex = 4;
@@ -29,27 +29,27 @@
       en: {
         period: "2008 - 2015",
         station: "Testing and Commissioning Technician",
-        title: "Testing and Commissioning Technician - Project Execution",
+        title: "Testing, Commissioning and Warranty Technician",
         company: "Siemens Mobility \u00b7 Madrid, Spain / International",
-        summary: "Onboard signalling systems commissioning in ASFA, ERTMS/ETCS, ATP/ATO and CBTC technologies.",
+        summary: "Initial period dedicated to Metro de Madrid Series 3000 and 9000, followed by onboard signalling commissioning activities.",
         bullets: [
-          "Executed static and dynamic tests, equipment configuration checks, integration activities and field validation for onboard railway signalling systems.",
-          "Supported commissioning, troubleshooting and operational validation of ASFA, ERTMS/ETCS, ATP/ATO and CBTC equipment.",
-          "Worked in project environments involving installation, train preparation, functional testing, technical reporting and delivery support.",
-          "Built a strong field background in railway safety-critical systems, later applied to maintenance engineering, warranty management and customer-facing technical support."
+          "Worked from 2008 to 2012 on commissioning and warranty of Metro de Madrid Series 3000 and 9000.",
+          "Participated in installation and commissioning of LTMT (Local Train Maintenance Tool) for the ATC system on Metro lines 3 and 4.",
+          "Took part in renewal of Series 6000 tachogenerators and in field validation tests of Series 9000 CBTC trains on Line 7B.",
+          "Executed static and dynamic testing, configuration, technical documentation and delivery support."
         ]
       },
       es: {
         period: "2008 - 2015",
         station: "T\u00e9cnico de Pruebas y Puesta en Servicio",
-        title: "T\u00e9cnico de Pruebas y Puesta en Servicio - Ejecuci\u00f3n de Proyectos",
+        title: "T\u00e9cnico de Puesta en Servicio y Garant\u00eda Ferroviaria",
         company: "Siemens Mobility \u00b7 Madrid, Espa\u00f1a / Internacional",
-        summary: "Puesta en servicio de sistemas de se\u00f1alizaci\u00f3n embarcada en tecnolog\u00edas ASFA, ERTMS/ETCS, ATP/ATO y CBTC.",
+        summary: "Etapa inicial dedicada a las Series 3000 y 9000 de Metro de Madrid y posterior actividad de puesta en servicio embarcada.",
         bullets: [
-          "Ejecuci\u00f3n de pruebas est\u00e1ticas y din\u00e1micas, verificaci\u00f3n de configuraciones, actividades de integraci\u00f3n y validaci\u00f3n en campo de sistemas ferroviarios embarcados.",
-          "Soporte en puesta en servicio, diagn\u00f3stico y validaci\u00f3n operacional de equipos ASFA, ERTMS/ETCS, ATP/ATO y CBTC.",
-          "Trabajo en entornos de proyecto con instalaci\u00f3n, preparaci\u00f3n de trenes, pruebas funcionales, reporting t\u00e9cnico y soporte a entrega.",
-          "Construcci\u00f3n de una base de campo en sistemas ferroviarios cr\u00edticos para la seguridad, aplicada posteriormente a mantenimiento, garant\u00edas y soporte t\u00e9cnico a cliente."
+          "Entre 2008 y 2012 trabaj\u00e9 de forma dedicada en la puesta en servicio y garant\u00eda de las Series 3000 y 9000 de Metro de Madrid.",
+          "Particip\u00e9 en la instalaci\u00f3n y puesta en servicio de LTMT (Local Train Maintenance Tool), herramienta local de mantenimiento asociada al ATC, en las l\u00edneas 3 y 4.",
+          "Intervine en la renovaci\u00f3n de tacogeneradores de la Serie 6000 y en pruebas de campo de validaci\u00f3n de trenes Serie 9000 CBTC de L\u00ednea 7B.",
+          "Ejecut\u00e9 pruebas est\u00e1ticas y din\u00e1micas, configuraci\u00f3n, documentaci\u00f3n t\u00e9cnica y soporte a la entrega."
         ]
       }
     },
@@ -85,33 +85,31 @@
     {
       current: false,
       en: {
-        period: "2017 - 2022",
-        station: "Customer Service Engineer",
-        title: "Customer Service Engineer - ATP/ATO Maintenance Contract",
+        period: "2017 - 2023",
+        station: "ATC Maintenance Engineer",
+        title: "ATC (ATP/ATO) Maintenance Engineer - Metro de Madrid",
         company: "Siemens Mobility \u00b7 Madrid, Spain",
-        summary: "Ferromovil 3000 and Ferromovil 9000 ATP/ATO maintenance contract.",
+        summary: "Maintenance contract for onboard ATC/ATP/ATO systems in Metro de Madrid Series 3000 and 9000 (Ferromovil).",
         bullets: [
-          "Resolved incidents in onboard ATP/ATO Dimetronic equipment, supporting preventive and corrective maintenance activities.",
-          "Managed and coordinated subcontracted personnel in maintenance execution.",
-          "Controlled client certifications, billing documentation, contract progress and technical-financial status.",
-          "Administered and improved IBM Maximo as the GMAO tool for integral maintenance management.",
-          "Developed BI dashboards and automated reports with Qlik Sense, NPrinting and Power BI to monitor technical and financial indicators.",
-          "Collaborated in the redesign of repair and spare parts management processes for Siemens Mobility Spain."
+          "Drafted onboard-equipment maintenance plans and defined preventive and corrective maintenance needs.",
+          "Organised and automated short- and long-cycle preventive maintenance planning in IBM Maximo.",
+          "Performed maintenance certifications and prepared technical documentation, contractual follow-up and monthly reports for Metro de Madrid.",
+          "Coordinated maintenance subcontractors, field tests and the technical interface with Metro and workshop teams.",
+          "Developed dashboards and automated reports with Qlik Sense, NPrinting and Power BI for technical and economic indicators."
         ]
       },
       es: {
-        period: "2017 - 2022",
-        station: "Customer Service Engineer",
-        title: "Customer Service Engineer - Contrato de mantenimiento ATP/ATO",
+        period: "2017 - 2023",
+        station: "Ingeniero de mantenimiento ATC",
+        title: "Ingeniero de mantenimiento ATC (ATP/ATO) Metro de Madrid",
         company: "Siemens Mobility \u00b7 Madrid, Espa\u00f1a",
-        summary: "Contrato de mantenimiento ATP/ATO Ferromovil 3000 y Ferromovil 9000.",
+        summary: "Contrato de mantenimiento de sistemas ATC/ATP/ATO embarcados en trenes de las series 3000 y 9000 de Metro de Madrid (Ferromovil).",
         bullets: [
-          "Resoluci\u00f3n de incidencias en equipos embarcados ATP/ATO Dimetronic, dando soporte a actividades de mantenimiento preventivo y correctivo.",
-          "Gesti\u00f3n y coordinaci\u00f3n de personal subcontratado en la ejecuci\u00f3n del mantenimiento.",
-          "Control de certificaciones de cliente, documentaci\u00f3n de facturaci\u00f3n, avance contractual y estado t\u00e9cnico-financiero.",
-          "Administraci\u00f3n y mejora de IBM Maximo como herramienta GMAO para la gesti\u00f3n integral del mantenimiento.",
-          "Desarrollo de cuadros de mando BI e informes automatizados con Qlik Sense, NPrinting y Power BI para monitorizar indicadores t\u00e9cnicos y financieros.",
-          "Colaboraci\u00f3n en el redise\u00f1o de procesos de reparaci\u00f3n y gesti\u00f3n de repuestos para Siemens Mobility Espa\u00f1a."
+          "Redact\u00e9 los planes de mantenimiento de los equipos embarcados y defin\u00ed las necesidades de mantenimiento preventivo y correctivo.",
+          "Organic\u00e9 y automatic\u00e9 en IBM Maximo la planificaci\u00f3n de preventivos de ciclo corto y largo para facilitar su ejecuci\u00f3n por el personal de taller.",
+          "Realic\u00e9 certificaciones de mantenimiento y elabor\u00e9 documentaci\u00f3n, seguimiento contractual e informes mensuales para las reuniones de mantenimiento con Metro de Madrid.",
+          "Coordin\u00e9 subcontratas en trabajos de mantenimiento y pruebas en campo; gestion\u00e9 la interfaz t\u00e9cnica con Metro y los equipos de taller.",
+          "Desarroll\u00e9 cuadros de mando y automatizaci\u00f3n de informes con Qlik Sense, NPrinting y Power BI para indicadores t\u00e9cnicos y econ\u00f3micos."
         ]
       }
     },
@@ -151,29 +149,27 @@
       en: {
         period: "2023 - Present",
         station: "Technical Warranty Manager",
-        title: "Technical Warranty Manager - Onboard Signalling",
+        title: "Technical Warranty and Onboard Maintenance Manager",
         company: "Siemens Mobility \u00b7 Madrid, Spain",
-        summary: "Responsible for technical warranty management of onboard signalling contracts, including ERTMS/ETCS and ASFA Digital/ASFA 4 equipment.",
         bullets: [
-          "Lead technical analysis of warranty incidents, including JRU/onboard log review, failure categorisation and warranty applicability.",
-          "Coordinate maintainers, customer stakeholders, repair centres, spare parts and logistics linked to warranty processes.",
-          "Lead warranty incident meetings with customers and maintainers, explaining failure origin, categorisation criteria and contractual impact.",
-          "Define and apply RAMS/contractual criteria based on customer contracts, ADIF ASFA technical specification and EN 50126 / EN 50129 principles.",
-          "Design digital incident-reporting and repair-request architecture using Teams Lists, SharePoint and Power Automate."
+          "For Renfe, manage warranty phases for ERTMS Trainguard 200 BL3 and ASFA Digital V4 installation projects, coordinating maintainers, repairs and evidence.",
+          "For Renfe, analyse JRU records and onboard logs to determine root cause, categorisation, RAMS impact and maintenance criterion.",
+          "For Metro de Madrid, provide technical maintenance support and assist the Project Manager on the ATC Lot 4 Series 3000/9000 maintenance contract since 2023.",
+          "For Metro de Madrid, manage maintenance, diagnostics, planning, certifications, reports and intervention coordination.",
+          "Since December 2024, manage incidents and traceability of warranty phases for the Line 7A signalling renewal."
         ]
       },
       es: {
         period: "2023 - Actualidad",
         station: "Responsable T\u00e9cnico de Garant\u00edas",
-        title: "Responsable T\u00e9cnico de Garant\u00edas - Se\u00f1alizaci\u00f3n Embarcada",
+        title: "Responsable t\u00e9cnico de garant\u00edas y mantenimiento embarcado",
         company: "Siemens Mobility \u00b7 Madrid, Espa\u00f1a",
-        summary: "Responsable de la gesti\u00f3n t\u00e9cnica de garant\u00edas en contratos de se\u00f1alizaci\u00f3n embarcada, incluyendo equipos ERTMS/ETCS y ASFA Digital/ASFA 4.",
         bullets: [
-          "Liderazgo del an\u00e1lisis t\u00e9cnico de incidencias en garant\u00eda, incluyendo revisi\u00f3n de registros JRU / logs embarcados, categorizaci\u00f3n de fallos y aplicabilidad de garant\u00eda.",
-          "Coordinaci\u00f3n de mantenedores, interlocutores de cliente, centros de reparaci\u00f3n, repuestos y log\u00edstica vinculados a procesos de garant\u00eda.",
-          "Liderazgo de reuniones de incidencias de garant\u00eda con clientes y mantenedores, explicando origen del fallo, criterios de categorizaci\u00f3n e impacto contractual.",
-          "Definici\u00f3n y aplicaci\u00f3n de criterios RAMS/contractuales basados en contratos de cliente, especificaci\u00f3n t\u00e9cnica ASFA de ADIF y principios EN 50126 / EN 50129.",
-          "Dise\u00f1o de arquitectura digital para reporte de incidencias y solicitudes de reparaci\u00f3n mediante Teams Lists, SharePoint y Power Automate."
+          "Renfe: gestiono fases de garant\u00eda de proyectos de instalaci\u00f3n de equipos ERTMS Trainguard 200 BL3 y ASFA Digital V4; coordino mantenedores, reparaciones y evidencias.",
+          "Renfe: analizo JRU, registros y logs embarcados para determinar causa ra\u00edz, categorizaci\u00f3n, impacto RAMS y criterio de mantenimiento.",
+          "Metro de Madrid: staff t\u00e9cnico de mantenimiento, adjunto al jefe de proyecto, en el contrato de mantenimiento del equipo ATC Lote 4 Series 3000/9000 desde 2023.",
+          "Metro de Madrid: mantenimiento, diagn\u00f3stico, planificaci\u00f3n, certificaciones, informes y coordinaci\u00f3n de intervenciones.",
+          "Desde diciembre de 2024, gestiono incidencias y trazabilidad de las fases de garant\u00eda de la renovaci\u00f3n de se\u00f1alizaci\u00f3n de L\u00ednea 7A."
         ]
       }
     }
@@ -211,8 +207,8 @@
       },
       hero: {
         eyebrow: "Interactive Railway Systems Portfolio",
-        title: "Railway Systems Engineer \u00b7 Onboard Signalling \u00b7 Technical Warranty Manager",
-        subtitle: "Computer Engineer with 17+ years at Siemens Mobility, focused on onboard railway systems, signalling, testing and commissioning, maintenance engineering, technical warranty management, incident analysis, JRU/onboard log analysis and digital workflow automation.",
+        title: "Railway Systems Engineer \u00b7 Rolling Stock Maintenance & Reliability",
+        subtitle: "Computer Engineer with 17+ years at Siemens Mobility, specialised in onboard railway systems, rolling-stock maintenance and reliability, technical warranty management, fault diagnosis, JRU/onboard-log analysis and railway digitalisation.",
         actionsLabel: "Primary actions",
         mapButton: "View Project Map",
         contactButton: "Contact"
@@ -223,14 +219,14 @@
         cards: [
           { value: "17+ years", label: "Siemens Mobility railway systems experience" },
           { value: "8+ years", label: "Project Execution / Testing & Commissioning" },
-          { value: "5+ years", label: "Maintenance Engineer / Service Engineer" },
-          { value: "Current role", label: "Technical Warranty Manager for Renfe onboard signalling contracts" }
+          { value: "8+ years", label: "Onboard maintenance and warranty management" },
+          { value: "Current role", label: "Technical warranty and maintenance for Renfe and Metro de Madrid" }
         ]
       },
       expertise: {
         eyebrow: "Core expertise",
         title: "Onboard systems, technical warranty and digitalisation",
-        subtitle: "A field-based railway systems profile combining testing and commissioning, maintenance engineering, technical warranty management, customer-facing technical analysis and data-driven workflow control.",
+        subtitle: "A field-based railway systems profile combining maintenance and reliability, diagnostics, technical warranty management, customer coordination and data-driven workflow control.",
         dashboardLabel: "Railway expertise control dashboard",
         kpis: [
           { value: "17+ years", label: "Railway systems experience" },
@@ -366,7 +362,7 @@
         }
       },
       footer: {
-        tagline: "Railway Systems Engineer \u00b7 Onboard Signalling \u00b7 Technical Warranty Manager"
+        tagline: "Railway Systems Engineer \u00b7 Rolling Stock Maintenance & Reliability"
       }
     },
     es: {
@@ -400,8 +396,8 @@
       },
       hero: {
         eyebrow: "Portfolio interactivo de sistemas ferroviarios",
-        title: "Ingeniero de Sistemas Ferroviarios \u00b7 Se\u00f1alizaci\u00f3n Embarcada \u00b7 Responsable T\u00e9cnico de Garant\u00edas",
-        subtitle: "Ingeniero de Computadores con m\u00e1s de 17 a\u00f1os en Siemens Mobility, centrado en sistemas ferroviarios embarcados, se\u00f1alizaci\u00f3n, pruebas y puesta en servicio, ingenier\u00eda de mantenimiento, gesti\u00f3n t\u00e9cnica de garant\u00edas, an\u00e1lisis de incidencias, an\u00e1lisis de registros JRU / logs embarcados y automatizaci\u00f3n de flujos digitales.",
+        title: "Ingeniero de Sistemas Ferroviarios \u00b7 Mantenimiento y Fiabilidad de Material M\u00f3vil",
+        subtitle: "Ingeniero de Computadores con m\u00e1s de 17 a\u00f1os en Siemens Mobility, especializado en sistemas ferroviarios embarcados, mantenimiento y fiabilidad de material m\u00f3vil, garant\u00eda t\u00e9cnica, diagn\u00f3stico de aver\u00edas, an\u00e1lisis de JRU / logs embarcados y digitalizaci\u00f3n ferroviaria.",
         actionsLabel: "Acciones principales",
         mapButton: "Ver mapa de proyectos",
         contactButton: "Contacto"
@@ -412,14 +408,14 @@
         cards: [
           { value: "17+ a\u00f1os", label: "Experiencia en sistemas ferroviarios en Siemens Mobility" },
           { value: "8+ a\u00f1os", label: "Ejecuci\u00f3n de proyectos / puesta en servicio" },
-          { value: "5+ a\u00f1os", label: "Ingenier\u00eda de mantenimiento / service engineering" },
-          { value: "Puesto actual", label: "Responsable t\u00e9cnico de garant\u00edas para contratos de se\u00f1alizaci\u00f3n embarcada Renfe" }
+          { value: "8+ a\u00f1os", label: "Mantenimiento y garant\u00eda de sistemas embarcados" },
+          { value: "Actualidad", label: "Garant\u00edas y mantenimiento para Renfe y Metro de Madrid" }
         ]
       },
       expertise: {
         eyebrow: "Especializaci\u00f3n",
         title: "Sistemas embarcados, gesti\u00f3n t\u00e9cnica de garant\u00edas y digitalizaci\u00f3n",
-        subtitle: "Perfil t\u00e9cnico ferroviario desarrollado en campo, combinando puesta en servicio, ingenier\u00eda de mantenimiento, gesti\u00f3n de garant\u00edas, an\u00e1lisis t\u00e9cnico con cliente y digitalizaci\u00f3n de flujos basada en datos.",
+        subtitle: "Perfil t\u00e9cnico ferroviario desarrollado en campo, combinando mantenimiento y fiabilidad, diagn\u00f3stico, gesti\u00f3n de garant\u00edas, coordinaci\u00f3n t\u00e9cnica con cliente y digitalizaci\u00f3n basada en datos.",
         dashboardLabel: "Dashboard de control de especializaci\u00f3n ferroviaria",
         kpis: [
           { value: "17+ a\u00f1os", label: "Experiencia en sistemas ferroviarios" },
@@ -555,13 +551,13 @@
         }
       },
       footer: {
-        tagline: "Ingeniero de Sistemas Ferroviarios \u00b7 Se\u00f1alizaci\u00f3n Embarcada \u00b7 Responsable T\u00e9cnico de Garant\u00edas"
+        tagline: "Ingeniero de Sistemas Ferroviarios \u00b7 Mantenimiento y Fiabilidad de Material M\u00f3vil"
       }
     }
   };
 
   function getInitialLanguage() {
-    return "en";
+    return "es";
   }
 
   function getValue(path, language) {
@@ -1290,6 +1286,7 @@
         return "<li>" + escapeHtml(item) + "</li>";
       }).join("");
       var currentBadge = content.current ? '<span class="role-badge">' + escapeHtml(getValue("journey.currentLabel")) + "</span>" : "";
+      var summary = content.summary ? "<p>" + escapeHtml(content.summary) + "</p>" : "";
 
       if (content.current) {
         stationClasses.push("is-current");
@@ -1338,7 +1335,7 @@
         "</div>",
         "<h3>" + escapeHtml(content.title) + "</h3>",
         '<p class="company">' + escapeHtml(content.company) + "</p>",
-        "<p>" + escapeHtml(content.summary) + "</p>",
+        summary,
         "<ul>" + bullets + "</ul>"
       ].join("");
 

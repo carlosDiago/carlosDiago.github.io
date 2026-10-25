@@ -12,6 +12,7 @@
   var backMapButton = document.querySelector("[data-map-back]");
 
   var navToggle = document.querySelector("[data-nav-toggle]");
+  var siteNav = document.querySelector(".site-nav");
   var navMenu = document.querySelector(".nav-menu");
   var navItems = document.querySelectorAll(".nav-links a");
   var languageButtons = document.querySelectorAll("[data-lang]");
@@ -738,6 +739,23 @@
     updateNavToggleLabel();
   }
 
+  function scrollToElement(element, gap) {
+    var behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    var navHeight = siteNav ? siteNav.getBoundingClientRect().height : 0;
+    var top = window.scrollY + element.getBoundingClientRect().top - navHeight - gap;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: behavior });
+  }
+
+  function scrollToSection(selector) {
+    var section = document.querySelector(selector);
+    var heading = section && section.querySelector(".section-heading");
+
+    if (section) {
+      scrollToElement(heading || section, 28);
+    }
+  }
+
   function applyLanguage(language) {
     currentLanguage = supportedLanguages.indexOf(language) >= 0 ? language : "en";
 
@@ -767,7 +785,15 @@
     }
 
     navItems.forEach(function (link) {
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function (event) {
+        var target = link.getAttribute("href");
+
+        if (target && target.charAt(0) === "#") {
+          event.preventDefault();
+          window.history.pushState(null, "", target);
+          scrollToSection(target);
+        }
+
         setNavOpen(false);
       });
     });
@@ -1349,7 +1375,6 @@
   function setActiveJourney(index, shouldFocus) {
     var buttons = document.querySelectorAll(".station-button");
     var cards = document.querySelectorAll(".journey-card");
-    var behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
     activeJourneyIndex = index;
 
@@ -1379,7 +1404,7 @@
 
     if (shouldFocus && activeCard) {
       activeCard.focus({ preventScroll: true });
-      activeCard.scrollIntoView({ behavior: behavior, block: "start" });
+      scrollToElement(activeCard, 20);
     }
   }
 

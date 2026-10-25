@@ -24,7 +24,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--nav-height) + 24px);
+  scroll-padding-top: 0;
 }
 
 body {
@@ -99,7 +99,7 @@ button:focus-visible {
 #personal,
 #education,
 #contact {
-  scroll-margin-top: calc(var(--nav-height) + 28px);
+  scroll-margin-top: calc(var(--nav-height) - 44px);
 }
 
 .site-nav {
@@ -1442,7 +1442,7 @@ button:focus-visible {
 
 .journey-card {
   min-width: 0;
-  scroll-margin-top: calc(var(--nav-height) + 28px);
+  scroll-margin-top: calc(var(--nav-height) + 20px);
   padding: 26px;
   transition: box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
 }

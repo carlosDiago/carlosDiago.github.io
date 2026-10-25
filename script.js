@@ -200,7 +200,7 @@
         selectorLabel: "Language selector"
       },
       nav: {
-        profile: "Profile",
+        profile: "Home",
         journey: "Journey",
         expertise: "Expertise",
         map: "Map",
@@ -389,7 +389,7 @@
         selectorLabel: "Selector de idioma"
       },
       nav: {
-        profile: "Perfil",
+        profile: "Inicio",
         journey: "Trayectoria",
         expertise: "Especializaci\u00f3n",
         map: "Mapa",

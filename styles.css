@@ -256,8 +256,8 @@ button:focus-visible {
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
   gap: clamp(34px, 6vw, 78px);
   align-items: center;
-  min-height: calc(100vh - var(--nav-height));
-  padding: 74px 0 82px;
+  min-height: min(610px, calc(100vh - var(--nav-height) - 190px));
+  padding: 54px 0 28px;
 }
 
 .hero-copy {
@@ -305,7 +305,7 @@ button:focus-visible {
 .hero-visual {
   position: relative;
   justify-self: end;
-  width: min(100%, 430px);
+  width: min(100%, 380px);
   min-width: 0;
 }
 
@@ -457,6 +457,101 @@ button:focus-visible {
 
 .figures {
   padding: 66px 0;
+}
+
+.hero-figures {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 44px;
+}
+
+.hero-figures-label {
+  margin-bottom: 14px;
+  color: var(--teal-500);
+}
+
+.hero-figure-grid {
+  gap: 12px;
+}
+
+.hero-figure-grid .figure-card {
+  min-height: 126px;
+  border-color: rgba(19, 184, 173, 0.34);
+  background: rgba(6, 24, 39, 0.56);
+  box-shadow: none;
+  padding: 18px;
+}
+
+.hero-figure-grid .figure-card:hover {
+  border-color: rgba(19, 184, 173, 0.64);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.hero-figure-grid .figure-card strong {
+  color: var(--teal-500);
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+}
+
+.hero-figure-grid .figure-card span {
+  margin-top: 10px;
+  color: #d3e1e8;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+/* Keep the complete profile introduction in view on shorter desktop windows. */
+@media (min-width: 981px) and (max-height: 1050px) {
+  .hero-grid {
+    gap: clamp(28px, 4vw, 52px);
+    min-height: 0;
+    padding: 30px 0 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.1rem, 5.2vw, 4.6rem);
+  }
+
+  .hero-title {
+    margin-top: 14px;
+    font-size: clamp(1.05rem, 1.8vw, 1.32rem);
+  }
+
+  .hero-subtitle {
+    margin-top: 14px;
+    font-size: 0.94rem;
+    line-height: 1.45;
+  }
+
+  .hero-actions {
+    margin-top: 18px;
+  }
+
+  .hero-visual {
+    width: min(100%, 300px);
+  }
+
+  .portrait-panel {
+    padding: 12px;
+  }
+
+  .hero-figures {
+    padding-bottom: 24px;
+  }
+
+  .hero-figures-label {
+    margin-bottom: 8px;
+  }
+
+  .hero-figure-grid .figure-card {
+    min-height: 94px;
+    padding: 13px 16px;
+  }
+
+  .hero-figure-grid .figure-card span {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
 }
 
 .section-heading {
@@ -1812,7 +1907,11 @@ button:focus-visible {
     grid-template-columns: 1fr;
     gap: 36px;
     min-height: auto;
-    padding: 60px 0 70px;
+    padding: 60px 0 42px;
+  }
+
+  .hero-figures {
+    padding-bottom: 60px;
   }
 
   .hero-visual {
@@ -1881,7 +1980,11 @@ button:focus-visible {
 
   .hero-grid {
     gap: 30px;
-    padding: 48px 0 56px;
+    padding: 48px 0 36px;
+  }
+
+  .hero-figures {
+    padding-bottom: 56px;
   }
 
   .hero h1 {
@@ -2007,6 +2110,10 @@ button:focus-visible {
 
   .figure-card {
     min-height: 132px;
+  }
+
+  .hero-figure-grid .figure-card {
+    min-height: 116px;
   }
 
   #assignment-map {

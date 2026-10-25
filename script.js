@@ -200,6 +200,7 @@
         selectorLabel: "Language selector"
       },
       nav: {
+        home: "Home",
         profile: "Profile",
         journey: "Journey",
         expertise: "Expertise",
@@ -389,6 +390,7 @@
         selectorLabel: "Selector de idioma"
       },
       nav: {
+        home: "Inicio",
         profile: "Perfil",
         journey: "Trayectoria",
         expertise: "Especializaci\u00f3n",
@@ -806,13 +808,18 @@
     navItems.forEach(function (link) {
       var section = document.querySelector(link.getAttribute("href"));
 
+      if (link.hasAttribute("data-nav-home")) {
+        link.classList.toggle("is-active", window.scrollY <= 8);
+        return;
+      }
+
       if (!section) {
         return;
       }
 
       var startsBefore = section.offsetTop <= fromTop;
       var endsAfter = section.offsetTop + section.offsetHeight > fromTop;
-      link.classList.toggle("is-active", startsBefore && endsAfter);
+      link.classList.toggle("is-active", startsBefore && endsAfter && !(link.getAttribute("href") === "#profile" && window.scrollY <= 8));
     });
   }
 
